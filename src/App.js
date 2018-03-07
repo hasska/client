@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './index.css';
 import { Select, i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'
 
