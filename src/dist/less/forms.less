@@ -1,0 +1,51 @@
+@import "var.less";
+@import "mixins.less";
+
+.form-custom-style{
+	.el-input__inner{
+		border-radius: 50px;
+	}
+	.el-form-item{
+		margin-bottom: 15px;
+	}
+	.el-form-item__label{
+		text-transform: none;
+		letter-spacing: 1px;
+    font-size: 12px;
+    font-weight: 100;	
+    padding: 14px 12px 14px 0;
+	}
+	.el-icon-caret-top{
+		+ .el-input__inner{
+			font-weight: 100;
+			letter-spacing: 1px;
+			text-transform: none;
+			.t5();
+		}		
+	}
+	.el-select-dropdown__item{
+		.t4();
+	}
+	.el-radio-group{
+		label{
+	    span{
+		    font-size: 12px;
+				text-transform: none;
+				letter-spacing: 1px;
+		    font-weight: 100;	    	
+    		padding: 11px 15px;
+      }
+			&:first-child{
+				span{
+						border-radius: 50px 0 0 50px;
+				}
+			}
+			&:last-child{
+				span{
+					border-radius: 0 50px 50px 0;
+				}
+			}
+		}
+	}
+
+}

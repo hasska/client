@@ -1,0 +1,90 @@
+.nav-container {
+  display: flex;
+  flex-direction: column;
+}
+.nav-container li {
+  display: flex;
+  flex-direction: row;
+  width: 36px;
+  height: 36px;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-container li span {
+  width: 2px;
+  height: 30px;
+  background-color: #FFFFFF;
+  flex: 0 0 2px;
+}
+.nav-container li div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.nav-container li div i {
+  color: #999999;
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+}
+.nav-container li div .t6 {
+  text-align: center;
+  letter-spacing: 1px;
+}
+.nav-container li.active span {
+  background-color: #0084FF;
+}
+.nav-container li.active i {
+  color: #0084FF;
+}
+.nav-container li:hover i {
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #0084FF;
+}
+@font-face {
+  font-family: 'ABeeZee';
+  font-style: normal;
+  font-weight: 400;
+  src: local('ABeeZee Regular'), local('ABeeZee-Regular'), url(https://fonts.gstatic.com/s/abeezee/v11/esDR31xSG-6AGleN2tWklQ.ttf) format('truetype');
+}
+body {
+  font-family: 'ABeeZee', sans-serif;
+  cursor: default !important;
+}
+input,
+button {
+  font-family: 'ABeeZee', sans-serif;
+}
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.head-title {
+  padding: 10px 0px;
+  border-bottom: 1px solid #EAEAEA;
+}
+.head-title div {
+  color: #999999;
+  letter-spacing: 1px;
+  font-weight: 300;
+  text-transform: none;
+}

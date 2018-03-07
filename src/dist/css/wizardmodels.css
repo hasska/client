@@ -1,0 +1,9 @@
+.wizard-models-option-wrapper {
+  border: 1px solid red;
+}
+.wizard-models-option-wrapper .models-option-row {
+  border: 1px solid red;
+}
+.wizard-models-option-wrapper .models-option-row .models-option {
+  border: 1px solid red;
+}

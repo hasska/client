@@ -1,0 +1,62 @@
+.home-wrapper,
+html,
+body,
+body > div#root,
+body > div#root > div,
+body > div#root > div > div,
+body > div#root > div > div > div:nth-child(2) {
+  height: 100% !important;
+  margin: 0;
+}
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.home-body {
+  flex: 2;
+  display: flex;
+}
+.home-intro {
+  flex: 1;
+}
+.home-start {
+  flex: 2;
+}
+.app-wrapper,
+html,
+body,
+body > div#root,
+body > div#root > div,
+body > div#root > div > div,
+body > div#root > div > div > div:nth-child(2) {
+  height: 100% !important;
+  margin: 0;
+}
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.app-header {
+  height: 50px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #EAEAEA;
+  -webkit-app-region: drag;
+}
+.app-body {
+  flex: 2;
+  display: flex;
+}
+.app-nav {
+  background-color: #FFFFFF;
+  flex: 0 0 180px;
+  border-right: 1px solid #EAEAEA;
+}
+.app-sub-nav {
+  background-color: #FFFFFF;
+  flex: 0 0 260px;
+  border-right: 1px solid #EAEAEA;
+}
+.app-preview {
+  background-color: #FFFFFF;
+  flex: 1 1;
+}

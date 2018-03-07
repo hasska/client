@@ -1,0 +1,46 @@
+.app-sub-nav .sub-nav-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 15px 20px 15px;
+}
+.app-sub-nav .sub-nav-header .sub-nav-title h5 {
+  color: #000000;
+  letter-spacing: 1px;
+  text-transform: none;
+}
+.app-sub-nav .sub-nav-body ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 15px;
+  margin: 0 10px;
+  border-radius: 50px;
+}
+.app-sub-nav .sub-nav-body ul li h5 {
+  font-weight: 100;
+  color: #999999;
+  letter-spacing: 1px;
+}
+.app-sub-nav .sub-nav-body ul li i {
+  font-size: 10px;
+  color: #999999;
+}
+.app-sub-nav .sub-nav-body ul li:hover h5 {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #444444;
+}
+.app-sub-nav .sub-nav-body ul li:hover i {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #0084FF;
+}
+.app-sub-nav .sub-nav-body ul li.active {
+  background-color: #0084FF !important;
+}
+.app-sub-nav .sub-nav-body ul li.active h5,
+.app-sub-nav .sub-nav-body ul li.active i {
+  color: #FFFFFF;
+  border-top: 1px solid transparent;
+}

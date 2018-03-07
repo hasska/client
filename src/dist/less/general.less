@@ -1,0 +1,49 @@
+@import "nav.less";
+@import "mixins.less";
+
+@import url('https://fonts.googleapis.com/css?family=ABeeZee');
+
+// General 
+
+body{
+	font-family: 'ABeeZee', sans-serif;
+	cursor: default !important;
+}
+
+input, button{
+	font-family: 'ABeeZee', sans-serif;	
+}
+
+// Disable Text Selecting
+
+body{
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+// General Override
+
+h1,h2,h3,h4,h5,h6{
+	.nospace();
+	font-weight: normal;
+}
+
+ul{
+	.nospace();
+	.noliststyle();
+}
+
+.head-title{
+	padding: 10px 0px;
+	border-bottom: 1px solid @borderColor;
+	div{
+		color: @inactiveText;
+		letter-spacing: 1px;
+		font-weight: 300;
+		text-transform: none;
+	}
+}

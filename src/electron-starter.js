@@ -9,17 +9,24 @@ const url = require('url');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow, wizard, splash;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({width: 1280, height: 680, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
+    wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
+    splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:3000');
+    mainWindow.loadURL('http://localhost:3000/dashboard');
+    wizard.loadURL('http://localhost:3000/wizard');
+    splash.loadURL('http://localhost:3000');
 
+    splash.once('ready-to-show', () => {
+      splash.show()
+    })
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -27,6 +34,12 @@ function createWindow() {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
+    })
+    splash.on('closed', function () {
+        mainWindow.show();
+        wizard.show();
+    })
+    wizard.on('closed', function () {
     })
 }
 

@@ -1,0 +1,61 @@
+@import "var.less";
+@import "mixins.less";
+
+// Home Layout
+
+.home-wrapper, html, body, body>div#root, body>div#root>div, body>div#root>div>div, body>div#root>div>div>div:nth-child(2) {
+    height:100% !important;
+    margin:0;
+}
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.home-body {
+    flex:2;
+    display: flex;
+}
+.home-intro {
+    flex : 1;
+}
+.home-start {
+    flex : 2;
+}
+
+
+
+
+// Dashboard Layout
+
+.app-wrapper, html, body, body>div#root, body>div#root>div, body>div#root>div>div, body>div#root>div>div>div:nth-child(2) {
+    height:100% !important;
+    margin:0;
+}
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.app-header {
+    height: 50px;
+    background-color: @headerBGColor;
+    border-bottom: 1px solid @borderColor;
+    -webkit-app-region: drag;
+}
+.app-body {
+    flex:2;
+    display: flex;
+}
+.app-nav {
+    background-color: @navBGColor;
+    flex :0 0 180px;
+    border-right: 1px solid @borderColor;
+}
+.app-sub-nav {
+    background-color: @subNavBGColor;
+    flex :0 0 260px;
+    border-right: 1px solid @borderColor;
+}
+.app-preview {
+    background-color: @previewBGColor;
+    flex: 1 1;
+}

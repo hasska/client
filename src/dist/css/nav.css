@@ -1,0 +1,43 @@
+.nav-container {
+  display: flex;
+  flex-direction: column;
+}
+.nav-container li {
+  display: flex;
+  flex-direction: row;
+  width: 36px;
+  height: 36px;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-container li span {
+  width: 2px;
+  height: 30px;
+  background-color: #FFFFFF;
+  flex: 0 0 2px;
+}
+.nav-container li div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.nav-container li div i {
+  color: #999999;
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+}
+.nav-container li div .t6 {
+  text-align: center;
+  letter-spacing: 1px;
+}
+.nav-container li.active span {
+  background-color: #0084FF;
+}
+.nav-container li.active i {
+  color: #0084FF;
+}
+.nav-container li:hover i {
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #0084FF;
+}

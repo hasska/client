@@ -1,0 +1,14 @@
+.app-button {
+  border: 1px solid #0084FF;
+  border-radius: 100px;
+  background-color: transparent;
+  padding: 5px 30px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #0084FF;
+}
+.app-button.icon-button {
+  border: 1px solid transparent;
+  color: #0084FF;
+  padding: 5px;
+}

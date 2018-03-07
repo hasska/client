@@ -1,0 +1,38 @@
+.wizard-models-option-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 400px;
+}
+.wizard-models-option-wrapper .models-option-row {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.wizard-models-option-wrapper .models-option-row .models-option {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border: 1px solid #EAEAEA;
+  margin: 7px;
+  border-radius: 5px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-models-option-wrapper .models-option-row .models-option img {
+  width: 66%;
+}
+.wizard-models-option-wrapper .models-option-row .models-option div {
+  letter-spacing: 1px;
+  text-transform: none;
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-models-option-wrapper .models-option-row .models-option:hover {
+  border: 1px solid #CBCBCB;
+}
+.wizard-models-option-wrapper .models-option-row .models-option:hover div {
+  color: #0084FF;
+}

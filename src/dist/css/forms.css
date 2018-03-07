@@ -1,0 +1,35 @@
+.form-custom-style .el-input__inner {
+  border-radius: 50px;
+}
+.form-custom-style .el-form-item {
+  margin-bottom: 15px;
+}
+.form-custom-style .el-form-item__label {
+  text-transform: none;
+  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 14px 12px 14px 0;
+}
+.form-custom-style .el-icon-caret-top + .el-input__inner {
+  font-weight: 100;
+  letter-spacing: 1px;
+  text-transform: none;
+  font-size: 0.83em;
+}
+.form-custom-style .el-select-dropdown__item {
+  font-size: 1em;
+}
+.form-custom-style .el-radio-group label span {
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 1px;
+  font-weight: 100;
+  padding: 11px 15px;
+}
+.form-custom-style .el-radio-group label:first-child span {
+  border-radius: 50px 0 0 50px;
+}
+.form-custom-style .el-radio-group label:last-child span {
+  border-radius: 0 50px 50px 0;
+}

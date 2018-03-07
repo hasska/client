@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Loading } from 'element-react';
+import HomeIntro from '../components/Home/HomeIntro';
+import HomeStart from '../components/Home/HomeStart';
 
-require('element-theme-default');
 
 class Home extends Component {
   constructor(props) {
@@ -14,7 +14,6 @@ class Home extends Component {
     };
   }
   componentWillMount() {
-   
   }
   componentWillReceiveProps(nextProps) {
     
@@ -24,7 +23,12 @@ class Home extends Component {
 
     return (
         <div>
-          Home
+          <div className="home-wrapper">
+              <div className="home-body">
+                <HomeIntro />
+                <HomeStart />
+              </div>
+          </div>
         </div>
     );
   }

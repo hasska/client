@@ -1,0 +1,74 @@
+.home-intro {
+  background-color: #FFFFFF;
+  border-right: 1px solid #EAEAEA;
+  -webkit-app-region: drag;
+  display: flex;
+  flex-direction: column;
+}
+.home-intro .intro-top {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+.home-intro .intro-top .intro-app-welcome div {
+  text-align: center;
+  letter-spacing: 1px;
+  color: #4A4A4A;
+  padding-bottom: 10px;
+}
+.home-intro .intro-top .intro-app-version div {
+  text-align: center;
+  letter-spacing: 1px;
+  color: #999999;
+}
+.home-intro .intro-top .intro-app-close {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  opacity: 0;
+}
+.home-intro .intro-top .intro-app-close img {
+  opacity: .5;
+}
+.home-intro .intro-top .intro-app-close:hover img {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  opacity: 1;
+}
+.home-intro .intro-bottom {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 140px;
+}
+.home-intro .intro-bottom .intro-tips {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin: 0 15px;
+  border-top: 1px solid #EAEAEA;
+}
+.home-intro .intro-bottom .intro-tips .intro-tips-icon {
+  display: flex;
+  flex: 0 0 50px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.home-intro .intro-bottom .intro-tips .intro-tips-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+}
+.home-intro .intro-bottom .intro-tips .intro-tips-info div {
+  color: #4A4A4A;
+  line-height: 1.5em;
+}
+.home-intro .intro-bottom .intro-tips .intro-tips-info div:nth-child(2) {
+  color: #999999;
+}
+.home-intro:hover .intro-top .intro-app-close {
+  opacity: 1;
+}

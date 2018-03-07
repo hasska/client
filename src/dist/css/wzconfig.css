@@ -1,0 +1,68 @@
+.wizard-config-form {
+  margin-left: -180px;
+}
+.wizard-config-form .select-directory {
+  width: 400px;
+  border: 1px solid #bfcbd9;
+  border-radius: 50px;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 15px;
+  box-sizing: border-box;
+  cursor: pointer !important;
+}
+.wizard-config-form .select-directory .project-path {
+  color: #1f2d3d;
+  font-weight: 100;
+  font-size: 12px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-config-form .select-directory .project-path.no-select {
+  letter-spacing: 1px;
+  text-transform: none;
+}
+.wizard-config-form .select-directory:hover .project-path.no-select {
+  color: #0084FF;
+}
+.wizard-config-form .el-form-item {
+  margin-bottom: 15px;
+}
+.wizard-config-form .el-form-item__content {
+  margin-left: 180px !important;
+  width: 400px;
+}
+.wizard-config-form .radio-full-2 .el-radio-group {
+  width: 100%;
+}
+.wizard-config-form .radio-full-2 .el-radio-group label {
+  width: 50%;
+}
+.wizard-config-form .radio-full-2 .el-radio-group label span {
+  width: 100%;
+}
+.wizard-config-form .radio-full-4 .el-radio-group {
+  width: 100%;
+}
+.wizard-config-form .radio-full-4 .el-radio-group label {
+  width: 20%;
+}
+.wizard-config-form .radio-full-4 .el-radio-group label span {
+  width: 100%;
+}
+.wizard-config-form .wizard-action .el-form-item__content {
+  text-align: center;
+}
+.wizard-config-form .wizard-action .el-form-item__content .el-button {
+  padding: 10px 50px;
+  letter-spacing: 1px;
+  text-transform: none;
+  border-color: #0084FF;
+  color: #0084FF;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-config-form .wizard-action .el-form-item__content .el-button:hover {
+  background-color: #0084FF;
+  color: #FFFFFF;
+}

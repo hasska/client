@@ -1,0 +1,38 @@
+@import "var.less";
+@import "mixins.less";
+
+.wizard-models-option-wrapper{
+	.flexcol();
+	width: 400px;
+	height: 400px;
+	.models-option-row{
+		.flexrow();
+			flex:1;
+			.models-option{
+			.flexcol();
+			flex:1;
+			border: 1px solid @borderColor;
+			margin: 7px;
+			border-radius: 5px;
+			justify-content: space-between;
+			align-items: center;
+			padding: 15px 0;
+			.transition(.2s);
+			img{
+				width: 66%;
+			}
+			div{
+				letter-spacing: 1px;
+				text-transform: none;
+				color: @secondryText;
+				.transition(.2s);
+			}
+			&:hover{
+				border: 1px solid @borderColorUp;
+				div{
+					color: @primaryColor;
+				}
+			}
+		}
+	}
+}

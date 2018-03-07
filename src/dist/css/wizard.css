@@ -1,0 +1,101 @@
+.wizard-wrapper {
+  -webkit-app-region: drag;
+  display: flex;
+  flex-direction: column;
+}
+.wizard-wrapper .wizard-steps-wrapper {
+  display: flex;
+  flex: 0 0 100px;
+  justify-content: center;
+  align-items: center;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps {
+  margin-right: -65px;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__line {
+  background-color: #2e8fff;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head {
+  width: 30px;
+  height: 30px;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head span div {
+  font-weight: 100;
+  font-size: 12px;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__line-inner {
+  border: none;
+  border-top: 1px solid;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__line.is-horizontal {
+  height: 1px;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__icon .el-icon-check {
+  font-size: 8px;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head.is-text {
+  border-width: 1px;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head.is-process {
+  color: #0084FF;
+  background-color: #FFFFFF;
+  border-color: #0084FF;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head.is-success {
+  color: #4A4A4A;
+  background-color: #FFFFFF;
+  border-color: #4A4A4A;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main {
+  margin-left: -32px;
+  margin-right: 32px;
+  text-align: center;
+  padding-right: 0;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main .el-step__title {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: none;
+  font-weight: 100;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main .el-step__title.is-process {
+  color: #0084FF;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main .el-step__title.is-success {
+  color: #4A4A4A;
+}
+.wizard-wrapper .wizard-content-wrapper {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.wizard-wrapper .wizard-action-wrapper {
+  display: flex;
+  flex: 0 0 80px;
+  justify-content: center;
+  align-items: center;
+}
+.wizard-wrapper .wizard-action-wrapper .app-button {
+  padding: 10px 50px;
+  letter-spacing: 1px;
+  text-transform: none;
+  border-color: #0084FF;
+  color: #0084FF;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-wrapper .wizard-action-wrapper .app-button:hover {
+  background-color: #0084FF;
+  color: #FFFFFF;
+}
+.wizard-wrapper .wizard-action-wrapper .app-button.back-button {
+  padding: 0;
+  border: none;
+  position: absolute;
+  left: 50px;
+  color: #4A4A4A;
+}
+.wizard-wrapper .wizard-action-wrapper .app-button.back-button:hover {
+  background-color: #FFFFFF;
+  color: #0084FF;
+}

@@ -1,0 +1,99 @@
+.model-single {
+  padding: 8px 20px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px);
+}
+.model-single .model-info-wrapper {
+  flex: 0 0 100px;
+}
+.model-single .model-info-wrapper .model-info-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 5px 0;
+}
+.model-single .model-info-wrapper .model-info-form .half-flex {
+  display: flex;
+  flex-direction: row;
+}
+.model-single .model-info-wrapper .model-info-form .half-flex > div {
+  flex: 1;
+}
+.model-single .model-info-wrapper .model-info-form .half-flex .el-select {
+  width: 100%;
+}
+.model-single .model-info-wrapper .model-info-form form {
+  margin-left: -120px;
+}
+.model-single .model-properties-wrapper {
+  flex: 1;
+}
+.model-single .model-properties-wrapper .model-properties-table {
+  padding-top: 10px;
+}
+.model-single .model-properties-wrapper .model-properties-table > button {
+  font-size: 0.83em;
+  margin-top: 10px;
+  margin-left: 7px;
+  padding: 10px 30px;
+  letter-spacing: 1px;
+  text-transform: none;
+  border-color: #0084FF;
+  color: #0084FF;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.model-single .model-properties-wrapper .model-properties-table > button:hover {
+  background-color: #0084FF;
+  color: #FFFFFF;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table {
+  overflow: visible;
+  border: none;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table .el-table__body-wrapper {
+  overflow: visible;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table::after {
+  background-color: transparent;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table::before {
+  background-color: transparent;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table th {
+  border: none;
+  background-color: #FFFFFF;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table th .cell {
+  background-color: #FFFFFF;
+  letter-spacing: 1px;
+  text-transform: none;
+  font-weight: 100;
+  font-size: 0.83em;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table td {
+  border: none;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table td .cell .el-input {
+  margin: 10px 0;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table .cell {
+  padding-left: 7px;
+  padding-right: 7px;
+  overflow: visible;
+  text-align: center;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table .cell input {
+  border-radius: 50px;
+  font-weight: 100;
+  font-size: 1em;
+}
+.model-single .model-properties-wrapper .model-properties-table .el-table .row-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.model-single .model-settings-wrapper {
+  flex: 0 0 100px;
+  margin-top: auto;
+}

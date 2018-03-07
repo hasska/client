@@ -1,0 +1,47 @@
+@import "var.less";
+@import "mixins.less";
+
+.nav-container{
+	.flexcol();
+	li{
+		.flexrow();
+		width: 36px;
+		height: 36px;
+		justify-content: space-between;
+		align-items: center;
+		span{
+			width: 2px;
+			height: 30px;
+			background-color: @white;
+			flex :0 0 2px;
+		}
+		div{
+			.flexcol();
+			flex:1;
+			i{
+				color: @inactiveColor;
+				flex : 1;
+				text-align: center;
+				font-size: 14px;
+			}
+			.t6{
+				text-align: center;
+				letter-spacing: 1px;
+			}
+		}
+		&.active{
+			span{
+				background-color: @primaryColor;
+			}
+			i{
+				color: @primaryColor;
+			}
+		}
+		&:hover{
+			i{
+				.transition(.4s);				
+				color: @primaryColor;
+			}
+		}
+	}
+}

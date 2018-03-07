@@ -1,0 +1,115 @@
+@import "var.less";
+@import "mixins.less";
+
+.home-start{
+    background-color: @whitegray;
+	.flexrow();
+	.home-section{
+		.flexcol();
+		flex: 1;
+		flex-wrap: wrap;
+		margin: 0 20px;
+
+		.home-body{
+			padding-top: 20px;
+			.flexcol();
+			flex: 1;
+			flex-wrap: wrap;
+			.home-app-new-wrapper{
+				.flexcol();
+				width: 100%;
+				.home-app-new{
+					.flex();
+					flex:1;
+					height: 140px;
+					flex-direction: center;
+					justify-content: center;
+					background-color: @white;
+					border:1px solid @borderColor;
+					margin-bottom: 20px;
+					border-radius: 5px;
+					position: relative;
+					img{
+					}
+					div{
+						color: @secondryText;
+						text-transform: none;
+						letter-spacing: 2px;
+						position: absolute;
+						bottom: 7px;
+					}
+					&:hover{
+						.transition(.2s);
+						border:1px solid @primaryColor;
+					}
+				}
+			}
+			.home-app-recent-wrapper{
+				.flexcol();
+				.home-app-recent{
+					.flexrow();
+					flex:1;
+					align-items: flex-start;
+					justify-content: center;
+					position: relative;
+					margin-bottom: 20px;
+					.app-recent-logo{
+						.flex();
+						flex: 0 0 50px;
+						align-items: center;
+						justify-content: flex-start;
+						img{
+							opacity: .7;
+						}
+					}
+					.app-recent-info{
+						.flexcol();
+						flex: 1;						
+						border-bottom: 1px solid @borderColor;
+						padding-bottom: 15px;
+						.app-recent-title{
+							.flexrow();
+							align-items: center;
+							justify-content: space-between;
+
+							.t4{
+								color: @secondryText;
+							}
+							i{
+								font-size: 10px;
+								color: @inactiveText;							}
+						}
+						.t6{
+							padding-top: 6px;
+							color: @inactiveText;
+						}
+					}
+					&:hover{
+						.app-recent-logo{
+							img{
+								.transition(.2s);
+								opacity: 1;
+							}
+						}
+						.app-recent-info{
+							.app-recent-title{
+								.t4{
+									.transition(.2s);
+									color: @primaryText;
+								}
+								i{
+									.transition(.2s);
+									color: @primaryColor;
+								}
+							}
+						}
+					}
+				}
+			}
+
+		}
+		&.home-get-started{
+			flex: 0 0 140px;
+		}
+	}
+}

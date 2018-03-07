@@ -1,0 +1,110 @@
+@import "var.less";
+@import "mixins.less";
+
+.wizard-wrapper{
+  -webkit-app-region: drag;	
+	.flexcol();
+	.wizard-steps-wrapper{
+		.flex();
+		flex: 0 0 100px;
+		justify-content: center;
+		align-items: center;
+		.wizard-steps{
+			margin-right: -65px;
+			.el-step__line{
+		    background-color: #2e8fff;				
+			}
+			.el-step__head{
+		    width: 30px;
+		    height: 30px;
+				span{
+					div{
+						font-weight: 100;
+						font-size: 12px;
+					}
+				}
+				.el-step__line-inner{
+					border:none;
+					border-top: 1px solid;
+				}
+				.el-step__line{
+					&.is-horizontal{
+				    height: 1px;						
+					}
+				}
+				.el-step__icon{
+					.el-icon-check{
+						font-size: 8px;
+					}
+				}
+				&.is-text{
+					border-width: 1px;
+				}
+				&.is-process{
+					color: @primaryColor;
+					background-color: @white;
+					border-color: @primaryColor;
+				}
+				&.is-success{
+					color: @secondryText;
+					background-color: @white;
+					border-color: @secondryText;					
+				}
+			}
+			.el-step__main{
+		    margin-left: -32px;
+		    margin-right: 32px;
+		    text-align: center;
+		    padding-right: 0;			
+				.el-step__title{
+					font-size: 12px;
+					letter-spacing: 1px;
+					text-transform: none;
+					font-weight: 100;
+					&.is-process{
+						color: @primaryColor;
+					}
+					&.is-success{
+						color: @secondryText;
+					}
+				}	
+			}
+		}
+	}
+	.wizard-content-wrapper{
+		.flex();
+		flex: 1;
+		justify-content: center;
+		align-items: center;
+	}
+	.wizard-action-wrapper{
+		.flex();
+		flex: 0 0 80px;
+		justify-content: center;
+		align-items: center;
+		.app-button{
+	    padding: 10px 50px;				
+	    letter-spacing: 1px;
+	    text-transform: none;
+	    border-color: @primaryColor;
+	    color: @primaryColor;
+	    .transition(.2s);
+	    &:hover{
+	    	background-color: @primaryColor;
+	    	color: @white;
+	    }			
+	    &.back-button{
+	    	padding: 0;
+	    	border:none;
+	    	position: absolute;
+	    	left: 50px;
+	    	color: @secondryText;	    	
+		    &:hover{
+		    	background-color: @white;
+		    	color: @primaryColor;
+		    }			
+	    }
+		}
+	}
+
+}

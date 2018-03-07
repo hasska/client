@@ -1,0 +1,108 @@
+.home-start {
+  background-color: #FCFCFC;
+  display: flex;
+  flex-direction: row;
+}
+.home-start .home-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-wrap: wrap;
+  margin: 0 20px;
+}
+.home-start .home-section .home-body {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-wrap: wrap;
+}
+.home-start .home-section .home-body .home-app-new-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.home-start .home-section .home-body .home-app-new-wrapper .home-app-new {
+  display: flex;
+  flex: 1;
+  height: 140px;
+  flex-direction: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+.home-start .home-section .home-body .home-app-new-wrapper .home-app-new div {
+  color: #4A4A4A;
+  text-transform: none;
+  letter-spacing: 2px;
+  position: absolute;
+  bottom: 7px;
+}
+.home-start .home-section .home-body .home-app-new-wrapper .home-app-new:hover {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border: 1px solid #0084FF;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-logo {
+  display: flex;
+  flex: 0 0 50px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-logo img {
+  opacity: .7;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  border-bottom: 1px solid #EAEAEA;
+  padding-bottom: 15px;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-info .app-recent-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-info .app-recent-title .t4 {
+  color: #4A4A4A;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-info .app-recent-title i {
+  font-size: 10px;
+  color: #999999;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-info .t6 {
+  padding-top: 6px;
+  color: #999999;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent:hover .app-recent-logo img {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  opacity: 1;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent:hover .app-recent-info .app-recent-title .t4 {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #000000;
+}
+.home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent:hover .app-recent-info .app-recent-title i {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  color: #0084FF;
+}
+.home-start .home-section.home-get-started {
+  flex: 0 0 140px;
+}
