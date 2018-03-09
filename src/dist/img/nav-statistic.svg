@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>nav-statistic</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="statistic">
+            <g id="Group" transform="translate(3.000000, 5.000000)">
+                <rect id="Rectangle-2" stroke="#000000" stroke-width="1.4" x="21" y="3" width="5" height="19" rx="2"></rect>
+                <rect id="Rectangle-2-Copy" stroke="#000000" stroke-width="1.4" x="16" y="9" width="5" height="13" rx="2"></rect>
+                <rect id="Rectangle-2-Copy-2" stroke="#000000" stroke-width="1.4" x="11" y="0" width="5" height="22" rx="2"></rect>
+                <rect id="Rectangle-2-Copy-3" stroke="#000000" stroke-width="1.4" x="6" y="14" width="5" height="8" rx="2"></rect>
+                <rect id="Rectangle-2-Copy-4" stroke="#000000" stroke-width="1.4" x="1" y="8" width="5" height="14" rx="2"></rect>
+                <rect id="Rectangle" fill="#000000" x="0" y="25" width="27" height="1.5" rx="0.75"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

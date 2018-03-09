@@ -48,7 +48,7 @@ body > div#root > div > div > div:nth-child(2) {
 }
 .app-nav {
   background-color: #FFFFFF;
-  flex: 0 0 180px;
+  flex: 0 0 200px;
   border-right: 1px solid #EAEAEA;
 }
 .app-sub-nav {

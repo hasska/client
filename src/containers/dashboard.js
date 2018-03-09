@@ -6,6 +6,15 @@ import { Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Ic
 
 import Title from '../components/Title';
 
+import navOverview from "../dist/img/nav-overview.svg";
+import navModels from "../dist/img/nav-models.svg";
+import navDb from "../dist/img/nav-db.svg";
+import navApi from "../dist/img/nav-api.svg";
+import navDocuments from "../dist/img/nav-documents.svg";
+import navReports from "../dist/img/nav-reports.svg";
+import navStatistic from "../dist/img/nav-statistic.svg";
+import navAdmindashboard from "../dist/img/nav-admindashboard.svg";
+
 
 require('element-theme-default-custom');
 
@@ -174,17 +183,65 @@ class Dashboard extends Component {
               <div className="app-body">
                   <div className="app-nav">
                     <ul className="nav-container">
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navOverview} /></div>
+                          <div>Overview</div>
+                        </div>
+                      </li>
                       <li className="active">
                         <span></span>
                         <div className="nav-section">
-                          <i className="el-icon-star-off"></i>
-                          <div></div>
+                          <div><img src={navModels} /></div>
+                          <div>Models</div>
+                        </div>
+                      </li>
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navDb} /></div>
+                          <div>Databases</div>
+                        </div>
+                      </li>
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navApi} /></div>
+                          <div>APIs</div>
+                        </div>
+                      </li>
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navReports} /></div>
+                          <div>Reports</div>
+                        </div>
+                      </li>
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navStatistic} /></div>
+                          <div>Statistics</div>
+                        </div>
+                      </li>
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navAdmindashboard} /></div>
+                          <div>Admin Dashboard</div>
+                        </div>
+                      </li>
+                      <li>
+                        <span></span>
+                        <div className="nav-section">
+                          <div><img src={navDocuments} /></div>
+                          <div>Documentation</div>
                         </div>
                       </li>
                     </ul>
                   </div>
                   <div className="app-sub-nav sub-nav-model">
-
                     <div className="sub-nav-header">
                       <div className="sub-nav-title">
                         <h5>Models</h5>
