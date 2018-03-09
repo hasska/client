@@ -2,7 +2,7 @@ import * as ActionTypes from '../constants/ActionTypes';// includes Action Types
 
 export default function projects(state = { projects: { } }, action) {
   switch (action.type) {
-    case ActionTypes.FETCH_SERVERS_DETAILS_SUCCESS:
+    case ActionTypes.CREATE_PROJECT_SUCCESS:
 
       state = {
         type: action.type,
@@ -11,7 +11,7 @@ export default function projects(state = { projects: { } }, action) {
 
       return state;
 
-    case ActionTypes.FETCH_SERVERS_DETAILS_FAILED:
+    case ActionTypes.CREATE_PROJECT_FAILED:
 
       state = {
         type: action.type,

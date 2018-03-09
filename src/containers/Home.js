@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+<<<<<<< Updated upstream
 
 import HomeIntro from '../components/Home/HomeIntro';
 import HomeStart from '../components/Home/HomeStart';
+=======
+import axios from 'axios';
+import { Loading } from 'element-react';
+>>>>>>> Stashed changes
+
 
 
 class Home extends Component {
@@ -14,6 +20,25 @@ class Home extends Component {
     };
   }
   componentWillMount() {
+<<<<<<< Updated upstream
+=======
+   axios.post('http://localhost:8000/projects/create',{
+    title: 'test1',
+    destination: '/Users/vt/Desktop/projects/sag',
+    database: {
+      name: 'test1',
+      type: 'mongo',
+      username: 'vah7id',
+      password: '1234',
+      host: '127.0.0.1',
+      port: '2701'
+    }
+   }).then( ()=>{
+
+   }).catch( ()=>{
+
+   });
+>>>>>>> Stashed changes
   }
   componentWillReceiveProps(nextProps) {
     
