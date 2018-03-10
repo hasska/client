@@ -51,7 +51,7 @@ body,
 body > div#root,
 body > div#root > div,
 body > div#root > div > div,
-body > div#root > div > div > div:nth-child(2) {
+body > div#root > div > div > div {
   height: 100% !important;
   margin: 0;
 }
@@ -98,26 +98,31 @@ body > div#root > div > div > div:nth-child(2) {
   flex: 0 0 200px;
   border-right: 1px solid #EAEAEA;
 }
-.app-window {
+.app-window-wrapper {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
-.app-window .app-top {
+.app-window-wrapper .app-window {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app-window-wrapper .app-window .app-top {
   display: flex;
   flex-direction: row;
   flex: 1;
 }
-.app-window .app-top .app-sub-nav {
+.app-window-wrapper .app-window .app-top .app-sub-nav {
   background-color: #FFFFFF;
   flex: 0 0 260px;
   border-right: 1px solid #EAEAEA;
 }
-.app-window .app-top .app-preview {
+.app-window-wrapper .app-window .app-top .app-preview {
   background-color: #FFFFFF;
   flex: 1 1;
 }
-.app-window .app-editor-wrapper {
+.app-window-wrapper .app-editor-wrapper {
   display: flex;
   flex-direction: row;
   flex: 0 0 160px;
@@ -837,7 +842,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 400px;
+  height: 200px;
 }
 .wizard-models-option-wrapper .models-option-row {
   display: flex;

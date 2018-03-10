@@ -3,7 +3,7 @@
 
 // Home Layout
 
-.home-wrapper, html, body, body>div#root, body>div#root>div, body>div#root>div>div, body>div#root>div>div>div:nth-child(2) {
+.home-wrapper, html, body, body>div#root, body>div#root>div, body>div#root>div>div, body>div#root>div>div>div {
     height:100% !important;
     margin:0;
 }
@@ -50,26 +50,31 @@
     flex :0 0 200px;
     border-right: 1px solid @borderColor;
 }
-.app-window{
+.app-window-wrapper{
     .flexcol();
-    flex:1; 
-    .app-top{
-        .flexrow();
-        flex:1;
-        .app-sub-nav {
-            background-color: @subNavBGColor;
-            flex :0 0 260px;
-            border-right: 1px solid @borderColor;
-        }
-        .app-preview {
-            background-color: @previewBGColor;
-            flex: 1 1;
-        }    
+    flex:1;
+    .app-window{
+        .flexcol();
+        flex:1; 
+        .app-top{
+            .flexrow();
+            flex:1;
+            .app-sub-nav {
+                background-color: @subNavBGColor;
+                flex :0 0 260px;
+                border-right: 1px solid @borderColor;
+            }
+            .app-preview {
+                background-color: @previewBGColor;
+                flex: 1 1;
+            }    
 
+        }
     }
     .app-editor-wrapper{
         .flexrow();
         flex: 0 0 160px;
         border-top: 1px solid @borderColor;
     }
+
 }

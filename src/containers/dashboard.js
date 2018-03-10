@@ -59,17 +59,19 @@ class Dashboard extends Component {
               <ActionBar />
               <div className="app-body">
                   <Nav active={this.state.active} />
-                  <div className="app-window">
-                      <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager /> )} />
-                      <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager /> )} />
-                      <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager /> )} />
-                      <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager /> )} />
-                      <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager /> )} />
-                      <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager /> )} />
-                      <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager /> )} />
-                      <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer /> )} />
+                  <div className="app-window-wrapper">
+                    <div className="app-window">
+                        <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager /> )} />
+                        <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager /> )} />
+                        <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager /> )} />
+                        <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager /> )} />
+                        <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager /> )} />
+                        <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager /> )} />
+                        <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager /> )} />
+                        <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer /> )} />
+                    </div>
+                    <Console />
                   </div>
-                  <Console />
               </div>
           </div>
         </div>
