@@ -76,7 +76,28 @@
 					&:last-child{
 						padding-right: 0;
 					}
+					&.action-main-run{
+						.el-popover{
+							min-width: 70px !important;
+							padding: 5px 0;
+						}
+						.action-container{
+
+							.flexcol();
+							a{
+								flex:1;
+								font-size: 12px;
+								letter-spacing: 1px;
+								padding: 4px 10px;
+								color: @secondryText;
+								&:hover{
+									color: @primaryColor;
+								}
+							}							
+						}
+					}
 				}
+
 			}
 		}
 

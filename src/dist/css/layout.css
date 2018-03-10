@@ -70,7 +70,7 @@ body > div#root > div > div > div:nth-child(2) {
   background-color: #FFFFFF;
   flex: 1 1;
 }
-.app-window .app-editor {
+.app-window .app-editor-wrapper {
   display: flex;
   flex-direction: row;
   flex: 0 0 160px;

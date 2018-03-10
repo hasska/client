@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Progress, Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
+import { Popover, Progress, Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
 import Title from '../components/Title';
 
@@ -210,7 +210,17 @@ class Dashboard extends Component {
                   </div>
                   <div className="header-right">
                     <div className="project-actions">
-                      <a className="action-run"><img src={run} /></a>
+                      <a className="action-main-run">
+                        <Popover placement="bottom" width="40" trigger="focus" content={(
+                            <div className="action-container">
+                              <a className="action-run">Run</a>
+                              <a className="action-build">Build</a>
+                              <a className="action-publish">Publish</a>
+                            </div>
+                          )}>
+                          <img src={run} />
+                        </Popover>
+                      </a>
                       <a className="action-stop"><img src={stop} /></a>
                     </div>
                   </div>
@@ -221,6 +231,9 @@ class Dashboard extends Component {
               </div>
               <div className="app-body">
                   <div className="app-nav">
+                    <div className="nav-collapse">
+                      <a><i className="el-icon-arrow-left"></i></a>                      
+                    </div>
                     <ul className="nav-container">
                       <li>
                         <span></span>
@@ -392,7 +405,16 @@ class Dashboard extends Component {
                         </div>
                       </div>
                     </div>
-                    <div className="app-editor">
+                    <div className="app-editor-wrapper">
+                      <div className="editor-actions">
+                        <a className="editor-clean"><img src={clean} /></a>
+                        <a><i className="el-icon-arrow-down"></i></a>
+
+                      </div>
+                      <Tabs activeName="2" onTabClick={ (tab) => console.log(tab.props.name) }>
+                        <Tabs.Pane label="User" name="1">User</Tabs.Pane>
+                        <Tabs.Pane label="Config" name="2">Config</Tabs.Pane>
+                      </Tabs>
                     </div>
                   </div>
               </div>

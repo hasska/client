@@ -84,6 +84,24 @@
 .app-header .header-layout .header-right .project-actions a:last-child {
   padding-right: 0;
 }
+.app-header .header-layout .header-right .project-actions a.action-main-run .el-popover {
+  min-width: 70px !important;
+  padding: 5px 0;
+}
+.app-header .header-layout .header-right .project-actions a.action-main-run .action-container {
+  display: flex;
+  flex-direction: column;
+}
+.app-header .header-layout .header-right .project-actions a.action-main-run .action-container a {
+  flex: 1;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  color: #4A4A4A;
+}
+.app-header .header-layout .header-right .project-actions a.action-main-run .action-container a:hover {
+  color: #0084FF;
+}
 .app-header .progress-bar .el-progress-bar__outer {
   height: 1px !important;
 }

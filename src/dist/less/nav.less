@@ -1,6 +1,24 @@
 @import "var.less";
 @import "mixins.less";
 
+.app-nav{
+	position: relative;
+	.nav-collapse{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+    height: 44px;
+    padding-right: 15px;
+    .flexrow();
+    align-items: center;
+    justify-content: center;
+		a{
+			i{
+				font-size: 12px;
+			}
+		}
+	}	
+}
 .nav-container{
 	.flexcol();
 	li{

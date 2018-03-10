@@ -1,0 +1,51 @@
+@import "var.less";
+@import "mixins.less";
+
+.app-editor-wrapper{
+	.el-tabs{
+		.flexcolrev();
+		flex:1;
+		.el-tabs__header{
+			.flexrow();
+			flex:0 0 42px;
+			border-bottom: none !important;
+			margin: 0 !important;
+	    border-top: 1px solid @borderColor;
+			.el-tabs__nav{
+				.el-tabs__item{
+			    padding: 0 15px;					
+					font-size: 12px;
+					letter-spacing: 1px;
+					display: hidden;
+				}
+				.el-tabs__active-bar{
+					top:0 !important;
+				}
+			}
+		}
+		.el-tabs__content{
+			.flexrow();
+			flex:1;
+		}
+	}
+	.editor-actions{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+    height: 42px;
+    padding-right: 15px;
+    z-index: 1;
+    .flexrow();
+    align-items: center;
+    justify-content: center;
+		a{
+			margin-left: 10px;
+			i{
+				font-size: 12px;
+			}
+			img{
+				width: 18px;
+			}
+		}
+	}
+}
