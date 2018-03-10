@@ -6,9 +6,9 @@ import './custom.css';
 import { Select, i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'
 
-import 'element-theme-default-custom';
+import 'element-theme-default';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 
 import Home from './containers/Home';
 import Header from './components/Header';
@@ -19,14 +19,13 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <HashRouter>
           <div>
-            <Header />
             <Route path="/" exact component={Home} />            
-            <Route path="/dashboard" exact component={Dashboard} />
-            <Route path="/wizard" exact component={Wizard} />            
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/wizard" component={Wizard} />            
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     );
   }

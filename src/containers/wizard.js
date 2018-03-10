@@ -43,6 +43,10 @@ class Wizard extends Component {
   }  
   componentWillMount() {
     
+    
+  }
+  componentDidMount(){
+    
   }
   componentWillReceiveProps(nextProps) {
     

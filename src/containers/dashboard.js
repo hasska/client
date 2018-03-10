@@ -5,23 +5,22 @@ import { withRouter } from 'react-router-dom';
 import { Popover, Progress, Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
 import Title from '../components/Title';
-
-import navOverview from "../dist/img/nav-overview.svg";
-import navModels from "../dist/img/nav-models.svg";
-import navDb from "../dist/img/nav-db.svg";
-import navApi from "../dist/img/nav-api.svg";
-import navAdmindashboard from "../dist/img/nav-admindashboard.svg";
-import navDocuments from "../dist/img/nav-documents.svg";
-import navMonitoring from "../dist/img/nav-monitoring.svg";
-import navStatistic from "../dist/img/nav-statistic.svg";
-import haskaType from "../dist/img/haska.svg";
-import run from "../dist/img/run.svg";
-import stop from "../dist/img/stop.svg";
 import clean from "../dist/img/clean.svg";
-import build from "../dist/img/build.svg";
-import publish from "../dist/img/publish.svg";
-import LoggerPane from '../components/LoggerPane'
 
+import LoggerPane from '../components/LoggerPane'
+import Nav from '../components/Dashboard/Nav'
+import ActionBar from '../components/Dashboard/ActionBar'
+import Console from '../components/Dashboard/Console'
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import OverviewContainer from '../containers/Overview'
+import ModelsManager from '../components/ModelsManager'
+import DatabaseManager from '../components/DatabaseManager'
+import ApiManager from '../components/ApiManager'
+import AdminManager from '../components/AdminManager'
+import DocsManager from '../components/DocsManager'
+import MonitoringManager from '../components/MonitoringManager'
+import DeployManager from '../components/DeployManager'
 
 
 require('element-theme-default');
@@ -31,134 +30,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       step: 1,
-      dialogVisible: false,
-      options:{
-        name: '',
-        region: '',
-      },
-      info: {
-        modelName: '',
-        modelType: '',
-        modelDB: '',
-      },
-      types: [{
-        value: 'persistModel',
-        label: 'Persist Model'
-      }, {
-        value: 'baseModel',
-        label: 'Base Model'
-      }],
-      typeValue: '',
-      dbs: [{
-        value: 'Option1',
-        label: 'Option1'
-      }, {
-        value: 'Option2',
-        label: 'Option2'
-      }, {
-        value: 'Option3',
-        label: 'Option3'
-      }],
-      dbValue: '',
-      propTypes:[{
-        value: 'Option1',
-        label: 'Option1'
-      }, {
-        value: 'Option2',
-        label: 'Option2'
-      }],
-      propType: '',
-      columns: [
-        {
-          label: "Name",
-          prop: "name",
-          render: function(data){
-            return (
-              <Input></Input>
-            )
-          }
-        },
-        {
-          label: "Type",
-          prop: "type",
-          render: function(data){
-            return (
-              <Select value="">
-                    <Select.Option label="op1" value="op1" />
-              </Select>
-            )
-          }
-        },
-        {
-          label: "Index",
-          prop: "indexKey",
-          width: "60px",
-          render: function(data){
-            return (
-              <Checkbox></Checkbox>
-        )
-          }
-        },
-        {
-          label: "UI Type",
-          prop: "uiType",
-          render: function(data){
-            return (
-              <Select value="">
-                    <Select.Option label="op1" value="op1" />
-              </Select>
-            )
-          }
-        },
-        {
-          label: "Initial",
-          prop: "initial",
-          width: "60px",
-          render: function(data){
-            return (
-              <Checkbox></Checkbox>
-            )
-          }
-        },
-        {
-          label: "Validation",
-          prop: "validation",
-          render: function(data){
-            return (
-              <Input></Input>
-            )
-          }
-        },
-        {
-          label: "Relation",
-          prop: "relation",
-          render: function(data){
-            return (
-              <Select value="">
-                <Select.Option label="op1" value="op1" />
-              </Select>
-            )
-          }
-        }, {
-          label: "",
-          prop: "relation",
-          width: "50px",
-          render: function(data){
-            return (
-              <span className="row-actions">
-                <Button type="text" onClick={ () => this.setState({ dialogVisible: true }) }><Icon name="setting"/></Button>
-                <Button type="text" ><Icon name="delete"/></Button>
-
-              </span>
-
-              )
-          }
-        },],
-      data: [{
-        date: '',
-        name: '',
-      },],
-
+      active: 'overview'
     };
   }
 
@@ -172,249 +44,32 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
-    
+    console.log(this.props.match.path)
   }
   componentWillReceiveProps(nextProps) {
     
   }
 
   render() {
-
+    console.log(this.props.match.path+'/models')
     return (
         <div>
-          <LoggerPane prefix={"root@haska"} history={[{value: 'sag'}]} />
+          <LoggerPane prefix={"root@haska"} />
           <div className="app-wrapper">
-              <div className="app-header">
-                <div className="window-actions">
-                  <div className="name">
-                    haska
-                  </div>
-                </div>
-                <div className="header-layout">
-                  <div className="header-left">
-                    <div className="project-name">
-                        monosority <i className="el-icon-arrow-down"></i>
-                    </div>
-                  </div>
-                  <div className="header-center">
-                    <div className="project-status-wrapper">
-                      <div className="project-name">
-                        monosority
-                      </div>
-                      <div className="project-status">
-                        Build succeeded!
-                      </div>
-                    </div>
-                  </div>
-                  <div className="header-right">
-                    <div className="project-actions">
-                      <a className="action-main-run">
-                        <Popover placement="bottom" width="40" trigger="focus" content={(
-                            <div className="action-container">
-                              <a className="action-run">Run</a>
-                              <a className="action-build">Build</a>
-                              <a className="action-publish">Publish</a>
-                            </div>
-                          )}>
-                          <img src={run} />
-                        </Popover>
-                      </a>
-                      <a className="action-stop"><img src={stop} /></a>
-                    </div>
-                  </div>
-                </div>
-                <div className="progress-bar">
-                  <Progress percentage={30} showText={false}/>
-                </div>
-              </div>
+              <ActionBar />
               <div className="app-body">
-                  <div className="app-nav">
-                    <div className="nav-collapse">
-                      <a><i className="el-icon-arrow-left"></i></a>                      
-                    </div>
-                    <ul className="nav-container">
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navOverview} /></div>
-                          <div>Overview</div>
-                        </div>
-                      </li>
-                      <li className="active">
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navModels} /></div>
-                          <div>Models</div>
-                        </div>
-                      </li>
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navDb} /></div>
-                          <div>Databases</div>
-                        </div>
-                      </li>
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navApi} /></div>
-                          <div>APIs</div>
-                        </div>
-                      </li>
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navAdmindashboard} /></div>
-                          <div>Admin Dashboard</div>
-                        </div>
-                      </li>
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navMonitoring} /></div>
-                          <div>Monitoring</div>
-                        </div>
-                      </li>
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navStatistic} /></div>
-                          <div>Statistics</div>
-                        </div>
-                      </li>
-                      <li>
-                        <span></span>
-                        <div className="nav-section">
-                          <div><img src={navDocuments} /></div>
-                          <div>Documentation</div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                  <Nav active={this.state.active} />
                   <div className="app-window">
-                    <div className="app-top">
-                      <div className="app-sub-nav sub-nav-model">
-                        <div className="sub-nav-header">
-                          <div className="sub-nav-title">
-                            <h5>Models</h5>
-                          </div>
-                          <div className="sub-nav-action">
-                            <a className="app-button icon-button">
-                              <i className="el-icon-plus"></i>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div className="sub-nav-body">
-                          <ul>
-                            <li>
-                              <h5>users</h5>
-                              <i className="el-icon-arrow-right"></i>
-                            </li>
-                            <li className="active">
-                              <h5>customers</h5>
-                              <i className="el-icon-arrow-right"></i>
-                            </li>
-                            <li>
-                              <h5>products</h5>
-                              <i className="el-icon-arrow-right"></i>
-                            </li>
-                            <li>
-                              <h5>tags</h5>
-                              <i className="el-icon-arrow-right"></i>
-                            </li>
-                            <li>
-                              <h5>comments</h5>
-                              <i className="el-icon-arrow-right"></i>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="app-preview">
-                        <div className="model-single">
-                          <div className="model-info-wrapper">
-                            <Title contnet="Modal Info" />
-                            <div className="model-info-form">
-                              <Form className="en-US form-custom-style" model={this.state.form} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
-                                <Form.Item label="Name">
-                                  <Input value={this.state.info.modelName} onChange={this.onChange.bind(this, 'modelName')}></Input>
-                                </Form.Item>
-                                <div className="half-flex">
-                                  <Form.Item label="Type">
-                                    <Select value={this.state.typeValue}>
-                                      {
-                                        this.state.types.map(el => {
-                                          return <Select.Option key={el.value} label={el.label} value={el.value} />
-                                        })
-                                      }
-                                    </Select>
-                                  </Form.Item>
-                                  <Form.Item label="Database">
-                                    <Select value={this.state.dbValue}>
-                                      {
-                                        this.state.dbs.map(el => {
-                                          return <Select.Option key={el.value} label={el.label} value={el.value} />
-                                        })
-                                      }
-                                    </Select>
-                                  </Form.Item>
-                                </div>
-                              </Form>
-                            </div>
-                          </div>
-                          <div className="model-properties-wrapper">
-                            <Title contnet="Properties" />
-                            <div className="model-properties-table">
-                              <Table
-                                style={{width: '100%'}}
-                                columns={this.state.columns}
-                                data={this.state.data}
-                                border={true}
-                                maxHeight={270}
-                                highlightCurrentRow={true}
-                                onCurrentChange={item=>{console.log(item)}}
-                              />
-                              <Button className="app-button new-row" >New</Button>
-                              <Dialog
-                                title="Shipping Address"
-                                visible={ this.state.dialogVisible }
-                                onCancel={ () => this.setState({ dialogVisible: false }) }
-                              >
-                                <Dialog.Body>
-                                  <Form model={this.state.options}>
-                                    <Form.Item label="Promotion name" labelWidth="120">
-                                      <Input value={this.state.options.name}></Input>
-                                    </Form.Item>
-                                    <Form.Item label="Zones" labelWidth="120">
-                                      <Select value={this.state.options.region} placeholder="Please select a zone">
-                                        <Select.Option label="Zone No.1" value="shanghai"></Select.Option>
-                                        <Select.Option label="Zone No.2" value="beijing"></Select.Option>
-                                      </Select>
-                                    </Form.Item>
-                                  </Form>
-                                </Dialog.Body>
-                                <Dialog.Footer className="dialog-footer">
-                                  <Button onClick={ () => this.setState({ dialogVisible: false }) }>取 消</Button>
-                                  <Button type="primary" onClick={ () => this.setState({ dialogVisible: false }) }>确 定</Button>
-                                </Dialog.Footer>
-                              </Dialog>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="app-editor-wrapper">
-                      <div className="editor-actions">
-                        <a className="editor-clean"><img src={clean} /></a>
-                        <a><i className="el-icon-arrow-down"></i></a>
-
-                      </div>
-                      <Tabs activeName="2" onTabClick={ (tab) => console.log(tab.props.name) }>
-                        <Tabs.Pane label="User" name="1">User</Tabs.Pane>
-                        <Tabs.Pane label="Config" name="2">Config</Tabs.Pane>
-                      </Tabs>
-                    </div>
+                      <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager /> )} />
+                      <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager /> )} />
+                      <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager /> )} />
+                      <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager /> )} />
+                      <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager /> )} />
+                      <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager /> )} />
+                      <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager /> )} />
+                      <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer /> )} />
                   </div>
+                  <Console />
               </div>
           </div>
         </div>

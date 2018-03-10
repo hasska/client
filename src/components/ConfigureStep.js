@@ -13,7 +13,7 @@ const {ipcRenderer} = window.require('electron')
 
 
 const ipc = window.ipc || {}
-require('element-theme-default-custom');
+require('element-theme-default');
 
 class ConfigureStep extends Component {
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class ApiManager extends Component {
+class AdminManager extends Component {
   render() {
     return (
       <div>
-        	API
+        
       </div>
     );
   }
 }
 
-export default ApiManager;
+export default AdminManager;

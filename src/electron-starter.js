@@ -31,8 +31,8 @@ function createWindow() {
     menuManger.setMenu(false);
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:3000/dashboard');
-    wizard.loadURL('http://localhost:3000/wizard');
+    mainWindow.loadURL('http://localhost:3000/#/dashboard/overview');
+    wizard.loadURL('http://localhost:3000/#/wizard');
     splash.loadURL('http://localhost:3000');
 
     splash.once('ready-to-show', () => {
