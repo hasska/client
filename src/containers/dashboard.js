@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
+import { Progress, Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
 import Title from '../components/Title';
 
@@ -20,6 +20,7 @@ import stop from "../dist/img/stop.svg";
 import clean from "../dist/img/clean.svg";
 import build from "../dist/img/build.svg";
 import publish from "../dist/img/publish.svg";
+
 
 
 require('element-theme-default');
@@ -213,6 +214,9 @@ class Dashboard extends Component {
                       <a className="action-stop"><img src={stop} /></a>
                     </div>
                   </div>
+                </div>
+                <div className="progress-bar">
+                  <Progress percentage={30} showText={false}/>
                 </div>
               </div>
               <div className="app-body">

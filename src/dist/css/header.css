@@ -75,6 +75,7 @@
   padding-right: 10px;
 }
 .app-header .header-layout .header-right .project-actions a img {
+  width: 20px;
   opacity: .4;
 }
 .app-header .header-layout .header-right .project-actions a:first-child img {
@@ -82,4 +83,7 @@
 }
 .app-header .header-layout .header-right .project-actions a:last-child {
   padding-right: 0;
+}
+.app-header .progress-bar .el-progress-bar__outer {
+  height: 1px !important;
 }
