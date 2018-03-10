@@ -20,6 +20,7 @@ import stop from "../dist/img/stop.svg";
 import clean from "../dist/img/clean.svg";
 import build from "../dist/img/build.svg";
 import publish from "../dist/img/publish.svg";
+import LoggerPane from '../components/LoggerPane'
 
 
 
@@ -67,10 +68,6 @@ class Dashboard extends Component {
         label: 'Option2'
       }],
       propType: '',
-
-
-
-
       columns: [
         {
           label: "Name",
@@ -185,6 +182,7 @@ class Dashboard extends Component {
 
     return (
         <div>
+          <LoggerPane prefix={"root@haska"} history={[{value: 'sag'}]} />
           <div className="app-wrapper">
               <div className="app-header">
                 <div className="window-actions">

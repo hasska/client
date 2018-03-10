@@ -4,19 +4,24 @@ import { withRouter } from 'react-router-dom';
 
 import HomeIntro from '../components/Home/HomeIntro';
 import HomeStart from '../components/Home/HomeStart';
+import axios from 'axios';
+import { Loading } from 'element-react';
+import { fetchProjects } from '../actions/projects'
 
-
-
+require('element-theme-default');
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    
+      projects: []  
     };
   }
   componentWillMount() {
-
+    const self = this;
+    fetchProjects( (response) => {
+      self.setState({'projects':response.data});
+    })
   }
   componentWillReceiveProps(nextProps) {
     
@@ -29,7 +34,7 @@ class Home extends Component {
           <div className="home-wrapper">
               <div className="home-body">
                 <HomeIntro />
-                <HomeStart />
+                <HomeStart projects={this.state.projects} />
               </div>
           </div>
         </div>

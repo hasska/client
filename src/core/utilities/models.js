@@ -170,7 +170,10 @@ module.exports = {
 	deleteMethod: (req,res,app) => {
 
 	},
-	getAllMethods: (req,res,app) => {
+	updateMethod: (req,res,app) => {
 
 	},
+	getAllMethods: (req,res,app) => {
+
+	}
 }

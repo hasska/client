@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import IntroTips from './IntroTips';
 
 
-import logo from "../../dist/img/logo.svg";
-import logoType from "../../dist/img/logoType.svg";
+import logo from "../../dist/img/logo/haska-color.svg";
 import tutorialIcon from "../../dist/img/introTutorial.svg";
 import comunityIcon from "../../dist/img/introComunity.svg";
 import closeIcon from "../../dist/img/closeIcon.svg";
@@ -29,12 +28,9 @@ class HomeIntro extends Component {
             <img src={closeIcon} alt="rootvision" />
           </a>
           <div className="intro-app-logo">
-            <img src={logo} alt="rootvision" />
+            <img src={logo} width="185" alt="rootvision" />
           </div>
-          <div className="intro-app-welcome">
-            <div className="t5">Welcome to</div>
-            <img src={logoType} alt="rootvision" />
-          </div>
+          
           <div className="intro-app-version">
             <div className="t6">version 1.0.0</div>
           </div>

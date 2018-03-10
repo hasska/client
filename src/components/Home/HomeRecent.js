@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
+const {ipcRenderer} = window.require('electron')
+
+const ipc = window.ipc || {}
 
 class HomeRecent extends Component {
+  constructor(props){
+    super(props)
+    ipc.messaging = {
+        sendOpenMainProject: function(data) {
+            ipcRenderer.send('main-project', data)
+        }
+    }
+  }
   render() {
     return (
-      <div className="home-app-recent">
+      <div onClick={ () => { ipc.messaging.sendOpenMainProject(this.props.data)} } className="home-app-recent">
         <div className="app-recent-logo">
-          <img src={this.props.icon} alt="rootvision" />
+          <img src={this.props.icon} width={32} />
         </div>
         <div className="app-recent-info">
           <div className="app-recent-title">
@@ -15,7 +26,6 @@ class HomeRecent extends Component {
           <div className="t6">{this.props.destination}</div>
         </div>
       </div>
-
     );
   }
 }

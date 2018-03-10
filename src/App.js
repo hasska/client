@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './index.css';
+import './custom.css';
+
 import { Select, i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'
 
-import 'element-theme-default';
+import 'element-theme-default-custom';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 

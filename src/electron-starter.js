@@ -1,5 +1,13 @@
 const electron = require('electron');
 
+const server = require('../src/core/provider/server');
+const fileManager = require('../src/core/filemanager');
+const Store = require('electron-store');
+const store = new Store();
+const menuManger = require('../src/core/utilities/menu');
+const projectManger = require('../src/core/utilities/projects');
+
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -9,6 +17,7 @@ const express = require('express');
 const path = require('path');
 const url = require('url');
 
+const {ipcMain,dialog} = require('electron');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow, wizard, splash;
@@ -19,6 +28,8 @@ function createWindow() {
     wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
     splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 
+    menuManger.setMenu(false);
+
     // and load the index.html of the app.
     mainWindow.loadURL('http://localhost:3000/dashboard');
     wizard.loadURL('http://localhost:3000/wizard');
@@ -28,22 +39,105 @@ function createWindow() {
       splash.show()
     })
 
+    //mainWindow.loadURL('http://localhost:3000');
+    mainWindow.webContents.session.clearStorageData();
+
+    ipcMain.on('create-project', (event, arg) => {
+        event.preventDefault();
+        if(!wizard) {
+            //wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
+        } else {
+            wizard.show();
+        }
+    })
+
+    ipcMain.on('open-dialog', (event,arg) => {
+        event.preventDefault();
+
+        dialog.showOpenDialog({properties: [ 'openDirectory']}, (filePaths) => {
+             event.sender.send('open-dialog-reply', filePaths)
+        });
+    });
+
+    ipcMain.on('main-project', (event,arg) => {
+        event.preventDefault();
+
+        /*dialog.showOpenDialog({properties: [ 'openDirectory']}, (filePaths) => {
+             event.sender.send('open-dialog-reply', filePaths)
+        });*/
+        wizard.hide();
+        splash.hide();
+        store.set('currentProject', arg)
+        menuManger.setMenu(true);
+        mainWindow.show();
+    });
+
+    ipcMain.on('start-project', (event,arg) => {
+        event.preventDefault();
+        projectManger.run( (response) => {
+            event.sender.send('start-project-result', response)
+        });
+    });
+
+    ipcMain.on('stop-project', (event,arg) => {
+        event.preventDefault();
+        projectManger.run( (response) => {
+            event.sender.send('stop-project-result', response)
+        });
+    });
+
+    ipcMain.on('build-project', (event,arg) => {
+        event.preventDefault();
+        projectManger.run( (response) => {
+            event.sender.send('build-project-result', response)
+        });
+    });
+
+    ipcMain.on('clean-project', (event,arg) => {
+        event.preventDefault();
+        projectManger.run( (response) => {
+            event.sender.send('clean-project-result', response)
+        });
+    });
+
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
+    mainWindow.on('close', function () {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
     })
-    splash.on('closed', function () {
-        mainWindow.show();
-        wizard.show();
+
+    splash.on('close', function () {
+        //app.quit()
+        //mainWindow.show();
+        spash.hide();
+        event.preventDefault();
     })
-    wizard.on('closed', function () {
+
+    wizard.on('close', function (event) {
+        wizard.hide();
+        event.preventDefault();
+        //wizard = null;
+        //wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
+       // wizard = null;
     })
+    
+    app.port = process.env.PORT || 8000;
+    app.express = express();
+    app.server = server.createServer(app);
+    app.logger = server.logger(app);
+    //app.filesManager = fileManager.serve(app);
+    server.timeout = 1000;  
+
+    server.run(app);
+}
+
+app.respondToClient = (req) => {
+    return req;
 }
 
 // This method will be called when Electron has finished

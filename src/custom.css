@@ -1,0 +1,11 @@
+.ReactBash{
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  height: 300px !important;
+  width: 100% !important;
+}
+
+.ReactBash input{
+	outline: none !important;
+}

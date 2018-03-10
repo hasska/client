@@ -3,23 +3,20 @@ import * as API_URL from '../constants/ApiConstants';// includes API URL's const
 
 const axios = require('axios');
 
-export const createProject = params => (dispatch) => {
-
-  return axios.post('http://localhost:8000/projects/create')
+export const createProject = (params,callback) => {
+  axios.post(API_URL.CREATE_PROJECT_URL,params)
   .then((body) => {
-      dispatch({
-        type: ActionTypes.CREATE_PROJECT_SUCCESS,
-        payload: {
-          project: body.data
-        }
-      });
+      callback(body.data);
     }).catch((ex) => {
-      dispatch({
-        type: ActionTypes.CREATE_PROJECT_FAILED,
-        payload: {
-          project: null,
-          error: ex,
-        },
-      });
+      callback(ex);
+  });
+};
+
+export const fetchProjects = (callback) => {
+  axios.get(API_URL.FETCH_PROJECTS_URL)
+  .then((body) => {
+      callback(body.data);
+    }).catch((ex) => {
+      callback(ex);
   });
 };

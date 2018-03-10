@@ -1,0 +1,25 @@
+{
+  "name": "dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dotenv": "^5.0.0",
+    "element-react": "^1.4.5",
+    "element-theme-default": "^1.4.13",
+    "react": "^16.2.0",
+    "react-codemirror": "^1.0.0",
+    "react-color": "^2.13.8",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
+    "react-quill": "^1.2.6",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
