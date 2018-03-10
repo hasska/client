@@ -1,6 +1,4 @@
 const electron = require('electron');
-const server = require('../src/core/provider/server');
-const fileManager = require('../src/core/filemanager');
 
 // Module to control application life.
 const app = electron.app;
@@ -22,7 +20,6 @@ function createWindow() {
     splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 
     // and load the index.html of the app.
-<<<<<<< Updated upstream
     mainWindow.loadURL('http://localhost:3000/dashboard');
     wizard.loadURL('http://localhost:3000/wizard');
     splash.loadURL('http://localhost:3000');
@@ -30,10 +27,7 @@ function createWindow() {
     splash.once('ready-to-show', () => {
       splash.show()
     })
-=======
-    mainWindow.loadURL('http://localhost:3000');
-    mainWindow.webContents.session.clearStorageData();
->>>>>>> Stashed changes
+
     // Open the DevTools.
     //mainWindow.webContents.openDevTools();
 
@@ -44,28 +38,12 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
-<<<<<<< Updated upstream
     splash.on('closed', function () {
         mainWindow.show();
         wizard.show();
     })
     wizard.on('closed', function () {
     })
-=======
-    
-    app.port = process.env.PORT || 8000;
-    app.express = express();
-    app.server = server.createServer(app);
-    app.logger = server.logger(app);
-    app.filesManager = fileManager.serve(app);
-    server.timeout = 2000;  
-
-    server.run(app);
-}
-
-app.respondToClient = (req) => {
-    return req;
->>>>>>> Stashed changes
 }
 
 // This method will be called when Electron has finished

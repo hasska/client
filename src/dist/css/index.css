@@ -84,7 +84,7 @@ body > div#root > div > div > div:nth-child(2) {
   flex-direction: column;
 }
 .app-header {
-  height: 50px;
+  height: 72px;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EAEAEA;
   -webkit-app-region: drag;
@@ -98,14 +98,30 @@ body > div#root > div > div > div:nth-child(2) {
   flex: 0 0 200px;
   border-right: 1px solid #EAEAEA;
 }
-.app-sub-nav {
+.app-window {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app-window .app-top {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.app-window .app-top .app-sub-nav {
   background-color: #FFFFFF;
   flex: 0 0 260px;
   border-right: 1px solid #EAEAEA;
 }
-.app-preview {
+.app-window .app-top .app-preview {
   background-color: #FFFFFF;
   flex: 1 1;
+}
+.app-window .app-editor {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 160px;
+  border-top: 1px solid #EAEAEA;
 }
 .form-custom-style .el-input__inner {
   border-radius: 50px;
@@ -247,6 +263,94 @@ body > div#root > div > div > div:nth-child(2) {
 .app-sub-nav .sub-nav-body ul li.active i {
   color: #FFFFFF;
   border-top: 1px solid transparent;
+}
+.app-header {
+  display: flex;
+  flex-direction: column;
+}
+.app-header .window-actions {
+  height: 22px;
+  background-color: #EAEAEA;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.app-header .window-actions .name {
+  font-size: 11px;
+  color: #4A4A4A;
+  letter-spacing: 1px;
+}
+.app-header .header-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex: 1;
+}
+.app-header .header-layout .header-left {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.app-header .header-layout .header-left .project-name {
+  font-size: 14px;
+  padding-left: 25px;
+}
+.app-header .header-layout .header-left .project-name i {
+  font-size: 10px;
+}
+.app-header .header-layout .header-center {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.app-header .header-layout .header-center .project-status-wrapper {
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+}
+.app-header .header-layout .header-center .project-status-wrapper .project-name {
+  color: #4A4A4A;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid #999999;
+}
+.app-header .header-layout .header-center .project-status-wrapper .project-status {
+  color: #999999;
+}
+.app-header .header-layout .header-right {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 200px;
+  align-items: center;
+  justify-content: center;
+}
+.app-header .header-layout .header-right .project-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 25px;
+}
+.app-header .header-layout .header-right .project-actions a {
+  padding-right: 10px;
+}
+.app-header .header-layout .header-right .project-actions a img {
+  opacity: .4;
+}
+.app-header .header-layout .header-right .project-actions a:first-child img {
+  opacity: 1;
+}
+.app-header .header-layout .header-right .project-actions a:last-child {
+  padding-right: 0;
+}
+button {
+  border-radius: 100px !important;
 }
 .app-button {
   border: 1px solid #0084FF;

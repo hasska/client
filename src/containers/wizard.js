@@ -8,7 +8,7 @@ import { Loading, Button } from 'element-react';
 import ConfigureStep from '../components/ConfigureStep';
 import ModelsStep from '../components/ModelsStep';
 
-require('element-theme-default-custom');
+require('element-theme-default');
 
 class Wizard extends Component {
   constructor(props) {

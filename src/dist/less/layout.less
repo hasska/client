@@ -36,7 +36,7 @@
     flex-direction: column;
 }
 .app-header {
-    height: 50px;
+    height: 72px;
     background-color: @headerBGColor;
     border-bottom: 1px solid @borderColor;
     -webkit-app-region: drag;
@@ -50,12 +50,26 @@
     flex :0 0 200px;
     border-right: 1px solid @borderColor;
 }
-.app-sub-nav {
-    background-color: @subNavBGColor;
-    flex :0 0 260px;
-    border-right: 1px solid @borderColor;
-}
-.app-preview {
-    background-color: @previewBGColor;
-    flex: 1 1;
+.app-window{
+    .flexcol();
+    flex:1; 
+    .app-top{
+        .flexrow();
+        flex:1;
+        .app-sub-nav {
+            background-color: @subNavBGColor;
+            flex :0 0 260px;
+            border-right: 1px solid @borderColor;
+        }
+        .app-preview {
+            background-color: @previewBGColor;
+            flex: 1 1;
+        }    
+
+    }
+    .app-editor{
+        .flexrow();
+        flex: 0 0 160px;
+        border-top: 1px solid @borderColor;
+    }
 }

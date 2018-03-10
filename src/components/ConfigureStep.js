@@ -9,7 +9,7 @@ import mdBlog from "../dist/img/mdBlog.svg";
 import mdShop from "../dist/img/mdShop.svg";
 import mdCompany from "../dist/img/mdCompany.svg";
 
-require('element-theme-default-custom');
+require('element-theme-default');
 
 
 class ConfigureStep extends Component {

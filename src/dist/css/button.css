@@ -1,3 +1,6 @@
+button {
+  border-radius: 100px !important;
+}
 .app-button {
   border: 1px solid #0084FF;
   border-radius: 100px;

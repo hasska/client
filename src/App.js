@@ -4,7 +4,7 @@ import './index.css';
 import { Select, i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'
 
-import 'element-theme-default-custom';
+import 'element-theme-default';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 

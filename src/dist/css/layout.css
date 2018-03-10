@@ -37,7 +37,7 @@ body > div#root > div > div > div:nth-child(2) {
   flex-direction: column;
 }
 .app-header {
-  height: 50px;
+  height: 72px;
   background-color: #FFFFFF;
   border-bottom: 1px solid #EAEAEA;
   -webkit-app-region: drag;
@@ -51,12 +51,28 @@ body > div#root > div > div > div:nth-child(2) {
   flex: 0 0 200px;
   border-right: 1px solid #EAEAEA;
 }
-.app-sub-nav {
+.app-window {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app-window .app-top {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.app-window .app-top .app-sub-nav {
   background-color: #FFFFFF;
   flex: 0 0 260px;
   border-right: 1px solid #EAEAEA;
 }
-.app-preview {
+.app-window .app-top .app-preview {
   background-color: #FFFFFF;
   flex: 1 1;
+}
+.app-window .app-editor {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 160px;
+  border-top: 1px solid #EAEAEA;
 }
