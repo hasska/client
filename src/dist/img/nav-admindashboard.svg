@@ -5,12 +5,18 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="admindashboard" stroke="#000000" stroke-width="1.5">
-            <g id="Group" transform="translate(3.000000, 2.000000)">
-                <rect id="Rectangle" x="15" y="0" width="11" height="10" rx="2"></rect>
-                <rect id="Rectangle-Copy-3" x="0" y="19" width="11" height="10" rx="2"></rect>
-                <rect id="Rectangle-Copy" x="15" y="14" width="11" height="15" rx="2"></rect>
-                <rect id="Rectangle-Copy-2" x="0" y="0" width="11" height="15" rx="2"></rect>
+        <g id="admindashboard">
+            <g id="001-dashboard-1" transform="translate(5.000000, 4.000000)" fill-rule="nonzero" fill="#999999">
+                <ellipse id="Oval" cx="11" cy="2.23670213" rx="1.25" ry="1.24734043"></ellipse>
+                <ellipse id="Oval" cx="1.25" cy="11.9659574" rx="1.25" ry="1.24734043"></ellipse>
+                <ellipse id="Oval" cx="4.125" cy="5.10558511" rx="1.25" ry="1.24734043"></ellipse>
+                <ellipse id="Oval" cx="20.75" cy="11.9659574" rx="1.25" ry="1.24734043"></ellipse>
+            </g>
+            <rect id="Rectangle" stroke="#999999" stroke-width="1.5" x="10" y="25" width="12" height="5" rx="2"></rect>
+            <path d="M16,29 C23.7319865,29 30,22.7319865 30,15 C30,7.2680135 23.7319865,1 16,1 C8.2680135,1 2,7.2680135 2,15" id="Oval-2" stroke="#999999" stroke-width="1.5" stroke-linecap="round" transform="translate(16.000000, 15.000000) rotate(-45.000000) translate(-16.000000, -15.000000) "></path>
+            <g id="Group" transform="translate(18.345686, 13.259301) rotate(-44.000000) translate(-18.345686, -13.259301) translate(12.845686, 11.259301)" fill="#999999">
+                <circle id="Oval-3" cx="2" cy="2" r="2"></circle>
+                <rect id="Rectangle-2" x="3" y="1" width="8" height="2" rx="1"></rect>
             </g>
         </g>
     </g>

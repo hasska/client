@@ -6,23 +6,22 @@
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="documents">
-            <g id="Group-Copy" transform="translate(1.000000, 4.000000)">
-                <rect id="Rectangle-3" stroke="#000000" stroke-width="1.5" x="0" y="0" width="7" height="26" rx="1"></rect>
-                <rect id="Rectangle-2" fill="#000000" x="2" y="2" width="3" height="1" rx="0.5"></rect>
-                <rect id="Rectangle" fill="#000000" x="0" y="22" width="7" height="1"></rect>
-                <rect id="Rectangle-Copy" fill="#000000" x="0" y="18" width="7" height="1"></rect>
-            </g>
-            <g id="Group-Copy-2" transform="translate(11.000000, 4.000000)">
-                <rect id="Rectangle-3" stroke="#000000" stroke-width="1.5" x="0" y="0" width="7" height="26" rx="1"></rect>
-                <rect id="Rectangle-2" fill="#000000" x="2" y="2" width="3" height="1" rx="0.5"></rect>
-                <rect id="Rectangle" fill="#000000" x="0" y="22" width="7" height="1"></rect>
-                <rect id="Rectangle-Copy" fill="#000000" x="0" y="18" width="7" height="1"></rect>
-            </g>
-            <g id="Group-Copy-3" transform="translate(25.500000, 17.000000) rotate(-7.000000) translate(-25.500000, -17.000000) translate(22.000000, 4.000000)">
-                <rect id="Rectangle-3" stroke="#000000" stroke-width="1.5" x="0" y="0" width="7" height="26" rx="1"></rect>
-                <rect id="Rectangle-2" fill="#000000" x="2" y="2" width="3" height="1" rx="0.5"></rect>
-                <rect id="Rectangle" fill="#000000" x="0" y="22" width="7" height="1"></rect>
-                <rect id="Rectangle-Copy" fill="#000000" x="0" y="18" width="7" height="1"></rect>
+            <g id="Group" transform="translate(4.000000, 4.000000)">
+                <g id="Group-Copy" transform="translate(0.000000, 1.000000)">
+                    <rect id="Rectangle-3" stroke="#999999" stroke-width="1.5" x="0" y="0" width="6" height="22" rx="1"></rect>
+                    <rect id="Rectangle" fill="#999999" x="0" y="18.6153846" width="6" height="1"></rect>
+                    <rect id="Rectangle-Copy" fill="#999999" x="0" y="15.2307692" width="6" height="1"></rect>
+                </g>
+                <g id="Group-Copy-2" transform="translate(9.000000, 1.000000)">
+                    <rect id="Rectangle-3" stroke="#999999" stroke-width="1.5" x="0" y="0" width="6" height="22" rx="1"></rect>
+                    <rect id="Rectangle" fill="#999999" x="0" y="18.6153846" width="6" height="1"></rect>
+                    <rect id="Rectangle-Copy" fill="#999999" x="0" y="15.2307692" width="6" height="1"></rect>
+                </g>
+                <g id="Group-Copy-3" transform="translate(21.000000, 12.000000) rotate(-7.000000) translate(-21.000000, -12.000000) translate(18.000000, 1.000000)">
+                    <rect id="Rectangle-3" stroke="#999999" stroke-width="1.5" x="0" y="0" width="6" height="22" rx="1"></rect>
+                    <rect id="Rectangle" fill="#999999" x="0" y="18.6153846" width="6" height="1"></rect>
+                    <rect id="Rectangle-Copy" fill="#999999" x="0" y="15.2307692" width="6" height="1"></rect>
+                </g>
             </g>
         </g>
     </g>
