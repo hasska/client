@@ -2,6 +2,26 @@
 @import "mixins.less";
 
 .form-custom-style{
+	.logo-uploader{
+		.flexrow();
+		justify-content: center;
+		.el-upload{
+			>i{
+				width: 144px;
+				height: 144px;
+				border-radius: 5px;
+				background-color: @inactiveColor;
+				color: @white;
+				font-size: 42px;
+				.flexrow();
+				align-items: center;
+				justify-content: center;
+			}
+		}
+	}
+	.el-textarea__inner{
+		border-radius: 18px;
+	}
 	.el-input__inner{
 		border-radius: 50px;
 	}
@@ -26,6 +46,61 @@
 	.el-select-dropdown__item{
 		.t4();
 	}
+	.radio-full-2{
+		.el-radio-group{
+			width: 100%;
+			label{
+				width: 50%;
+				span{
+					width: 100%;
+				}
+			}
+		}
+	}
+	.flex-2-1{
+		.flexrow();
+		>div{
+			&:nth-child(1){
+				flex:2;
+				.el-form-item__content{
+					width: auto;
+				}
+			}
+			&:nth-child(2){
+				flex:1;
+				.el-form-item__label{
+					width: 100px !important;
+				}
+				.el-form-item__content{
+					width: auto;
+					margin-left: 100px !important;
+				}
+			}
+		}
+	}
+
+	.radio-full-4{
+		.el-radio-group{
+			width: 100%;
+			label{
+				width: 20%;
+				span{
+					width: 100%;
+				}
+			}
+		}
+	}	
+	.radio-full-3{
+		.el-radio-group{
+			width: 100%;
+			label{
+				width: 33.333333%;
+				span{
+					width: 100%;
+				}
+			}
+		}
+	}	
 	.el-radio-group{
 		label{
 	    span{

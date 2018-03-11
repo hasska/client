@@ -33,8 +33,8 @@ class Overview extends Component {
   render() {
 
     return (
-      <div className="app-top">
-sagjghk
+      <div className="app-window">
+        sagjghk
       </div>
     );
   }

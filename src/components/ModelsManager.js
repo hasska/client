@@ -6,8 +6,8 @@ class ModelsManager extends Component {
   }
   render() {
     return (
-      <div>
-        sage
+      <div className="app-window">
+        sages
       </div>
     );
   }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class DeployManager extends Component {
   render() {
     return (
-      <div>
+      <div className="app-window">
         
       </div>
     );

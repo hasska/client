@@ -1,0 +1,26 @@
+.setting-wrapper {
+  flex: 1;
+}
+.setting-wrapper .el-tab-pane {
+  flex: 1;
+}
+.setting-wrapper .setting-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 0 0;
+}
+.setting-wrapper .setting-form form {
+  margin-left: -120px;
+  width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.setting-wrapper .setting-form form .head-title {
+  width: 400px;
+  margin-bottom: 15px;
+}
+.setting-wrapper .setting-form .el-form-item__content {
+  width: 400px;
+}

@@ -1,0 +1,29 @@
+@import "var.less";
+@import "mixins.less";
+
+.setting-wrapper{
+	flex:1;
+	.el-tab-pane{
+		flex:1;
+	}
+	.setting-form{
+		.flex();
+		align-items: center;
+		justify-content: center;
+    padding: 40px 0 0 0;
+		form{
+			margin-left: -120px;
+			width: 520px;
+			.flexcol();
+			align-items: flex-end;
+			.head-title{
+				width: 400px;
+				margin-bottom: 15px;
+			}
+
+		}
+		.el-form-item__content{
+			width: 400px;
+		}
+	}
+}

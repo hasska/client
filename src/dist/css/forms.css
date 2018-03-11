@@ -1,3 +1,23 @@
+.form-custom-style .logo-uploader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.form-custom-style .logo-uploader .el-upload > i {
+  width: 144px;
+  height: 144px;
+  border-radius: 5px;
+  background-color: #bfcbd9;
+  color: #FFFFFF;
+  font-size: 42px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.form-custom-style .el-textarea__inner {
+  border-radius: 18px;
+}
 .form-custom-style .el-input__inner {
   border-radius: 50px;
 }
@@ -19,6 +39,53 @@
 }
 .form-custom-style .el-select-dropdown__item {
   font-size: 1em;
+}
+.form-custom-style .radio-full-2 .el-radio-group {
+  width: 100%;
+}
+.form-custom-style .radio-full-2 .el-radio-group label {
+  width: 50%;
+}
+.form-custom-style .radio-full-2 .el-radio-group label span {
+  width: 100%;
+}
+.form-custom-style .flex-2-1 {
+  display: flex;
+  flex-direction: row;
+}
+.form-custom-style .flex-2-1 > div:nth-child(1) {
+  flex: 2;
+}
+.form-custom-style .flex-2-1 > div:nth-child(1) .el-form-item__content {
+  width: auto;
+}
+.form-custom-style .flex-2-1 > div:nth-child(2) {
+  flex: 1;
+}
+.form-custom-style .flex-2-1 > div:nth-child(2) .el-form-item__label {
+  width: 100px !important;
+}
+.form-custom-style .flex-2-1 > div:nth-child(2) .el-form-item__content {
+  width: auto;
+  margin-left: 100px !important;
+}
+.form-custom-style .radio-full-4 .el-radio-group {
+  width: 100%;
+}
+.form-custom-style .radio-full-4 .el-radio-group label {
+  width: 20%;
+}
+.form-custom-style .radio-full-4 .el-radio-group label span {
+  width: 100%;
+}
+.form-custom-style .radio-full-3 .el-radio-group {
+  width: 100%;
+}
+.form-custom-style .radio-full-3 .el-radio-group label {
+  width: 33.333333%;
+}
+.form-custom-style .radio-full-3 .el-radio-group label span {
+  width: 100%;
 }
 .form-custom-style .el-radio-group label span {
   font-size: 12px;

@@ -1,14 +1,24 @@
+.app-sub-nav {
+  display: flex;
+  flex-direction: column;
+}
 .app-sub-nav .sub-nav-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex: 0 0 60px;
+  box-sizing: border-box;
   padding: 22px 15px 20px 15px;
 }
 .app-sub-nav .sub-nav-header .sub-nav-title h5 {
   color: #000000;
   letter-spacing: 1px;
   text-transform: none;
+}
+.app-sub-nav .sub-nav-body {
+  flex: 1;
+  overflow-x: scroll;
 }
 .app-sub-nav .sub-nav-body ul li {
   display: flex;
@@ -23,10 +33,18 @@
   font-weight: 100;
   color: #999999;
   letter-spacing: 1px;
+  flex: 1;
 }
 .app-sub-nav .sub-nav-body ul li i {
-  font-size: 10px;
   color: #999999;
+  flex: 0 0 20px;
+  text-align: right;
+}
+.app-sub-nav .sub-nav-body ul li i:last-child {
+  font-size: 10px;
+}
+.app-sub-nav .sub-nav-body ul li i:first-child {
+  font-size: 13px;
 }
 .app-sub-nav .sub-nav-body ul li:hover h5 {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);

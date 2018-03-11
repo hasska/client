@@ -25,7 +25,8 @@ class Nav extends Component {
     return (
       <div className="app-nav">
         { this.state.navigate && <Redirect to={"/dashboard/"+this.state.active} push={true} />}
-        <div className="nav-collapse">
+        <div className="nav-actions">
+          <a onClick={()=>this.changeRoute('setting')} ><i className="el-icon-setting"></i></a>                      
           <a><i className="el-icon-arrow-left"></i></a>                      
         </div>
         <ul className="nav-container">
@@ -45,7 +46,7 @@ class Nav extends Component {
           </li>
           <li className={ this.state.active == 'database'?'active':'' }>
             <span></span>
-            <div onClick={()=>this.changeRoute('database')} className="nav-section">
+            <div onClick={()=>this.changeRoute('databases')} className="nav-section">
               <div><img src={navDb} /></div>
               <div>Databases</div>
             </div>

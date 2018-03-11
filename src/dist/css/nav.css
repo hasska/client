@@ -1,7 +1,7 @@
 .app-nav {
   position: relative;
 }
-.app-nav .nav-collapse {
+.app-nav .nav-actions {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -12,8 +12,15 @@
   align-items: center;
   justify-content: center;
 }
-.app-nav .nav-collapse a i {
+.app-nav .nav-actions a {
+  margin-left: 10px;
+}
+.app-nav .nav-actions a i {
   font-size: 12px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.app-nav .nav-actions a:hover i {
+  color: #0084FF;
 }
 .nav-container {
   display: flex;
@@ -22,8 +29,8 @@
 .nav-container li {
   display: flex;
   flex-direction: row;
-  height: 36px;
-  padding: 10px 0;
+  height: 34px;
+  padding: 5px 0;
   justify-content: space-between;
   align-items: center;
 }

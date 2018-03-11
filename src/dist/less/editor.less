@@ -1,6 +1,27 @@
 @import "var.less";
 @import "mixins.less";
 
+.el-tabs{
+	flex:1;
+	.el-tabs__header{
+		.flexrow();
+		flex:0 0 42px;
+		margin: 0 !important;
+		.el-tabs__nav{
+			.el-tabs__item{
+		    padding: 0 15px;					
+				font-size: 12px;
+				letter-spacing: 1px;
+			}
+		}
+	}
+	.el-tabs__content{
+		.flexrow();
+		flex:1;
+	}
+}
+
+
 .app-editor-wrapper{
 	.el-tabs{
 		.flexcolrev();

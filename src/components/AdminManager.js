@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class AdminManager extends Component {
   render() {
     return (
-      <div>
-        
+      <div className="app-window">
+        Admin
       </div>
     );
   }

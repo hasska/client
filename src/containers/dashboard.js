@@ -15,12 +15,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import OverviewContainer from '../containers/Overview'
 import ModelsManager from '../components/ModelsManager'
-import DatabaseManager from '../components/DatabaseManager'
+import DatabaseManager from '../components/Database/DatabaseManager'
 import ApiManager from '../components/ApiManager'
 import AdminManager from '../components/AdminManager'
 import DocsManager from '../components/DocsManager'
 import MonitoringManager from '../components/MonitoringManager'
 import DeployManager from '../components/DeployManager'
+import SettingContainer from '../components/Setting/Setting'
 
 
 require('element-theme-default');
@@ -59,18 +60,17 @@ class Dashboard extends Component {
               <ActionBar />
               <div className="app-body">
                   <Nav active={this.state.active} />
-                  <div className="app-window-wrapper">
-                    <div className="app-window">
-                        <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager /> )} />
-                        <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager /> )} />
-                        <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager /> )} />
-                        <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager /> )} />
-                        <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager /> )} />
-                        <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager /> )} />
-                        <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager /> )} />
-                        <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer /> )} />
-                    </div>
-                    <Console />
+                    <div className="app-window-wrapper">
+                      <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager /> )} />
+                      <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager /> )} />
+                      <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager /> )} />
+                      <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager /> )} />
+                      <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager /> )} />
+                      <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager /> )} />
+                      <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager /> )} />
+                      <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer /> )} />
+                      <Route path={this.props.match.path+'/setting'} render={(props) => ( <SettingContainer /> )} />
+                      <Console />
                   </div>
               </div>
           </div>

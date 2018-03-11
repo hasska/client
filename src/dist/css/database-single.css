@@ -1,0 +1,19 @@
+.database-single {
+  padding: 8px 20px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px);
+}
+.database-single .database-config-wrapper .database-config-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0 5px 0;
+}
+.database-single .database-config-wrapper .database-config-form form {
+  margin-left: -120px;
+  width: 520px;
+}
+.database-single .database-config-wrapper .database-config-form .el-form-item__content {
+  width: 400px;
+}
