@@ -41,7 +41,7 @@ class ModelEdit extends Component {
   fetchModelData(){
     const self = this;
     const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
-    
+
     axios.get(url+this.props.model+'s/'+window.location.pathname.split('update/')[1],{
       headers: {
         Authorization: JSON.parse(localStorage.getItem('authorized_user')).id
@@ -60,12 +60,12 @@ class ModelEdit extends Component {
             }
           //}
           self.setState({loading:false,fullscreen:false,form: tmp_form})
-        } 
+        }
       } else {
         self.showMessage('Error','Entry not available !','error');
         self.setState({loading:false,fullscreen:false,redirect:true,redirect_url:'/'+this.props.model});
       }
-    }) 
+    })
   }
   saveModel(e){
 
@@ -74,12 +74,12 @@ class ModelEdit extends Component {
     const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
     this.refs.form.validate((valid) => {
       if (valid) {
-        
+
         self.setState({ loading: true,fullscreen:true })
-        
+
         var xhr  = new XMLHttpRequest();
         const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
-        xhr.onload = function(){ 
+        xhr.onload = function(){
           if(xhr.status==200){
             var response = JSON.parse(xhr.response);
             self.showMessage('Updated :)','Successfully Entry Updated !','success');
@@ -88,7 +88,7 @@ class ModelEdit extends Component {
             self.setState({loading:false,fullscreen:false});
             self.showMessage('Error :(',JSON.parse(xhr.response).error.message.toString(),'error')
           }
-          
+
         }
 
         var form_data = new FormData();
@@ -97,7 +97,7 @@ class ModelEdit extends Component {
         }
         xhr.open ('PATCH', url+self.props.model+'s/'+window.location.pathname.split('update/')[1], true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
-        
+
         xhr.send (form_data);
         return false;
 
@@ -136,7 +136,7 @@ class ModelEdit extends Component {
         }];
         self.setState({ rules: tmp_rules });
       }
-      
+
       formModel[property] = "";
 
       if(properties[property].type=="string"){
@@ -169,7 +169,7 @@ class ModelEdit extends Component {
         }
 
         if(properties[property].uiType.toLowerCase()=="editor" ||
-          properties[property].uiType.toLowerCase()=="html" || 
+          properties[property].uiType.toLowerCase()=="html" ||
           properties[property].uiType.toLowerCase()=="code"){
           formModel[property] = properties[property].options.default || "";
         }
@@ -184,7 +184,7 @@ class ModelEdit extends Component {
            // self.setState({'loading':false,fullscreen:false});
           }).catch( (ex) => {
            // self.setState({'loading':false,fullscreen:false});
-          }); 
+          });
         }
         if(properties[property].uiType.toLowerCase() == 'file'){
           formModel[property] = [];
@@ -220,7 +220,7 @@ class ModelEdit extends Component {
     this.setState({ form: tmp })
   }
   render() {
-    
+
     let form_fields = [];
     let properties = this.state.properties;
     let hiddens = this.props.model_config.hidden || [];
@@ -229,7 +229,7 @@ class ModelEdit extends Component {
 
     if(!this.state.loading){
       Object.keys(properties).map(function (key,index) {
-          
+
           var type = properties[key].type;
           if(typeof properties[key].uiType != "undefined")
             type = properties[key].uiType.toLowerCase();
@@ -251,18 +251,18 @@ class ModelEdit extends Component {
               case 'url':
                 form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } prepend="http://" type="text"></Input></Form.Item>);
                 break;
-              case 'textarea': 
+              case 'textarea':
                 form_fields.push(<Form.Item prop={key} label={key+' :'}><Input onChange={ (value) => self.onFormChange(value,key) } autosize={ {minRows: 3} } value={self.state.form[key]} type={'textarea'} ></Input></Form.Item>);
                 break;
               case 'number':case 'money':
                 form_fields.push(<Form.Item prop={key} label={key+' :'}><InputNumber value={self.state.form[key]}  defaultValue={0} onChange={ (value) => self.onFormChange(value,key) } type="text"></InputNumber></Form.Item>);
                 break;
               case 'select':
-                form_fields.push( 
+                form_fields.push(
                   <Form.Item prop={key} label={key}>
                     <Select onChange={ (value) => self.onFormChange(value,key) } multiple={properties[key].multiple || false} value={self.state.form[key]}>
                     {
-                      properties[key].options.map(el => {
+                      properties[key].options.selectItems.map(el => {
                         return <Select.Option key={el.value} label={el.label} value={el.value} />
                       })
                     }
@@ -284,8 +284,8 @@ class ModelEdit extends Component {
               case 'slider':
                 var options = properties[key].options || {};
                 form_fields.push(<Form.Item prop={key} label={key+' :'}>
-                  <Slider onChange={ (value) => self.onFormChange(value,key) } value={self.state.form[key]} name={key} min={options.min || 0} range={options.range || false} 
-                  step={options.step || 1} max={options.max || 100} showTooltip={options.showTooltip || true} 
+                  <Slider onChange={ (value) => self.onFormChange(value,key) } value={self.state.form[key]} name={key} min={options.min || 0} range={options.range || false}
+                  step={options.step || 1} max={options.max || 100} showTooltip={options.showTooltip || true}
                   disabled={options.disabled || false } showStops={options.showStops || false} />
                 </Form.Item>);
               break;

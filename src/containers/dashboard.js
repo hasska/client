@@ -13,7 +13,7 @@ import ActionBar from '../components/Dashboard/ActionBar'
 import Console from '../components/Dashboard/Console'
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import OverviewContainer from '../containers/Overview'
+import OverviewContainer from '../components/Overview'
 import ModelsManager from '../components/ModelsManager'
 import DatabaseManager from '../components/DatabaseManager'
 import ApiManager from '../components/ApiManager'
@@ -22,7 +22,9 @@ import DocsManager from '../components/DocsManager'
 import MonitoringManager from '../components/MonitoringManager'
 import DeployManager from '../components/DeployManager'
 
+const {ipcRenderer} = window.require('electron')
 
+const ipc = window.ipc || {}
 require('element-theme-default');
 
 class Dashboard extends Component {
@@ -30,8 +32,25 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       step: 1,
-      active: 'overview'
+      active: 'overview',
+      progress: {
+        inprogress: false,
+        type: 'KICKOFF',
+        time: 0,
+        text: 'Ready to Start',
+        status: ''
+      },
+      project: [],
+      projects: []
     };
+    ipc.messaging = {
+      getProjectInfo: function(data) {
+          ipcRenderer.send('project-info', [])
+      },
+      getProjects: function(data) {
+          ipcRenderer.send('projects-list', [])
+      }
+    }
   }
 
   onChange(key, value) {
@@ -44,31 +63,38 @@ class Dashboard extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.match.path)
-  }
-  componentWillReceiveProps(nextProps) {
-    
+    const self = this;
+    ipc.messaging.getProjectInfo();
+    ipc.messaging.getProjects();
+    ipcRenderer.on('project-info-result', (event, arg) => {
+      self.setState({'project':arg});
+    });
+    ipcRenderer.on('projects-list-result', (event, arg) => {
+      self.setState({'projects':arg});
+      console.log(self.state.projects)
+    });
   }
 
+
   render() {
-    console.log(this.props.match.path+'/models')
     return (
         <div>
-          <LoggerPane prefix={"root@haska"} />
+          <Loading loading={this.state.projects.length==0} fullscreen={this.state.projects.length==0} text={"Loading Project ..."} />
+          <LoggerPane />
           <div className="app-wrapper">
-              <ActionBar />
+              <ActionBar projects={this.state.projects} project={this.state.project} progress={this.state.progress} />
               <div className="app-body">
                   <Nav active={this.state.active} />
                   <div className="app-window-wrapper">
                     <div className="app-window">
-                        <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager /> )} />
-                        <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager /> )} />
-                        <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager /> )} />
-                        <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager /> )} />
-                        <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager /> )} />
-                        <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager /> )} />
-                        <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager /> )} />
-                        <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer /> )} />
+                        <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer project={this.state.project} progress={this.state.progress} /> )} />
                     </div>
                     <Console />
                   </div>

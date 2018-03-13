@@ -6,6 +6,9 @@ const Store = require('electron-store');
 const store = new Store();
 const menuManger = require('../src/core/utilities/menu');
 const projectManger = require('../src/core/utilities/projects');
+const logsManger = require('../src/core/utilities/logger');
+const modelsManager = require('../src/core/utilities/models');
+const dbManger = require('../src/core/utilities/database');
 
 
 // Module to control application life.
@@ -13,7 +16,7 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-const express = require('express');        
+const express = require('express');
 const path = require('path');
 const url = require('url');
 
@@ -24,8 +27,9 @@ let mainWindow, wizard, splash;
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 1280, height: 680, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
-    wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
+    const {screen} = require('electron');
+    mainWindow = new BrowserWindow({width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height, minWidth: 900, minHeight: 480, titleBarStyle: 'hidden', show: false});
+    wizard = new BrowserWindow({width: 820, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
     splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 
     menuManger.setMenu(false);
@@ -59,12 +63,57 @@ function createWindow() {
         });
     });
 
+    ipcMain.on('project-info', (event,arg) => {
+        event.preventDefault();
+        event.sender.send('project-info-result', store.get('currentProject'));
+    });
+
+  ipcMain.on('models-remove', (event,arg) => {
+      event.preventDefault();
+      modelsManager.modelRemove(arg, (response) => {
+          event.sender.send('models-remove-result', response)
+          //mainWindow.reload();
+      });
+  });
+
+    ipcMain.on('models-publish', (event,arg) => {
+        event.preventDefault();
+        modelsManager.modelPublish(arg, (response) => {
+            event.sender.send('models-publish-result', response)
+        });
+    });
+
+    ipcMain.on('models-create', (event,arg) => {
+        event.preventDefault();
+        modelsManager.modelCreate(arg, (response) => {
+            event.sender.send('models-create-result', response)
+        });
+    });
+
+    ipcMain.on('projects-list', (event,arg) => {
+        event.preventDefault();
+        projectManger.getProjectsIPC( (response) => {
+            event.sender.send('projects-list-result', response)
+        });
+    });
+
+    ipcMain.on('databases-list', (event,arg) => {
+        event.preventDefault();
+        dbManger.getDatabasesIPC( (response) => {
+            event.sender.send('databases-list-result', response)
+        });
+    });
+
+    ipcMain.on('models-configs', (event,arg) => {
+        event.preventDefault();
+        modelsManager.getModelsConfigsIPC( (response) => {
+            event.sender.send('models-configs-result', response)
+        });
+    });
+
     ipcMain.on('main-project', (event,arg) => {
         event.preventDefault();
 
-        /*dialog.showOpenDialog({properties: [ 'openDirectory']}, (filePaths) => {
-             event.sender.send('open-dialog-reply', filePaths)
-        });*/
         wizard.hide();
         splash.hide();
         store.set('currentProject', arg)
@@ -72,31 +121,78 @@ function createWindow() {
         mainWindow.show();
     });
 
+    ipcMain.on('import-project', (event,arg) => {
+        event.preventDefault();
+
+        wizard.hide();
+        splash.hide();
+        console.log(arg)
+        store.set('currentProject', arg)
+        menuManger.setMenu(true);
+        mainWindow.reload();
+    });
+
+    ipcMain.on('models-list', (event,arg) => {
+        event.preventDefault();
+        modelsManager.getModelsIPC( (response) => {
+            if(response != "error")
+                event.sender.send('models-list-result', response)
+        });
+    });
+
+    ipcMain.on('model-props', (event,arg) => {
+        event.preventDefault();
+        modelsManager.getModelIPC( arg,(response) => {
+            if(response != "error")
+                event.sender.send('model-props-result', response)
+        });
+    });
+
+    ipcMain.on('update-logs', (event,arg) => {
+        event.preventDefault();
+        logsManger.getLogs( (response) => {
+            event.sender.send('update-logs-result', response.data)
+        });
+    });
+
+    ipcMain.on('update-errors', (event,arg) => {
+        event.preventDefault();
+        logsManger.getErrLogs( (response) => {
+            event.sender.send('update-errors-result', response.data)
+        });
+    });
+
     ipcMain.on('start-project', (event,arg) => {
         event.preventDefault();
         projectManger.run( (response) => {
-            event.sender.send('start-project-result', response)
+            setTimeout( ()=> {
+                event.sender.send('start-project-result', response)
+            },2000)
         });
     });
 
     ipcMain.on('stop-project', (event,arg) => {
         event.preventDefault();
-        projectManger.run( (response) => {
-            event.sender.send('stop-project-result', response)
+        projectManger.stop( (response) => {
+            setTimeout( ()=> {
+                event.sender.send('stop-project-result', response)
+            },1000);
         });
     });
 
     ipcMain.on('build-project', (event,arg) => {
         event.preventDefault();
-        projectManger.run( (response) => {
+        projectManger.build( (response) => {
             event.sender.send('build-project-result', response)
         });
     });
 
     ipcMain.on('clean-project', (event,arg) => {
         event.preventDefault();
-        projectManger.run( (response) => {
-            event.sender.send('clean-project-result', response)
+        projectManger.clean( (response) => {
+            setTimeout( ()=> {
+                event.sender.send('clean-project-result', response)
+            },2000)
         });
     });
 
@@ -125,13 +221,13 @@ function createWindow() {
         //wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
        // wizard = null;
     })
-    
+
     app.port = process.env.PORT || 8000;
     app.express = express();
     app.server = server.createServer(app);
     app.logger = server.logger(app);
     //app.filesManager = fileManager.serve(app);
-    server.timeout = 1000;  
+    server.timeout = 1000;
 
     server.run(app);
 }

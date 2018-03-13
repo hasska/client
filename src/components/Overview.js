@@ -34,7 +34,7 @@ class Overview extends Component {
 
     return (
       <div className="app-top">
-sagjghk
+
       </div>
     );
   }

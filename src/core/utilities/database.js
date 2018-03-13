@@ -165,5 +165,20 @@ module.exports = {
 			data: store.get('databases.'+req.query.name),
 			status: 'success'
 		}));
-	}
+	},
+	getDatabasesIPC: (callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		fs.readJson(project.destination+'/server/datasources.json', (err, packageObj) => {
+		    
+		    let tmpData = packageObj;
+
+		    if (err) {
+		    	callback('error');
+		    }  else {
+		    	callback(packageObj)
+		    }
+		});
+	},
 }

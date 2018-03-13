@@ -50,48 +50,48 @@ module.exports = {
 		  return {"status":"error","msg": "Log file dosnt exist in destination"}
 		})
 	},
-	getErrLogs: () => {
+	getErrLogs: (callback) => {
 		const store = new Store();
 		let project = store.get('currentProject');
 		let log_destination = project.destination+'/logs/err.log';
 
 		fs.ensureFile(log_destination).then(() => {
 		  // With Promises:
-			fs.readFile(log_destination).then( results => {
-			    return {"status":"success","data": results}
+			fs.readFile(log_destination,{encoding: 'utf-8'}).then( results => {
+			    return callback({"status":"success","data": results.toString()})
 			})
 			.catch(err => {
-			  return {"status":"error","msg": "Log file dosnt exist in destination"}
+			  return callback({"status":"error","msg": "Log file dosnt exist in destination"})
 			})
 		});
 	},
-	getOutLogs: () => {
+	getOutLogs: (callback) => {
 		const store = new Store();
 		let project = store.get('currentProject');
 		let log_destination = project.destination+'/out.log';
 
 		fs.ensureFile(log_destination).then(() => {
 			  // With Promises:
-			fs.readFile(log_destination).then(results => {
-			    return {"status":"success","data": results}
+			fs.readFile(log_destination,{encoding: 'utf-8'}).then(results => {
+			    return callback({"status":"success","data": results.toString()})
 			  })
 			.catch(err => {
-			  return {"status":"error","msg": "Log file dosnt exist in destination"}
+			  return callback({"status":"error","msg": "Log file dosnt exist in destination"})
 			})
 		});
 	},
-	getLogs: () => {
+	getLogs: (callback) => {
 		const store = new Store();
 		let project = store.get('currentProject');
 		let log_destination = project.destination+'/haska.log';
 
 		fs.ensureFile(log_destination).then(() => {
 			  // With Promises:
-			fs.readFile(log_destination).then(results => {
-			    return {"status":"success","data": results}
+			fs.readFile(log_destination,{encoding: 'utf-8'}).then(results => {
+			    callback({"status":"success","data": results.toString()})
 			})
 			.catch(err => {
-			  return {"status":"error","msg": "Log file dosnt exist in destination"}
+			  return callback({"status":"error","msg": "Log file dosnt exist in destination"})
 			})
 		});
 		

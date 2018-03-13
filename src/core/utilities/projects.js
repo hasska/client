@@ -77,6 +77,10 @@ module.exports = {
 			status: 'success'
 		}));
 	},
+	getProjectsIPC: (callback) => {
+		const store = new Store();
+		callback(store.get('projects'));
+	},
 	getProjectById: (req,res,app) => {
 		const store = new Store();
 		res.send(app.respondToClient({
@@ -130,11 +134,11 @@ module.exports = {
 		  //console.log('Program stderr:', stderr);
 	  	  if(code==0){
 	  	  	logger.log(stdout);
-	  	  	callback({"status":"success",step:'START_APP'})
+	  	  	callback({"status":"success",step:'START_APP',data:stdout })
 	  	  }
 	  	  else{
 	  	  	logger.log(stderr)
-	  	  	callback({"status":"error",step:'START_APP'})
+	  	  	callback({"status":"error",step:'START_APP',data:stderr })
 	  	  }
 		  //HERE WE CAN DETECT BUILD SUCCESS OR FAILED WITH STDERR AND OUT
 
@@ -161,11 +165,11 @@ module.exports = {
 	  	  //logger.log(code);
 	  	  if(code==0){
 	  	  	logger.log(stdout);
-	  	  	callback({"status":"success",step:'STOP_APP'})
+	  	  	callback({"status":"success",step:'STOP_APP',data:stdout})
 	  	  }
 	  	  else{
 	  	  	logger.log(stderr)
-	  	  	callback({"status":"error",step:'STOP_APP'})
+	  	  	callback({"status":"error",step:'STOP_APP',data:stderr})
 	  	  }
 
 		});
@@ -223,11 +227,11 @@ module.exports = {
 	  	  //logger.log(code);
 	  	  if(code==0){
 	  	  	logger.log(stdout);
-	  	  	callback({"status":"success",step:'BUILD_DASHBOARD_APP'})
+	  	  	callback({"status":"success",step:'BUILD_DASHBOARD_APP',data:stdout})
 	  	  }
 	  	  else{
 	  	  	logger.log(stderr)
-	  	  	callback({"status":"error",step:'BUILD_DASHBOARD_APP'})
+	  	  	callback({"status":"error",step:'BUILD_DASHBOARD_APP',data: stderr})
 	  	  }
 
 		});
@@ -254,11 +258,11 @@ module.exports = {
 	  	  //logger.log(code);
 	  	  if(code==0){
 	  	  	logger.log(stdout);
-	  	  	callback({"status":"success",step:'BUILD_APP'})
+	  	  	//callback({"status":"success",step:'BUILD_APP',data:stdout})
 	  	  }
 	  	  else{
 	  	  	logger.log(stderr)
-	  	  	callback({"status":"error",step:'BUILD_APP'})
+	  	  	callback({"status":"error",step:'BUILD_APP',data:stderr})
 	  	  }
 
 		});
@@ -275,11 +279,11 @@ module.exports = {
 		  //console.log('Program stderr:', stderr);
 	  	  if(code==0){
 	  	  	logger.log(stdout);
-	  	  	callback({"status":"success",step:'BUILD_DASHBOARD_APP'})
+	  	  	callback({"status":"success",step:'BUILD_APP',data:stdout})
 	  	  }
 	  	  else{
 	  	  	logger.log(stderr)
-	  	  	callback({"status":"error",step:'BUILD_DASHBOARD_APP'})
+	  	  	callback({"status":"error",step:'BUILD_DASHBOARD_APP',data:stderr})
 	  	  }
 		});
 

@@ -8,22 +8,23 @@
 const fs = require("fs-extra");
 const Store = require('electron-store');
 const shell = require('shelljs');
+const dirToJson = require('dir-to-json');
 
 module.exports = {
 	createModel: (req,res,app) => {
-		
+
 		const store = new Store();
 		let models = store.get('models'),model_config = {};
 
-		//Create Files 
-		
+		//Create Files
+
 		const _JS_DIRECTORY = req.body.project.destination+'/common/models/'+req.body.title+'.js';
 		const _JSON_DIRECTORY = req.body.project.destination+'/common/models/'+req.body.title+'.json';
 		const _MODELS_JSON_DIRECTORY = req.body.project.destination+'/server/model-config.json';
-		
+
 		fs.ensureFile(_JS_DIRECTORY, err => { console.log(err) });
 		fs.ensureFile(_JSON_DIRECTORY, err => { console.log(err) });
-		
+
 		let jsData = "'use strict'; module.exports = function("+req.body.title+") {};";
 		let jsonData = {
 		  "name": req.body.title,
@@ -36,7 +37,7 @@ module.exports = {
 			"nocreate": false,
 		  },
 		  "properties": {
-		    
+
 		  },
 		  "validations": [],
 		  "relations": {},
@@ -59,7 +60,7 @@ module.exports = {
 			msg: 'Model created successfully :)',
 			status: 'success'
 		}));
-			
+
 	},
 	setProperties: (req,res,app) => {
 		let model = req.body.model;
@@ -96,8 +97,9 @@ module.exports = {
 		})
 	},
 	getModelsConfigs: (req,res,app) => {
+
 		fs.readJson(req.query.project_dir+'/server/model-config.json', (err, packageObj) => {
-		    
+
 		    let tmpData = packageObj;
 
 		    if (err) {
@@ -114,6 +116,36 @@ module.exports = {
 		    }
 		});
 	},
+	getModelsConfigsIPC: (callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		fs.readJson(project.destination+'/server/model-config.json', (err, packageObj) => {
+
+		    let tmpData = packageObj;
+
+		    if (err) {
+		    	callback('error');
+		    }  else {
+		    	callback(packageObj)
+		    }
+		});
+	},
+	getProjectConfigsIPC: (callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		fs.readJson(project.destination+'/server/config.json', (err, packageObj) => {
+
+		    let tmpData = packageObj;
+
+		    if (err) {
+		    	callback('error');
+		    }  else {
+		    	callback(packageObj)
+		    }
+		});
+	},
 	setBaseConfigs: (req,res,app) => {
 		let model = req.body.model;
 		const _JSON_DIRECTORY = req.body.project.destination+'/common/models/'+model.title+'.json';
@@ -125,7 +157,7 @@ module.exports = {
 		  for(var item in req.body.configs){
 		  	tmpData[item] = req.body.configs[item];
 		  }
-		  
+
 	      fs.writeJson(_JSON_DIRECTORY, tmpData);
 
 		  res.send(app.respondToClient({
@@ -134,12 +166,111 @@ module.exports = {
 			}));
 		})
 	},
+
 	getModels: (req,res,app) => {
 		const store = new Store();
 		res.send(app.respondToClient({
 			data: store.get('models'),
 			status: 'success'
 		}));
+	},
+	getModelsIPC: (callback) =>{
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		dirToJson( project.destination+'/common/models' , function( err, dirTree ){
+			if( err ){
+				callback('error');
+			}else{
+				callback(dirTree.children)
+			}
+		});
+	},
+	modelCreate(arg,callback){
+		const store = new Store();
+		let project = store.get('currentProject');
+		let _dir = project.destination+'/common/models/'+arg.name+'.json';
+		let _dir_js = project.destination+'/common/models/'+arg.name+'.js';
+		const self = this;
+		
+		fs.ensureFile(_dir, err => {
+			if(!err){
+				fs.writeJson(_dir, arg.model, (err) => {
+					if(err) callback(err.toString());
+					else {
+						self.updateDb(arg.name,arg.db);
+					}
+				});
+			}
+		});
+
+		let _data_js = "'use strict'; module.exports = function("+arg.name+") { }";
+		fs.ensureFile(_dir_js, err => {
+				if(err) callback(err.toString());
+				else{
+					fs.writeJson(_dir_js, _data_js, (err) => {
+						if(err) callback(err.toString());
+						else {
+							callback('success')
+						}
+					});
+				}
+			});
+
+	},
+	updateDb(model,db){
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		fs.readJson(project.destination+'/server/model-config.json', (err,data) => {
+		  if(err){
+				console.log("You dont have model configs file");
+				return;
+			}
+		  let _data = data;
+			_data[model] = { "dataSource": db, "public":true };
+			fs.writeJson(project.destination+'/server/model-config.json', _data, (err) => {
+				if(err) console.log(err.toString());
+				else console.log('datasources for '+model+' changed successfully')
+			});
+		})
+	},
+	modelPublish(arg,callback){
+		const store = new Store();
+		let project = store.get('currentProject');
+		const self = this;
+
+		if(arg.name == 'User')
+			fs.writeJson(project.destination+'/common/User.json', arg.model, (err) => {
+				if(err) callback(err.toString());
+				else {
+					self.updateDb(arg.name,arg.db);
+					callback('success')
+				}
+			});
+		else {
+			fs.writeJson(project.destination+'/common/models/'+arg.name+'.json', arg.model, (err) => {
+				if(err) callback(err.toString());
+				else {
+					self.updateDb(arg.name,arg.db);
+					callback('success')
+				}
+			});
+		}
+	},
+	getModelIPC: (model,callback) =>{
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		let _JSON_DIRECTORY = project.destination+'/common/models/'+model+'.json';
+		if(model=='User')
+			 _JSON_DIRECTORY = project.destination+'/common/'+model+'.json';
+
+		fs.readJson(_JSON_DIRECTORY, (err, packageObj) => {
+		  if (err) console.error(err)
+
+		  callback(packageObj);
+		});
 	},
 	getModel: (req,res,app) => {
 		const store = new Store();
@@ -148,10 +279,43 @@ module.exports = {
 			status: 'success'
 		}));
 	},
+	modelRemove: (model,callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+		if(model=='User'){
+			callback({"status":"error","msg":"You can not remove user built-in model"});
+			return;
+		}
+
+		fs.removeSync(project.destination+'/common/models/'+model+'.json')
+		fs.removeSync(project.destination+'/common/models/'+model+'.js');
+		/*fs.remove('/tmp/myfile')
+		.then(() => {
+		  console.log('success!')
+		})
+		.catch(err => {
+		  console.error(err)
+		})*/
+
+		fs.readJson(project.destination+'/server/model-config.json', (err,data) => {
+		  if(err){
+				callback({"status":"error","msg":"You dont have model configs file"});
+				return;
+			}
+		  let _data = data;
+			delete _data[model];
+			fs.writeJson(project.destination+'/server/model-config.json', _data, (err) => {
+				if(err) callback({"status":"error","msg":err.toString()});
+				else callback({"status":"success","data":model})
+			});
+		})
+
+
+	},
 	removeModel: (req,res,app) => {
 		const store = new Store();
 		let model = store.get('models.'+req.body.model.id);
-		
+
 		fs.remove(req.body.project.destination+'/common/models/'+req.body.project.title+'.json', err => { console.log(err) })
 		fs.remove(req.body.project.destination+'/common/models/'+req.body.project.title+'.js', err => { console.log(err) })
 

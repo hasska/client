@@ -7,24 +7,228 @@ import navAdmindashboard from "../../dist/img/nav-admindashboard.svg";
 import navDocuments from "../../dist/img/nav-documents.svg";
 import navMonitoring from "../../dist/img/nav-monitoring.svg";
 import navStatistic from "../../dist/img/nav-statistic.svg";
-import { Popover, Progress, Loading, Button, Select, Icon, Dropdown } from 'element-react';
+import { Popover,Tooltip, Progress, Loading, Button, Select, Icon, Dropdown } from 'element-react';
 
-import haskaType from "../../dist/img/haska.svg";
+import logo from "../../dist/img/logo/haskafavicon.svg";
 import run from "../../dist/img/run.svg";
 import stop from "../../dist/img/stop.svg";
 import clean from "../../dist/img/clean.svg";
 import build from "../../dist/img/build.svg";
 import publish from "../../dist/img/publish.svg";
 
+const {ipcRenderer} = window.require('electron')
+
+const ipc = window.ipc || {}
 
 class ActionBar extends Component {
   constructor(props){
     super(props)
     this.state = {
-     
+     progress: this.props.progress,
+     timer: null,
+     projects: []
+    }
+    ipc.messaging = {
+      runProject: function(data) {
+          ipcRenderer.send('start-project', []);
+      },
+      buildProject: function(data) {
+          ipcRenderer.send('build-project', [])
+      },
+      stopProject: function(data) {
+          ipcRenderer.send('stop-project', [])
+      },
+      cleanProject: function(data) {
+          ipcRenderer.send('clean-project', [])
+      },
+      importProject: function(data) {
+          ipcRenderer.send('import-project', data)
+      }
     }
   }
+  timer() {
+    let time = this.state.progress.time;
+    var self = this;
+    let timeout = 100;
+
+    if(this.state.progress.type=='BUILD')
+      timeout = 2000;
+
+    this.state.timer = window.setInterval(function(){
+        time++;
+        var _progress = self.state.progress;
+        _progress['time'] = time;
+        self.setState({'progress': _progress});
+
+        if (time >= 100 || self.state.progress.inprogress == false ) {
+            _progress['time'] = 100;
+            self.setState({ 'progress': _progress})
+            window.clearInterval(self.state.timer);
+        }
+    }, timeout);
+  }
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.projects != this.state.projects){
+      let projects = [];
+      for(var i in nextProps.projects)
+        projects[i] = JSON.parse(nextProps.projects[i]);
+
+      this.setState({'projects':projects})
+      console.log(this.state.projects)
+    }
+  }
+  clearProgress(msg,type){
+    const self = this;
+    setTimeout( () => {
+      let _progress = self.state.progress;
+      _progress['time'] = 100;
+      _progress['status'] = self.state.progress.status;
+      _progress['text'] = msg;
+      _progress['inprogress'] = false;
+      _progress['type'] = type;
+      self.setState({progress: _progress});
+
+    },2000);
+  }
+  run(){
+    ipc.messaging.runProject();
+    let _progress = this.state.progress;
+    _progress['time'] = 0;
+    _progress['status'] = '';
+    _progress['text'] = 'Preparing for run...';
+    _progress['inprogress'] = true;
+    _progress['type'] = 'RUN';
+    this.setState({progress: _progress});
+    console.log(_progress)
+    this.timer();
+  }
+  build(){
+    ipc.messaging.buildProject();
+    let _progress = this.state.progress;
+    _progress['time'] = 0;
+    _progress['status'] = '';
+    _progress['text'] = 'Install & Building Modules ...';
+    _progress['inprogress'] = true;
+    _progress['type'] = 'BUILD';
+    this.setState({progress: _progress});
+    this.timer();
+  }
+  stop(){
+    ipc.messaging.stopProject();
+    let _progress = this.state.progress;
+    _progress['time'] = 0;
+    _progress['status'] = '';
+    _progress['text'] = 'Stopping Services ...';
+    _progress['inprogress'] = true;
+    _progress['type'] = 'STOP';
+    this.setState({progress: _progress});
+    this.timer();
+  }
+  clean(){
+    ipc.messaging.cleanProject();
+    let _progress = this.state.progress;
+    _progress['time'] = 0;
+    _progress['status'] = '';
+    _progress['text'] = 'Cleaning Resources ...';
+    _progress['inprogress'] = true;
+    _progress['type'] = 'CLEAN';
+    this.setState({progress: _progress});
+    this.timer();
+  }
+  importProject(project){
+    ipc.messaging.importProject(project)
+  }
+  componentWillMount() {
+    const self = this;
+
+//    ipc.messaging.getProjectInfo();
+    ipcRenderer.on('start-project-result', (event, arg) => {
+        let _progress = self.state.progress;
+        _progress['time'] = 100;
+        _progress['inprogress'] = false;
+
+      if(arg.status=='success'){
+        _progress['status'] = 'success';
+        _progress['text'] = 'Running Successfully';
+        self.setState({progress: _progress});
+        self.clearProgress('Up & Running','RUN');
+      } else {
+        _progress['status'] = 'exception';
+        _progress['text'] = 'Running Failed !';
+        self.setState({progress: _progress});
+        self.clearProgress('Run Failed !','RUN');
+      }
+
+    })
+
+
+    ipcRenderer.on('stop-project-result', (event, arg) => {
+      console.log(arg)
+        let _progress = self.state.progress;
+        _progress['time'] = 100;
+        _progress['inprogress'] = false;
+
+      if(arg.status=='success'){
+        _progress['status'] = 'success';
+        _progress['text'] = 'Stopped Successfully';
+        self.setState({progress: _progress});
+        self.clearProgress('Stopped Services','KICKOFF');
+      } else {
+        _progress['status'] = 'exception';
+        _progress['text'] = 'Stop Failed !';
+        self.setState({progress: _progress});
+        self.clearProgress('Stop Failed !','STOP');
+      }
+
+    })
+
+    ipcRenderer.on('clean-project-result', (event, arg) => {
+      console.log(arg)
+        let _progress = self.state.progress;
+        _progress['time'] = 100;
+        _progress['inprogress'] = false;
+
+      if(arg.status=='success'){
+        _progress['status'] = 'success';
+        _progress['text'] = 'Cleaned Successfully';
+        self.setState({progress: _progress});
+        self.clearProgress('Cleaned Resources','CLEAN');
+      } else {
+        _progress['status'] = 'exception';
+        _progress['text'] = 'Clean Failed !';
+        self.setState({progress: _progress});
+        self.clearProgress('Clean Failed !','CLEAN');
+      }
+
+    })
+
+    ipcRenderer.on('build-project-result', (event, arg) => {
+      console.log(arg)
+      let _progress = self.state.progress;
+      _progress['time'] = 100;
+      _progress['inprogress'] = false;
+
+      if(arg.status=='success'){
+        _progress['status'] = 'success';
+        _progress['text'] = 'Build Successfully';
+        self.setState({progress: _progress});
+        self.clearProgress('Build Successfully !','BUILD');
+      } else {
+        _progress['status'] = 'exception';
+        _progress['text'] = 'Build Failed !';
+        self.setState({progress: _progress});
+        self.clearProgress('Build Failed !','BUILD');
+      }
+    })
+  }
   render() {
+    let projects = [];
+    this.state.projects.length > 0 && this.state.projects.map( (el) => {
+      if( el.name == this.props.project.name)
+        projects.push(<p className="project-item active-project">{el.name}</p>)
+      else
+        projects.push(<p onClick={ () => this.importProject(el)} className="project-item">{el.name}</p>)
+    })
     return (
     <div className="app-header">
       <div className="window-actions">
@@ -35,38 +239,44 @@ class ActionBar extends Component {
       <div className="header-layout">
         <div className="header-left">
           <div className="project-name">
-              monosority <i className="el-icon-arrow-down"></i>
+
+              <Popover placement="bottom" title="Recent Projects" width="180" trigger="click" content={(
+              <div>{
+                projects
+              }</div>)}>
+                <div><img src={logo} height="30px" alt="rootvision" /><span> {this.props.project.name} <i className="el-icon-arrow-down"></i></span></div>
+              </Popover>
           </div>
         </div>
         <div className="header-center">
           <div className="project-status-wrapper">
             <div className="project-name">
-              monosority
+              { this.state.progress.type }
             </div>
             <div className="project-status">
-              Build succeeded!
+              { this.state.progress.text }
             </div>
           </div>
         </div>
         <div className="header-right">
           <div className="project-actions">
             <a className="action-main-run">
-              <Popover placement="bottom" width="40" trigger="focus" content={(
+              <Popover placement="bottom" width="40" trigger="click" content={(
                   <div className="action-container">
-                    <a className="action-run">Run</a>
-                    <a className="action-build">Build</a>
-                    <a className="action-publish">Publish</a>
+                    <a onClick={ ()=>this.run() } className="action-run">Run</a>
+                    <a onClick={ ()=>this.build() } className="action-build">Build</a>
+                    <a onClick={ ()=>this.clean() } className="action-build">Clean</a>
                   </div>
                 )}>
-                <img src={run} />
+                <Tooltip content="Run" placement="bottom" effect="dark"><img src={run} /></Tooltip>
               </Popover>
             </a>
-            <a className="action-stop"><img src={stop} /></a>
+            <Tooltip content="Stop" placement="bottom" effect="dark"><a className="action-stop" onClick={ ()=>this.stop() }><img src={stop} /></a></Tooltip>
           </div>
         </div>
       </div>
       <div className="progress-bar">
-        <Progress percentage={30} showText={false}/>
+        <Progress percentage={this.state.progress.time} status={this.state.progress.status} showText={false}/>
       </div>
     </div>
     );
