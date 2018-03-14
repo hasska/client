@@ -15,12 +15,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import OverviewContainer from '../components/Overview'
 import ModelsManager from '../components/ModelsManager'
-import DatabaseManager from '../components/DatabaseManager'
+import DatabaseManager from '../components/Database/DatabaseManager'
 import ApiManager from '../components/ApiManager'
 import AdminManager from '../components/AdminManager'
 import DocsManager from '../components/DocsManager'
 import MonitoringManager from '../components/MonitoringManager'
 import DeployManager from '../components/DeployManager'
+import SettingContainer from '../components/Setting/Setting'
+import AppsContainer from '../components/Apps'
 
 const {ipcRenderer} = window.require('electron')
 
@@ -95,12 +97,13 @@ class Dashboard extends Component {
                         <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/apps'} render={(props) => ( <AppsContainer project={this.state.project} progress={this.state.progress} /> )} />
                     </div>
                     <Console />
                   </div>
-              </div>
-          </div>
+            </div>
         </div>
+      </div>
     );
   }
 }

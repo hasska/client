@@ -33,24 +33,6 @@
   margin-left: 180px !important;
   width: 400px;
 }
-.wizard-config-form .radio-full-2 .el-radio-group {
-  width: 100%;
-}
-.wizard-config-form .radio-full-2 .el-radio-group label {
-  width: 50%;
-}
-.wizard-config-form .radio-full-2 .el-radio-group label span {
-  width: 100%;
-}
-.wizard-config-form .radio-full-4 .el-radio-group {
-  width: 100%;
-}
-.wizard-config-form .radio-full-4 .el-radio-group label {
-  width: 20%;
-}
-.wizard-config-form .radio-full-4 .el-radio-group label span {
-  width: 100%;
-}
 .wizard-config-form .wizard-action .el-form-item__content {
   text-align: center;
 }

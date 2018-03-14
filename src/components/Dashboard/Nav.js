@@ -25,8 +25,9 @@ class Nav extends Component {
     return (
       <div className="app-nav">
         { this.state.navigate && <Redirect to={"/dashboard/"+this.state.active} push={true} />}
-        <div className="nav-collapse">
-          <a><i className="el-icon-arrow-left"></i></a>                      
+        <div className="nav-actions">
+          <a onClick={()=>this.changeRoute('setting')} ><i className="el-icon-setting"></i></a>
+          <a><i className="el-icon-arrow-left"></i></a>
         </div>
         <ul className="nav-container">
           <li className={ this.state.active == 'overview'?'active':'' }>
@@ -43,9 +44,9 @@ class Nav extends Component {
               <div>Models</div>
             </div>
           </li>
-          <li className={ this.state.active == 'database'?'active':'' }>
+          <li className={ this.state.active == 'databases'?'active':'' }>
             <span></span>
-            <div onClick={()=>this.changeRoute('database')} className="nav-section">
+            <div onClick={()=>this.changeRoute('databases')} className="nav-section">
               <div><img src={navDb} /></div>
               <div>Databases</div>
             </div>
@@ -82,7 +83,21 @@ class Nav extends Component {
             <span></span>
             <div onClick={()=>this.changeRoute('docs')} className="nav-section">
               <div><img src={navDocuments} /></div>
-              <div>Documentation</div>
+              <div>Documentations</div>
+            </div>
+          </li>
+          <li className={ this.state.active == 'deploy'?'active':'' }>
+            <span></span>
+            <div onClick={()=>this.changeRoute('deploy')} className="nav-section">
+              <div><img src={navDocuments} /></div>
+              <div>Deployments</div>
+            </div>
+          </li>
+          <li className={ this.state.active == 'apps'?'active':'' }>
+            <span></span>
+            <div onClick={()=>this.changeRoute('apps')} className="nav-section">
+              <div><img src={navDocuments} /></div>
+              <div>Apps & Integrations</div>
             </div>
           </li>
         </ul>

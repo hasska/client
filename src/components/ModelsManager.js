@@ -266,19 +266,17 @@ class ModelsManager extends Component {
     e.preventDefault();
   }
   render() {
-    let loading = this.state.currentModel==null;
+    let loading = this.state.currentModel != null && this.state.currentModel.length>0;
     return (
-      <div>
+      <div className="app-top">
         <Loading loading={loading} fullscreen={loading} text={"Loading Lab..."} />
-        <div className="app-top">
     		<ModelsList newModel={this.newModel} switchModel={this.switchModel} selectedModel={this.state.selectedModel} models={this.state.models} />
 	        <div className="app-preview">
 		      <div className="model-single">
-		        <ModelCreator createMode={this.state.createMode} removeModel={this.removeModel} publishModels={this.publishModels} changeDb={this.changeDb} updateModel={this.updateModel} currentModel={this.state.currentModel} selectedDB={this.state.selectedDB} databases={this.state.databases} selectedModel={this.state.selectedModel} models={this.state.models} />
+		        <ModelCreator publishModels={this.publishModels} createMode={this.state.createMode} removeModel={this.removeModel} publishModels={this.publishModels} changeDb={this.changeDb} updateModel={this.updateModel} currentModel={this.state.currentModel} selectedDB={this.state.selectedDB} databases={this.state.databases} selectedModel={this.state.selectedModel} models={this.state.models} />
 	       		<ModelProperties updateTypeOptions={this.updateTypeOptions} updateRelations={this.updateRelations} updateValidations={this.updateValidations} updateModelProps={this.updateModelProps} updateModel={this.updateModel} currentModel={this.state.currentModel} selectedModel={this.state.selectedModel} models={this.state.models} />
 	   		  </div>
 	       	</div>
-        </div>
       </div>
     );
   }

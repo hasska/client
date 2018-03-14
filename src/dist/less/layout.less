@@ -54,22 +54,17 @@
     .flexcol();
     flex:1;
     .app-window{
-        .flexcol();
+        .flexrow();
         flex:1; 
-        .app-top{
-            .flexrow();
-            flex:1;
-            .app-sub-nav {
-                background-color: @subNavBGColor;
-                flex :0 0 260px;
-                border-right: 1px solid @borderColor;
-            }
-            .app-preview {
-                background-color: @previewBGColor;
-                flex: 1 1;
-            }    
-
+        .app-sub-nav {
+            background-color: @subNavBGColor;
+            flex :0 0 260px;
+            border-right: 1px solid @borderColor;
         }
+        .app-preview {
+            background-color: @previewBGColor;
+            flex: 1 1;
+        }    
     }
     .app-editor-wrapper{
         .flexrow();
@@ -77,4 +72,16 @@
         border-top: 1px solid @borderColor;
     }
 
+}
+
+// Database 
+
+.database-manager-wrapper{
+    .flexrow();
+    flex:1;
+
+    .database-single{
+        .flexcol();
+        flex: 1;
+    }
 }

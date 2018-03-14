@@ -1,3 +1,22 @@
+.el-tabs {
+  flex: 1;
+}
+.el-tabs .el-tabs__header {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 42px;
+  margin: 0 !important;
+}
+.el-tabs .el-tabs__header .el-tabs__nav .el-tabs__item {
+  padding: 0 15px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.el-tabs .el-tabs__content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
 .app-editor-wrapper .el-tabs {
   display: flex;
   flex-direction: column-reverse;

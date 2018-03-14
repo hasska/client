@@ -1,0 +1,24 @@
+@import "var.less";
+@import "mixins.less";
+
+.database-single{
+	padding: 8px 20px;
+	.flexcol();
+	height: calc(100% - 50px);
+	.database-config-wrapper{
+		.database-config-form{
+			.flex();
+			align-items: center;
+			justify-content: center;
+	    padding: 20px 0 5px 0;
+			form{
+				margin-left: -120px;
+				width: 520px;
+
+			}
+			.el-form-item__content{
+				width: 400px;
+			}
+		}		
+	}
+}

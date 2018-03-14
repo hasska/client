@@ -26,7 +26,7 @@ module.exports = {
 		const datasource_dir = req.body.project.destination+'/server/datasources.json';
 
 		fs.readJson(datasource_dir, (err, packageObj) => {
-		    
+
 		    let tmpData = packageObj;
 
 		    if (err) {
@@ -35,9 +35,9 @@ module.exports = {
 					msg: err,
 					status: 'error'
 				}));
-		    } 
+		    }
 		    else{
-		    	
+
 				fs.writeFileSync(datasource_dir, new_data);
 
 				store.set('databases.'+database.datasource,JSON.stringify(new_data))
@@ -49,7 +49,7 @@ module.exports = {
 				}));
 
 		    }
-			
+
 		})
 	},
 	removeDatabase: (req,res,app) => {
@@ -58,7 +58,7 @@ module.exports = {
 		store.delete('databases.'+req.body.database.datasource);
 
 		fs.readJson(datasource_dir, (err, packageObj) => {
-		    
+
 		    let tmpData = packageObj;
 
 		    if (err) {
@@ -67,9 +67,9 @@ module.exports = {
 					msg: err,
 					status: 'error'
 				}));
-		    } 
+		    }
 		    else{
-		    	
+
 				delete tmpData[req.body.databases.datasource];
 
 				fs.writeFileSync(datasource_dir, tmpData);
@@ -82,7 +82,7 @@ module.exports = {
 				}));
 
 		    }
-			
+
 		})
 		res.send(app.respondToClient({
 			msg: 'success fetch',
@@ -106,7 +106,7 @@ module.exports = {
 		const datasource_dir = req.body.project.destination+'/server/datasources.json';
 
 		fs.readJson(datasource_dir, (err, packageObj) => {
-		    
+
 		    let tmpData = packageObj;
 
 		    if (err) {
@@ -115,9 +115,9 @@ module.exports = {
 					msg: err,
 					status: 'error'
 				}));
-		    } 
+		    }
 		    else{
-		    	
+
 				tmpData[database.datasource] = new_data;
 				fs.writeFileSync(datasource_dir, tmpData);
 
@@ -133,22 +133,22 @@ module.exports = {
 		})
 	},
 	getDatabases: (req,res,app) => {
-		
+
 		const datasource_dir = req.body.project.destination+'/server/datasources.json';
 
 		fs.readJson(datasource_dir, (err, packageObj) => {
-		    
+
 		    let tmpData = packageObj;
-		    
+
 		    if (err) {
 		    	console.error(err)
 		    	res.send(app.respondToClient({
 					msg: err,
 					status: 'error'
 				}));
-		    } 
+		    }
 		    else{
-		    	
+
 				res.send(app.respondToClient({
 					msg: 'success fetch',
 					data: tmpData,
@@ -171,7 +171,7 @@ module.exports = {
 		let project = store.get('currentProject');
 
 		fs.readJson(project.destination+'/server/datasources.json', (err, packageObj) => {
-		    
+
 		    let tmpData = packageObj;
 
 		    if (err) {
@@ -181,4 +181,75 @@ module.exports = {
 		    }
 		});
 	},
+	createDatabase: (arg,callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+		let _dir = project.destination+'/server/datasources.json';
+
+		fs.readJson(_dir, (err, packageObj) => {
+
+		    let tmpData = packageObj;
+				tmpData[arg.name] = arg;
+
+		    if (err) {
+		    	callback('error');
+		    }  else {
+					fs.writeJson(_dir, tmpData, (err) => {
+						if(err) callback(err.toString());
+						else {
+							callback("success");
+						}
+					});
+		    }
+		});
+	},
+	removeDatabase: (arg,callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+		let _dir = project.destination+'/server/datasources.json';
+
+		if(arg.name=='db'){
+			self.showMessage("You can remove memory default database !","error")
+			return;
+		}
+
+		fs.readJson(_dir, (err, packageObj) => {
+			let tmp = packageObj;
+			delete tmp[arg];
+			fs.writeJson(_dir, tmp, (err) => {
+				if(err) callback({"status":'error',"msg": err.toString()});
+				else {
+					callback({"status":"success",data: tmp});
+				}
+			});
+		});
+	},
+	updateDatabase: (arg,create,callback) => {
+		const store = new Store();
+		let project = store.get('currentProject');
+		let _dir = project.destination+'/server/datasources.json';
+
+		fs.readJson(_dir, (err, packageObj) => {
+				console.log(create)
+		    let tmpData = packageObj;
+				if(typeof tmpData[arg.name] != "undefined" && create==true){
+					callback({"status":'error',"msg":"Select unique name for your database"});
+					return;
+				} else {
+					tmpData[arg.name] = arg;
+				}
+
+		    if (err) {
+		    	callback({"status":'error',"msg":err.toString()});
+		    }  else {
+					fs.writeJson(_dir, tmpData, (err) => {
+						if(err) callback({"status":'error',"msg": err.toString()});
+						else {
+							callback({"status":"success",data: arg.name});
+						}
+					});
+		    }
+		});
+
+	}
 }

@@ -60,7 +60,7 @@ class ModelCreator extends Component {
       <div className="model-info-wrapper">
         <Title contnet="MODEL CONFIGURATION" />
         <div className="model-actions">
-          <Button onClick={ ()=>this.props.publishModels() } type="primary" size="small" className="publish-model"><Icon name="plus" /> Publish Model</Button>
+          <Button onClick={ ()=>this.props.publishModels() } type="primary" size="small" className="publish-model"><Icon name="plus" /> { this.props.createMode == true ? 'Publish' : 'Apply Changes'}</Button>
           { !this.props.createMode && <Button onClick={ ()=>this.props.removeModel(this.props.selectedModel) } type="default" size="small" className="remove-model"><Icon name="trash" /> Remove</Button> }
         </div>
         <div className="model-info-form">
@@ -69,7 +69,7 @@ class ModelCreator extends Component {
             {
               this.props.createMode == true ?
               <Input onChange={this.props.updateModel.bind(this, 'name')} value={this.props.currentModel.name}></Input> :
-              <Input value={this.props.currentModel.name}></Input>
+              <Input disabled value={this.props.currentModel.name}></Input>
             }
             </Form.Item>
             <div className="half-flex">

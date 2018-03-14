@@ -2,11 +2,14 @@
 @import "mixins.less";
 
 .app-sub-nav{
+	.flexcol();
 	.sub-nav-header{
 		.flex();
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		flex: 0 0 60px;
+		box-sizing: border-box;
 		padding: 22px 15px 20px 15px;
 		.sub-nav-title{
 			h5{
@@ -22,6 +25,8 @@
 		}
 	}
 	.sub-nav-body{
+		flex:1;
+    overflow-x: scroll;		
 		ul{
 			li{
 				.flex();
@@ -34,11 +39,19 @@
 				h5{
 					font-weight: 100;					
 					color: @inactiveText;
-					letter-spacing: 1px;					
+					letter-spacing: 1px;
+					flex:1;
 				}
 				i{
-					font-size: 10px;
 					color: @inactiveText;
+					flex: 0 0 20px;
+					text-align: right;
+					&:last-child{
+						font-size: 10px;
+					}
+					&:first-child{
+						font-size: 13px;
+					}
 				}
 				&:hover{
 					h5{

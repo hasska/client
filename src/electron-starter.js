@@ -97,6 +97,27 @@ function createWindow() {
         });
     });
 
+    ipcMain.on('database-remove', (event,arg) => {
+        event.preventDefault();
+        dbManger.removeDatabase(arg, (response) => {
+            event.sender.send('database-remove-result', response)
+        });
+    });
+
+    ipcMain.on('database-update', (event,arg) => {
+        event.preventDefault();
+        dbManger.updateDatabase(arg,false, (response) => {
+            event.sender.send('database-update-result', response)
+        });
+    });
+
+    ipcMain.on('database-create', (event,arg) => {
+      event.preventDefault();
+      dbManger.updateDatabase(arg,true, (response) => {
+          event.sender.send('database-update-result', response)
+      });
+    });
+
     ipcMain.on('databases-list', (event,arg) => {
         event.preventDefault();
         dbManger.getDatabasesIPC( (response) => {

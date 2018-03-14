@@ -58,20 +58,15 @@ body > div#root > div > div > div:nth-child(2) {
 }
 .app-window-wrapper .app-window {
   display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.app-window-wrapper .app-window .app-top {
-  display: flex;
   flex-direction: row;
   flex: 1;
 }
-.app-window-wrapper .app-window .app-top .app-sub-nav {
+.app-window-wrapper .app-window .app-sub-nav {
   background-color: #FFFFFF;
   flex: 0 0 260px;
   border-right: 1px solid #EAEAEA;
 }
-.app-window-wrapper .app-window .app-top .app-preview {
+.app-window-wrapper .app-window .app-preview {
   background-color: #FFFFFF;
   flex: 1 1;
 }
@@ -80,4 +75,14 @@ body > div#root > div > div > div:nth-child(2) {
   flex-direction: row;
   flex: 0 0 160px;
   border-top: 1px solid #EAEAEA;
+}
+.database-manager-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.database-manager-wrapper .database-single {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

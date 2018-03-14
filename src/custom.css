@@ -19,6 +19,9 @@
 .default-option{
 	margin-bottom:20px;
 }
+.databases-select{
+	margin:20px 0 0 120px;
+}
 .active-project{
 	background: blue;
 	color: #fff;
@@ -87,7 +90,9 @@
 .tabsConsole:hover{
 	color: #222;
 }
-
+.form-custom-style{
+	width: 100% !important;
+}
 .app-window-wrapper .app-window{
 	overflow: hidden;
 }
