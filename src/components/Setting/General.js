@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 import { Form, Input, Button, Switch, Upload, Message } from 'element-react';
+const {ipcRenderer} = window.require('electron')
+
+const ipc = window.ipc || {}
+
 
 class General extends Component {
 
@@ -8,12 +12,23 @@ class General extends Component {
 		super(props);
 		this.state = {
 			settingsGeneral:{
-        imageUrl: '',
-        brand: '',
-        authentication: 'true',
-        description: '',				
+        description: '',
 			}
 		}
+
+		ipc.messaging = {
+	    sendOpenDialog: function() {
+	        ipcRenderer.send('open-dialog-fav', 'an-argument')
+	    }
+	  }
+	}
+
+
+	componentWillMount(){
+		const self = this;
+		ipcRenderer.on('open-dialog-fav-reply', (event,arg) => {
+			self.props.updateConfigs('FAV_ICON',arg[0]);
+		});
 	}
 
   onChange(key, value) {
@@ -26,34 +41,30 @@ class General extends Component {
   }
 
   render() {
-	  const { imageUrl } = this.state.settingsGeneral;
+		console.log(this.props.configs)
+		let imageUrl = this.props.configs.FAV_ICON || null;
+
     return (
       <div className="setting-form">
-        <Form className="en-US form-custom-style" model={this.state.settingsGeneral} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
+        <Form className="en-US form-custom-style" labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
           <Form.Item>
-				    <Upload
-				      className="logo-uploader"
-				      action="//jsonplaceholder.typicode.com/posts/"
-				      showFileList={false}
-				      onSuccess={(res, file) => this.handleAvatarScucess(res, file)}
-				      beforeUpload={file => this.beforeAvatarUpload(file)}
-				    >
-				      { imageUrl ? <img src={imageUrl} className="avatar" /> : <i className="el-icon-picture avatar-uploader-icon"></i> }
-				    </Upload>
+						<div onClick={ ()=> ipc.messaging.sendOpenDialog() } id="selectDirectory">
+			      	<img onClick={ ()=>ipc.messaging.sendOpenDialog() } className="avatar" style={{'max-width':'150px'}} src={'file:///'+imageUrl} />
+			      </div>
           </Form.Item>
           <Form.Item label="Brand">
-            <Input value={this.state.settingsGeneral.brand} onChange={this.onChange.bind(this, 'brand')}></Input>
+            <Input value={this.props.configs.admin.PROJECT_BRAND || ""} onChange={this.props.updateConfigs.bind(this, 'PROJECT_BRAND')}></Input>
           </Form.Item>
-          <Form.Item label="Authentication">   
+          <Form.Item label="Authentication">
 			      <Switch
-			        value={this.state.settingsGeneral.authentication}
-			        onChange={this.onChange.bind(this, 'authentication')}
+			        value={this.props.configs.authentication}
+							onChange={this.props.updateConfigs.bind(this, 'authentication')}
 			        onText=""
 			        offText="">
 			        >
 			      </Switch>
           </Form.Item>
-          <Form.Item label="Description">   
+          <Form.Item label="Description">
             <Input type="textarea" autosize={{ minRows: 2, maxRows: 4}} value={this.state.settingsGeneral.descriptaion} onChange={this.onChange.bind(this, 'descriptaion')}></Input>
           </Form.Item>
         </Form>
@@ -70,9 +81,6 @@ class General extends Component {
 	  const isJPG = file.type === 'image/jpeg';
 	  const isLt2M = file.size / 1024 / 1024 < 2;
 
-	  if (!isJPG) {
-	    Message('Avatar picture must be JPG format!');
-	  }
 	  if (!isLt2M) {
 	    Message('Avatar picture size can not exceed 2MB!');
 	  }

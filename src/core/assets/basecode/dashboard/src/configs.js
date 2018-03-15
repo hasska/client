@@ -1,5 +1,5 @@
 export const configs = {
-	"PORT":3001,
+	"PORT":3006,
 	"SERVICE_PORT": 8080,
 	"CORE_PORT": 8000,
 	"PROJECT_PATH":"/Users/vt/Desktop/projects/sag/",

@@ -6,7 +6,101 @@
 	float: right;
 	margin: 10px;
 }
+.preview-services{
+	margin: 20px;
+}
+.account-form{
+	width: 650px;
+	margin:40px auto;
+	text-align: left;
+}
+.navbar-brand{
+	display: none !important;
+}
+.account-form p{
+	width: 100%;
+	float: left;
+}
+.preview-services{
+	max-width: 600px;
+	width: 100%;
+	display: block;
+	margin: 100px auto;
+}
+.loading-custom{
+	background:#fff;
+}
+.preview-services-image {
+	width: 35%;
+	float: left;
+	margin-right: 5%;
+}
+.api-view{
 
+}
+.webview-controller{
+	background: #08592b;
+	position: absolute;
+	height: 51px;
+	width: 400px;
+	z-index: 100;
+	left:0;
+	top: 0;
+}
+.admin-controllers{
+	background: transparent;
+	position: absolute;
+	height: 51px;
+	width: 100px;
+	padding-left: 15px;
+	z-index: 100;
+	left:0;
+	top: 0;
+}
+.admin-controllers button{
+	float: left;
+	position: relative;
+	margin-right: 0px;
+	border-radius: 2px !important;
+	margin-top:12px;
+	padding: 2px !important;
+	font-weight: bold !important;
+}
+.app-window{
+	position: relative;
+}
+.setting-wrapper .setting-form form{
+	    align-items: center;
+}
+.webview-controller{
+	padding-left: 60px;
+}
+.webview-controller button{
+	float: left;
+	position: relative;
+	margin-right: 0px;
+	border-radius: 2px !important;
+	margin-top:12px;
+	padding: 5px !important;
+	font-weight: bold !important;
+}
+.preview-services-image img{
+	width: 95%;
+	margin-top: 0px;
+	padding: 5px;
+	border:1px solid #ddd;
+	border-radius: 10px;
+	float: left;
+}
+.preview-services-content p{
+	color: #999;
+	font-weight: lighter;
+}
+.preview-services-content {
+	width: 60%;
+	float: left;
+}
+.preview-services
 .project-item{
 	border-bottom: 1px solid #eee;
 	width: 100%;
@@ -43,7 +137,13 @@
 	display: block;
 	margin:10px 20px;
 }
-
+.settings-actions{
+	float: right;
+	position: absolute;
+	right: 25px;
+	top:6px;
+	z-index: 3;
+}
 .model-actions{
 	float: right;
 	position: absolute;
@@ -79,6 +179,7 @@
 .closed-window-console{
 	flex: 0 0 40px !important;
 }
+
 .console-wrapper{
 	background: #fff !important;
 	z-index: 2;

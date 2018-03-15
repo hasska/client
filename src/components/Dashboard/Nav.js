@@ -26,7 +26,7 @@ class Nav extends Component {
       <div className="app-nav">
         { this.state.navigate && <Redirect to={"/dashboard/"+this.state.active} push={true} />}
         <div className="nav-actions">
-          <a onClick={()=>this.changeRoute('setting')} ><i className="el-icon-setting"></i></a>
+          <a onClick={()=>this.changeRoute('perferences')} ><i className="el-icon-setting"></i></a>
           <a><i className="el-icon-arrow-left"></i></a>
         </div>
         <ul className="nav-container">

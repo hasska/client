@@ -29,20 +29,20 @@ class AdminDashboard extends Component {
     return (
       <div className="setting-form">
         <Form className="en-US form-custom-style" model={this.state.settingsAdminDashboard} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
-          <Form.Item label="AdminDashboard">   
+          <Form.Item label="AdminDashboard">
 			      <Switch
-			        value={this.state.settingsAdminDashboard.active}
-			        onChange={this.onChange.bind(this, 'active')}
+			        value={this.props.configs.admin.DISABLE_ADMIN}
+			        onChange={this.props.updateConfigs.bind(this, 'DISABLE_ADMIN')}
 			        onText=""
 			        offText="">
 			        >
 			      </Switch>
           </Form.Item>
           <Form.Item label="Usrename">
-            <Input value={this.state.settingsAdminDashboard.username} onChange={this.onChange.bind(this, 'username')}></Input>
+            <Input value={this.props.configs.admin.default_username} onChange={this.props.updateConfigs.bind(this, 'default_username')}></Input>
           </Form.Item>
           <Form.Item label="Password">
-            <Input value={this.state.settingsAdminDashboard.password} onChange={this.onChange.bind(this, 'password')}></Input>
+            <Input value={this.props.configs.admin.default_password} onChange={this.props.updateConfigs.bind(this, 'default_password')}></Input>
           </Form.Item>
         </Form>
       </div>

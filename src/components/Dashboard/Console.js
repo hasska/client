@@ -35,7 +35,7 @@ class Console extends Component {
     }
   }
   componentDidMount(){
-    //this.setIntervals();
+    this.setIntervals();
   }
   triggerView(){
     if(this.state.showConsole==true){

@@ -42,6 +42,12 @@ class Dashboard extends Component {
         text: 'Ready to Start',
         status: ''
       },
+      windows: {
+        api: false,
+        admin: false,
+        monitoring: false,
+        docs: false
+      },
       project: [],
       projects: []
     };
@@ -53,6 +59,24 @@ class Dashboard extends Component {
           ipcRenderer.send('projects-list', [])
       }
     }
+
+    this.updateProject = this.updateProject.bind(this);
+    this.updateProgress = this.updateProgress.bind(this);
+    this.updateWindows = this.updateWindows.bind(this);
+  }
+
+  updateWindows(key,value){
+    let _windows = this.state.windows;
+    _windows[key] = value;
+    this.setState({windows: _windows})
+  }
+
+  updateProgress(progress){
+    this.setState({'progress': progress})
+  }
+
+  updateProject(project){
+      this.setState({'project': project})
   }
 
   onChange(key, value) {
@@ -69,11 +93,11 @@ class Dashboard extends Component {
     ipc.messaging.getProjectInfo();
     ipc.messaging.getProjects();
     ipcRenderer.on('project-info-result', (event, arg) => {
+      console.log(arg)
       self.setState({'project':arg});
     });
     ipcRenderer.on('projects-list-result', (event, arg) => {
       self.setState({'projects':arg});
-      console.log(self.state.projects)
     });
   }
 
@@ -81,28 +105,28 @@ class Dashboard extends Component {
   render() {
     return (
         <div>
-          <Loading loading={this.state.projects.length==0} fullscreen={this.state.projects.length==0} text={"Loading Project ..."} />
-          <LoggerPane />
-          <div className="app-wrapper">
-              <ActionBar projects={this.state.projects} project={this.state.project} progress={this.state.progress} />
+          <Loading loading={this.state.project.length==0} fullscreen={this.state.project.length==0} text={"Loading Project ..."} />
+          { this.state.project.length != 0 &&
+            <div className="app-wrapper">
+              <ActionBar updateProgress={this.updateProgress} updateProject={this.updateProject} projects={this.state.projects} project={this.state.project} progress={this.state.progress} />
               <div className="app-body">
                   <Nav active={this.state.active} />
                   <div className="app-window-wrapper">
                     <div className="app-window">
-                        <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager project={this.state.project} progress={this.state.progress} /> )} />
-                        <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager project={this.state.project} progress={this.state.progress} /> )} />
-                        <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/admin'} render={(props) => ( <AdminManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager project={this.state.project} progress={this.state.progress} /> )} />
-                        <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/apps'} render={(props) => ( <AppsContainer project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/perferences'} render={(props) => ( <SettingContainer project={this.state.project} progress={this.state.progress} /> )} />
                     </div>
-                    <Console />
                   </div>
             </div>
-        </div>
+        </div>}
       </div>
     );
   }

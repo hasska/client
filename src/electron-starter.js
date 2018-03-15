@@ -28,7 +28,9 @@ let mainWindow, wizard, splash;
 function createWindow() {
     // Create the browser window.
     const {screen} = require('electron');
-    mainWindow = new BrowserWindow({width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height, minWidth: 900, minHeight: 480, titleBarStyle: 'hidden', show: false});
+    mainWindow = new BrowserWindow({width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height, minWidth: 900, minHeight: 480, titleBarStyle: 'hidden', show: false,"webPreferences":{
+      "webSecurity":false
+    }});
     wizard = new BrowserWindow({width: 820, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
     splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 
@@ -63,6 +65,15 @@ function createWindow() {
         });
     });
 
+    ipcMain.on('open-dialog-fav', (event,arg) => {
+        event.preventDefault();
+
+        dialog.showOpenDialog({properties: [ 'openFile'],filters: [
+              { name: 'Images', extensions: ['jpg', 'png', 'gif'] } ] }, (filePaths) => {
+             event.sender.send('open-dialog-fav-reply', filePaths)
+        });
+    });
+
     ipcMain.on('project-info', (event,arg) => {
         event.preventDefault();
         event.sender.send('project-info-result', store.get('currentProject'));
@@ -72,6 +83,14 @@ function createWindow() {
       event.preventDefault();
       modelsManager.modelRemove(arg, (response) => {
           event.sender.send('models-remove-result', response)
+          //mainWindow.reload();
+      });
+  });
+
+  ipcMain.on('updateConfigs', (event,arg) => {
+      event.preventDefault();
+      projectManger.updateConfigs(arg, (response) => {
+          event.sender.send('updateConfigs-result', response)
           //mainWindow.reload();
       });
   });
@@ -171,9 +190,9 @@ function createWindow() {
 
     ipcMain.on('update-logs', (event,arg) => {
         event.preventDefault();
-        logsManger.getLogs( (response) => {
-            event.sender.send('update-logs-result', response.data)
-        });
+          logsManger.getLogs( (response) => {
+              event.sender.send('update-logs-result', response.data)
+          });
     });
 
     ipcMain.on('update-errors', (event,arg) => {

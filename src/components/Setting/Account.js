@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Form, Input, Radio, Button, Switch, Upload, Message } from 'element-react';
+import cactus from '../../dist/img/cactus.png';
 
 class Account extends Component {
 
@@ -25,15 +26,10 @@ class Account extends Component {
 
   render() {
     return (
-      <div className="setting-form">
-        <Form className="en-US form-custom-style" model={this.state.settingsAccount} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
-          <Form.Item label="Usrename">
-            <Input value={this.state.settingsAccount.username} onChange={this.onChange.bind(this, 'username')}></Input>
-          </Form.Item>
-          <Form.Item label="email">
-            <Input value={this.state.settingsAccount.email} onChange={this.onChange.bind(this, 'email')}></Input>
-          </Form.Item>
-        </Form>
+      <div className="setting-form account-form">
+				<img style={{width:'200px',display:'block',margin:'0 auto'}} src={cactus} />
+				<br />
+        <p>This is a beta version of haska for test. Thank you for testing our application. <br /><br /><b>Feel free to send us your feedbacks ;)</b></p>
       </div>
     );
   }

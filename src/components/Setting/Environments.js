@@ -23,6 +23,10 @@ class Environments extends Component {
     this.forceUpdate();
   }
 
+	componentWillReceiveProps(nextProps){
+		console.log(nextProps)
+  }
+
   onSubmit(e) {
     e.preventDefault();
   }
@@ -33,25 +37,25 @@ class Environments extends Component {
         <Form className="en-US form-custom-style" model={this.state.settingsEnvironments} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
 		      <Form.Item label="Type" className="radio-full-3">
 			      <Radio.Group value={this.state.settingsEnvironments.type} onChange={this.onChange.bind(this, 'type')}>
-			        <Radio.Button value="Debug" />
-			        <Radio.Button value="Production" />
-			        <Radio.Button value="Test" />
-			      </Radio.Group>      
+			        <Radio.Button value="Development" />
+			        <Radio.Button disabled value="Production" />
+			        <Radio.Button disabled value="Test" />
+			      </Radio.Group>
 		      </Form.Item>
           <div className="flex-2-1">
 	          <Form.Item label="API Host">
-	            <Input value={this.state.settingsEnvironments.apiHost} onChange={this.onChange.bind(this, 'apiHost')}></Input>
+	            <Input value={this.props.configs.SERVICE_HOST || "127.0.0.1"} onChange={this.props.updateConfigs.bind(this, 'SERVICE_HOST')}></Input>
 	          </Form.Item>
 	          <Form.Item label="API Port">
-	            <Input value={this.state.settingsEnvironments.apiPort} onChange={this.onChange.bind(this, 'apiPort')}></Input>
+	            <Input value={this.props.configs.SERVICE_PORT || "8080"} onChange={this.props.updateConfigs.bind(this, 'SERVICE_PORT')}></Input>
 	          </Form.Item>
           </div>
           <div className="flex-2-1">
 	          <Form.Item label="Admin Host">
-	            <Input value={this.state.settingsEnvironments.adminHost} onChange={this.onChange.bind(this, 'adminHost')}></Input>
+	            <Input value={this.props.configs.admin.HOST || "127.0.0.1"} onChange={this.props.updateConfigs.bind(this, 'HOST')}></Input>
 	          </Form.Item>
 	          <Form.Item label="Admin Port">
-	            <Input value={this.state.settingsEnvironments.adminPort} onChange={this.onChange.bind(this, 'adminPort')}></Input>
+	            <Input value={this.props.configs.admin.PORT || "3006"} onChange={this.props.updateConfigs.bind(this, 'PORT')}></Input>
 	          </Form.Item>
           </div>
         </Form>

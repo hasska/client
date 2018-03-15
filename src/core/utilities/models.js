@@ -192,7 +192,7 @@ module.exports = {
 		let _dir = project.destination+'/common/models/'+arg.name+'.json';
 		let _dir_js = project.destination+'/common/models/'+arg.name+'.js';
 		const self = this;
-		
+
 		fs.ensureFile(_dir, err => {
 			if(!err){
 				fs.writeJson(_dir, arg.model, (err) => {
@@ -231,8 +231,17 @@ module.exports = {
 			_data[model] = { "dataSource": db, "public":true };
 			fs.writeJson(project.destination+'/server/model-config.json', _data, (err) => {
 				if(err) console.log(err.toString());
-				else console.log('datasources for '+model+' changed successfully')
+				else{
+					fs.copy(project.destination+'/server/model-config.json', project.destination+'/dashboard/src/models/model-config.json', function (err) {
+						if (!err){
+							console.log('datasources for '+model+' changed successfully')
+						} else {
+							console.log('problem in copy');
+						}
+					});
+				}
 			});
+
 		})
 	},
 	modelPublish(arg,callback){
@@ -245,7 +254,11 @@ module.exports = {
 				if(err) callback(err.toString());
 				else {
 					self.updateDb(arg.name,arg.db);
-					callback('success')
+					fs.copy(project.destination+'/common/User.json', project.destination+'/dashboard/src/models/common/User.json', function (err) {
+						if (!err){
+							callback('success')
+						}
+					});
 				}
 			});
 		else {
@@ -253,10 +266,18 @@ module.exports = {
 				if(err) callback(err.toString());
 				else {
 					self.updateDb(arg.name,arg.db);
-					callback('success')
+					fs.copy(project.destination+'/common/models/'+arg.name+'.json', project.destination+'/dashboard/src/models/common/models/'+arg.name+'.json', function (err) {
+						if (!err){
+							callback('success')
+						}
+					});
 				}
 			});
 		}
+
+
+
+
 	},
 	getModelIPC: (model,callback) =>{
 		const store = new Store();

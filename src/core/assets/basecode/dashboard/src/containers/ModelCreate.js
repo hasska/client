@@ -128,7 +128,7 @@ class ModelCreate extends Component {
       if(typeof properties[property].uiType != "undefined"){
 
         if(properties[property].uiType.toLowerCase()=="select"){
-          formModel[property] = properties[property].options[0].value;
+          formModel[property] = properties[property].options.selectItems[0].value;
         }
 
         if(properties[property].uiType.toLowerCase()=="date"){
