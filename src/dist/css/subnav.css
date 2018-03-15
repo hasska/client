@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.app-sub-nav.sub-nav-database {
+  border-right: 1px solid #EAEAEA;
+}
 .app-sub-nav .sub-nav-header {
   display: flex;
   flex-direction: row;
@@ -19,6 +22,7 @@
 .app-sub-nav .sub-nav-body {
   flex: 1;
   overflow-x: scroll;
+  padding-bottom: 20px;
 }
 .app-sub-nav .sub-nav-body ul li {
   display: flex;
@@ -52,10 +56,10 @@
 }
 .app-sub-nav .sub-nav-body ul li:hover i {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  color: #0084FF;
+  color: #20a0ff;
 }
 .app-sub-nav .sub-nav-body ul li.active {
-  background-color: #0084FF !important;
+  background-color: #20a0ff !important;
 }
 .app-sub-nav .sub-nav-body ul li.active h5,
 .app-sub-nav .sub-nav-body ul li.active i {

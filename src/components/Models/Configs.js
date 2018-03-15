@@ -60,19 +60,19 @@ class ModelCreator extends Component {
       <div className="model-info-wrapper">
         <Title contnet="MODEL CONFIGURATION" />
         <div className="model-actions">
-          <Button onClick={ ()=>this.props.publishModels() } type="primary" size="small" className="publish-model"><Icon name="plus" /> { this.props.createMode == true ? 'Publish' : 'Apply Changes'}</Button>
-          { !this.props.createMode && <Button onClick={ ()=>this.props.removeModel(this.props.selectedModel) } type="default" size="small" className="remove-model"><Icon name="trash" /> Remove</Button> }
+          <Tooltip placement="top" content={ this.props.createMode == true ? 'Create'  : 'Apply Changes' }><Button type="text" onClick={ ()=>this.props.publishModels() } size="small" className="publish-model">{ this.props.createMode == true ? <Icon name="check" />  : <Icon name="check" /> }</Button></Tooltip>
+          { !this.props.createMode && <Tooltip placement="top" content={"Delete"}><Button onClick={ ()=>this.props.removeModel(this.props.selectedModel) } type="text" size="small" className="remove-model"><i className="el-icon-delete2"></i></Button></Tooltip> }
         </div>
         <div className="model-info-form">
           { this.props.currentModel && <Form className="en-US form-custom-style" model={this.props.currentModel} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
-            <Form.Item label="Name">
-            {
-              this.props.createMode == true ?
-              <Input onChange={this.props.updateModel.bind(this, 'name')} value={this.props.currentModel.name}></Input> :
-              <Input disabled value={this.props.currentModel.name}></Input>
-            }
-            </Form.Item>
-            <div className="half-flex">
+            <div className="triple-flex">
+              <Form.Item label="Name">
+              {
+                this.props.createMode == true ?
+                <Input onChange={this.props.updateModel.bind(this, 'name')} value={this.props.currentModel.name}></Input> :
+                <Input disabled value={this.props.currentModel.name}></Input>
+              }
+              </Form.Item>
               <Form.Item label="Type">
                 <Select onChange={this.props.updateModel.bind(this, 'base')} value={this.props.currentModel.base || 'PersistedModel'}>
                   {
@@ -91,21 +91,21 @@ class ModelCreator extends Component {
                   }
                 </Select>
               </Form.Item>
-              <Form.Item>
-                <div className="model-options">
-                  <Tooltip placement="right" content={"Whether to automatically add an id property to the model."}>
-                    <Checkbox onChange={this.props.updateModel.bind(this, 'idInjection')} label="Id Injection" checked={this.props.currentModel.idInjection || false}></Checkbox>
-                  </Tooltip>
-                  <Tooltip placement="right" content={"prevents clients from setting the auto-generated ID value manually."}>
-                    <Checkbox onChange={this.props.updateModel.bind(this, 'forceId')} label="Generate Id" checked={this.props.currentModel.forceId || false}></Checkbox>
-                  </Tooltip>
-                  <Tooltip placement="right" content={"enforce valid model data"}>
-                    <Checkbox onChange={this.props.updateModel.bind(this, 'validateUpsert',true)} label="Validation Upsert" checked={this.props.currentModel.options.validateUpsert || false}></Checkbox>
-                  </Tooltip>
-                  <Tooltip placement="right" content={"Allow access tokens that never expire."}>
-                    <Checkbox onChange={this.props.updateModel.bind(this, 'allowEternalTokens',true)} label="allow Eternal Tokens" checked={this.props.currentModel.options.allowEternalTokens || false}></Checkbox>
-                  </Tooltip>
-                </div>
+            </div>
+            <div className="model-options">
+              <Form.Item label="Options">
+                <Tooltip placement="top" content={"Whether to automatically add an id property to the model."}>
+                  <Checkbox onChange={this.props.updateModel.bind(this, 'idInjection')} label="Id Injection" checked={this.props.currentModel.idInjection || false}></Checkbox>
+                </Tooltip>
+                <Tooltip placement="top" content={"prevents clients from setting the auto-generated ID value manually."}>
+                  <Checkbox onChange={this.props.updateModel.bind(this, 'forceId')} label="Generate Id" checked={this.props.currentModel.forceId || false}></Checkbox>
+                </Tooltip>
+                <Tooltip placement="top" content={"enforce valid model data"}>
+                  <Checkbox onChange={this.props.updateModel.bind(this, 'validateUpsert',true)} label="Validation Upsert" checked={this.props.currentModel.options.validateUpsert || false}></Checkbox>
+                </Tooltip>
+                <Tooltip placement="top" content={"Allow access tokens that never expire."}>
+                  <Checkbox onChange={this.props.updateModel.bind(this, 'allowEternalTokens',true)} label="allow Eternal Tokens" checked={this.props.currentModel.options.allowEternalTokens || false}></Checkbox>
+                </Tooltip>
               </Form.Item>
             </div>
           </Form> }

@@ -30,9 +30,52 @@
 }
 .app-header .header-layout .header-left .project-name {
   font-size: 14px;
-  padding-left: 25px;
+  padding-left: 15px;
 }
-.app-header .header-layout .header-left .project-name i {
+.app-header .header-layout .header-left .project-name span > div.el-popover {
+  border-radius: 18px;
+  margin-top: 4px;
+}
+.app-header .header-layout .header-left .project-name span > div.el-popover > div:nth-child(1) {
+  font-size: 12px;
+  color: #bfcbd9;
+  padding-left: 5px;
+}
+.app-header .header-layout .header-left .project-name span > div.el-popover > div:nth-child(2) .project-item {
+  font-size: 13px;
+  color: #4A4A4A;
+  padding: 10px;
+  padding-left: 15px;
+  margin-top: 0 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.app-header .header-layout .header-left .project-name span > div.el-popover > div:nth-child(2) .project-item.active-project {
+  background-color: #20a0ff;
+  color: #FFFFFF !important;
+  border-radius: 50px;
+}
+.app-header .header-layout .header-left .project-name span > div.el-popover > div:nth-child(2) .project-item:hover {
+  color: #20a0ff;
+}
+.app-header .header-layout .header-left .project-name span > div.el-popover > div:nth-child(3) {
+  left: 100px !important;
+}
+.app-header .header-layout .header-left .project-name span > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.app-header .header-layout .header-left .project-name span > div:nth-child(2) img {
+  width: 30px;
+}
+.app-header .header-layout .header-left .project-name span > div:nth-child(2) span {
+  padding-left: 10px;
+}
+.app-header .header-layout .header-left .project-name span > div:nth-child(2) span i {
   font-size: 10px;
 }
 .app-header .header-layout .header-center {
@@ -51,10 +94,10 @@
   color: #4A4A4A;
   padding-right: 10px;
   margin-right: 10px;
-  border-right: 1px solid #999999;
+  border-right: 1px solid #bfcbd9;
 }
 .app-header .header-layout .header-center .project-status-wrapper .project-status {
-  color: #999999;
+  color: #bfcbd9;
 }
 .app-header .header-layout .header-right {
   display: flex;
@@ -74,12 +117,14 @@
 .app-header .header-layout .header-right .project-actions a {
   padding-right: 10px;
 }
-.app-header .header-layout .header-right .project-actions a img {
-  width: 20px;
-  opacity: .4;
+.app-header .header-layout .header-right .project-actions a span {
+  width: 24px;
+  font-size: 24px;
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.app-header .header-layout .header-right .project-actions a:first-child img {
-  opacity: 1;
+.app-header .header-layout .header-right .project-actions a:hover span {
+  color: #20a0ff;
 }
 .app-header .header-layout .header-right .project-actions a:last-child {
   padding-right: 0;
@@ -100,8 +145,8 @@
   color: #4A4A4A;
 }
 .app-header .header-layout .header-right .project-actions a.action-main-run .action-container a:hover {
-  color: #0084FF;
+  color: #20a0ff;
 }
 .app-header .progress-bar .el-progress-bar__outer {
-  height: 1px !important;
+  height: 3px !important;
 }

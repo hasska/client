@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
+import { Tooltip, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
 import Title from '../Title';
 
@@ -26,8 +26,8 @@ class DatabaseSingle extends Component {
 			    <div className="database-config-wrapper">
 			      <Title contnet="Database config" />
 						<div className="model-actions">
-		          <Button onClick={ ()=>this.props.publishDb(this.props.currentDatabase) } type="primary" size="small" className="publish-model"><Icon name="plus" />{ this.props.createMode == true ? 'Publish' : 'Apply Changes'}</Button>
-		          { !this.props.createMode && <Button onClick={ ()=>this.props.removeDb(this.props.selectedDb) } type="default" size="small" className="remove-model"><Icon name="trash" /> Remove</Button> }
+		          <Tooltip placement="top" content={ this.props.createMode == true ? 'Create'  : 'Apply Changes' }><Button type="text" onClick={ ()=>this.props.publishDb(this.props.currentDatabase) } size="small" className="publish-model">{ this.props.createMode == true ? <Icon name="check" />  : <Icon name="check" /> }</Button></Tooltip>
+		          { !this.props.createMode && <Tooltip placement="top" content={"Delete"}><Button onClick={ ()=>this.props.removeDb(this.props.selectedDb) } type="text" size="small" className="remove-model"><i className="el-icon-delete2"></i></Button></Tooltip> }
 		        </div>
 			      <div className="database-config-form">
 			        <Form className="en-US form-custom-style" labelWidth="120" onSubmit={this.onSubmit.bind(this)}>

@@ -10,8 +10,7 @@
 		.el-tabs__nav{
 			.el-tabs__item{
 		    padding: 0 15px;					
-				font-size: 12px;
-				letter-spacing: 1px;
+				font-size: 13px;
 			}
 		}
 	}
@@ -35,9 +34,7 @@
 			.el-tabs__nav{
 				.el-tabs__item{
 			    padding: 0 15px;					
-					font-size: 12px;
-					letter-spacing: 1px;
-					display: hidden;
+					font-size: 13px;
 				}
 				.el-tabs__active-bar{
 					top:0 !important;
@@ -60,13 +57,37 @@
     align-items: center;
     justify-content: center;
 		a{
-			margin-left: 10px;
-			i{
-				font-size: 12px;
+			margin-left: 15px;
+			span, i{
+				color: @secondryText;
+				.transition(.2s);
 			}
-			img{
-				width: 18px;
+			&:nth-child(1){
+				span{
+					font-size: 15px;
+				}
 			}
+			&:nth-child(2){
+				i{
+					font-size: 13px;
+				}
+			}
+			&:hover{
+				span, i{
+					color: @primaryColor;
+				}
+			}
+		}
+	}
+	&.closed-window-console{
+		flex: 0 0 42px !important;
+	}
+	p{
+		cursor: pointer;
+		color: @secondryText;
+		.transition(.2s);
+		&:hover{
+			color:@primaryColor;
 		}
 	}
 }

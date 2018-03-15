@@ -4,8 +4,6 @@ import IntroTips from './IntroTips';
 
 
 import logo from "../../dist/img/logo/haska-color.svg";
-import tutorialIcon from "../../dist/img/introTutorial.svg";
-import comunityIcon from "../../dist/img/introComunity.svg";
 import closeIcon from "../../dist/img/closeIcon.svg";
 
 
@@ -25,7 +23,7 @@ class HomeIntro extends Component {
       <div className="home-intro">
         <div className="intro-top">
           <a id="introAppClose" className="intro-app-close">
-            <img src={closeIcon} alt="rootvision" />
+            <span className="haskon-close"></span>
           </a>
           <div className="intro-app-logo">
             <img src={logo} width="185" alt="rootvision" />

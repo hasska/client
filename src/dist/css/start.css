@@ -24,15 +24,21 @@
 }
 .home-start .home-section .home-body .home-app-new-wrapper .home-app-new {
   display: flex;
+  flex-direction: column;
   flex: 1;
   height: 140px;
-  flex-direction: center;
+  align-items: center;
   justify-content: center;
   background-color: #FFFFFF;
   border: 1px solid #EAEAEA;
   margin-bottom: 20px;
   border-radius: 5px;
   position: relative;
+}
+.home-start .home-section .home-body .home-app-new-wrapper .home-app-new span {
+  font-size: 42px;
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .home-start .home-section .home-body .home-app-new-wrapper .home-app-new div {
   color: #4A4A4A;
@@ -43,20 +49,22 @@
 }
 .home-start .home-section .home-body .home-app-new-wrapper .home-app-new:hover {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  border: 1px solid #0084FF;
+  border: 1px solid #20a0ff;
+}
+.home-start .home-section .home-body .home-app-new-wrapper .home-app-new:hover span {
+  color: #20a0ff;
 }
 .home-start .home-section .home-body .home-app-recent-wrapper {
-  display: flex;
-  flex-direction: column;
+  overflow-x: scroll;
 }
 .home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent {
   display: flex;
   flex-direction: row;
-  flex: 1;
+  height: 55px;
   align-items: flex-start;
   justify-content: center;
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent .app-recent-logo {
   display: flex;
@@ -101,7 +109,7 @@
 }
 .home-start .home-section .home-body .home-app-recent-wrapper .home-app-recent:hover .app-recent-info .app-recent-title i {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  color: #0084FF;
+  color: #20a0ff;
 }
 .home-start .home-section.home-get-started {
   flex: 0 0 140px;

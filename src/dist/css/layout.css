@@ -39,7 +39,6 @@ body > div#root > div > div > div:nth-child(2) {
 .app-header {
   height: 72px;
   background-color: #FFFFFF;
-  border-bottom: 1px solid #EAEAEA;
   -webkit-app-region: drag;
 }
 .app-body {
@@ -63,12 +62,13 @@ body > div#root > div > div > div:nth-child(2) {
 }
 .app-window-wrapper .app-window .app-sub-nav {
   background-color: #FFFFFF;
-  flex: 0 0 260px;
-  border-right: 1px solid #EAEAEA;
+  flex: 0 0 200px;
+  height: 100%;
 }
 .app-window-wrapper .app-window .app-preview {
   background-color: #FFFFFF;
   flex: 1 1;
+  overflow: hidden;
 }
 .app-window-wrapper .app-editor-wrapper {
   display: flex;

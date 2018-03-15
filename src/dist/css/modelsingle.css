@@ -1,99 +1,178 @@
-.model-single {
+.app-preview {
+  display: flex;
+  flex-direction: column;
+}
+.app-preview .model-single {
   padding: 8px 20px;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 50px);
+  flex: 1;
 }
-.model-single .model-info-wrapper {
-  flex: 0 0 100px;
+.app-preview .model-single .model-info-wrapper {
+  flex: 0 0 180px;
+  overflow: hidden;
 }
-.model-single .model-info-wrapper .model-info-form {
+.app-preview .model-single .model-info-wrapper .model-info-form {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 0 5px 0;
 }
-.model-single .model-info-wrapper .model-info-form .half-flex {
+.app-preview .model-single .model-info-wrapper .model-info-form .triple-flex {
   display: flex;
   flex-direction: row;
 }
-.model-single .model-info-wrapper .model-info-form .half-flex > div {
+.app-preview .model-single .model-info-wrapper .model-info-form .triple-flex > div {
   flex: 1;
 }
-.model-single .model-info-wrapper .model-info-form .half-flex .el-select {
+.app-preview .model-single .model-info-wrapper .model-info-form .triple-flex .el-select {
   width: 100%;
 }
-.model-single .model-info-wrapper .model-info-form form {
-  margin-left: -120px;
+.app-preview .model-single .model-info-wrapper .model-info-form .triple-flex .el-form-item > label {
+  width: 100px !important;
 }
-.model-single .model-properties-wrapper {
+.app-preview .model-single .model-info-wrapper .model-info-form .triple-flex .el-form-item > div {
+  margin-left: 100px !important;
+}
+.app-preview .model-single .model-info-wrapper .model-info-form .model-options {
+  display: flex;
+  flex-direction: row;
+}
+.app-preview .model-single .model-info-wrapper .model-info-form .model-options .el-form-item {
   flex: 1;
 }
-.model-single .model-properties-wrapper .model-properties-table {
-  padding-top: 10px;
+.app-preview .model-single .model-info-wrapper .model-info-form .model-options .el-form-item > label {
+  width: 100px !important;
 }
-.model-single .model-properties-wrapper .model-properties-table > button {
+.app-preview .model-single .model-info-wrapper .model-info-form .model-options .el-form-item > div {
+  margin-left: 100px !important;
+}
+.app-preview .model-single .model-info-wrapper .model-info-form .model-options .el-form-item .el-form-item__content {
+  display: flex;
+  flex-direction: row;
+}
+.app-preview .model-single .model-info-wrapper .model-info-form .model-options .el-form-item .el-form-item__content > div {
+  flex: 1;
+}
+.app-preview .model-single .model-info-wrapper .model-info-form form {
+  margin-left: 0px;
+}
+.app-preview .model-single .model-properties-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.app-preview .model-single .model-properties-wrapper .head-title {
+  flex: 0 0 30px;
+  box-sizing: border-box;
+  padding: 0;
+}
+.app-preview .model-single .model-properties-wrapper .model-properties-table {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.app-preview .model-single .model-properties-wrapper .model-properties-table > button {
   font-size: 0.83em;
-  margin-top: 10px;
+  width: 200px;
   margin-left: 7px;
-  padding: 10px 30px;
   letter-spacing: 1px;
   text-transform: none;
-  border-color: #0084FF;
-  color: #0084FF;
+  border-color: #20a0ff;
+  color: #20a0ff;
+  margin-top: 10px;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.model-single .model-properties-wrapper .model-properties-table > button:hover {
-  background-color: #0084FF;
+.app-preview .model-single .model-properties-wrapper .model-properties-table > button:hover {
+  background-color: #20a0ff;
   color: #FFFFFF;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table {
+  overflow-x: scroll !important;
   overflow: visible;
   border: none;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table .el-table__body-wrapper {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table .el-table__body-wrapper {
   overflow: visible;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table::after {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table::after {
   background-color: transparent;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table::before {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table::before {
   background-color: transparent;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table th {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table th {
   border: none;
   background-color: #FFFFFF;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table th .cell {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table th .cell {
   background-color: #FFFFFF;
   letter-spacing: 1px;
   text-transform: none;
   font-weight: 100;
   font-size: 0.83em;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table td {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table td {
   border: none;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table td .cell .el-input {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table td .cell .el-input {
   margin: 10px 0;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table .cell {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table .cell {
   padding-left: 7px;
   padding-right: 7px;
   overflow: visible;
   text-align: center;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table .cell input {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table .cell input {
   border-radius: 50px;
   font-weight: 100;
   font-size: 1em;
 }
-.model-single .model-properties-wrapper .model-properties-table .el-table .row-actions {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table .row-actions {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.model-single .model-settings-wrapper {
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table .row-actions button {
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.app-preview .model-single .model-properties-wrapper .model-properties-table .el-table .row-actions button:hover {
+  color: #20a0ff;
+}
+.app-preview .model-single .model-settings-wrapper {
   flex: 0 0 100px;
   margin-top: auto;
+}
+.model-actions {
+  float: right;
+  position: absolute;
+  right: 0px;
+  width: 67px;
+  padding-right: 28px;
+  top: 80px;
+  display: flex;
+  flex-direction: row;
+}
+.model-actions > .el-tooltip {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.model-actions > .el-tooltip button {
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.model-actions > .el-tooltip button i.el-icon-delete2 {
+  font-size: 15px;
+}
+.model-actions > .el-tooltip button i.el-icon-check {
+  font-size: 13px;
+}
+.model-actions > .el-tooltip button:hover {
+  color: #20a0ff;
 }

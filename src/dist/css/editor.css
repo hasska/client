@@ -9,8 +9,7 @@
 }
 .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__item {
   padding: 0 15px;
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-size: 13px;
 }
 .el-tabs .el-tabs__content {
   display: flex;
@@ -32,9 +31,7 @@
 }
 .app-editor-wrapper .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__item {
   padding: 0 15px;
-  font-size: 12px;
-  letter-spacing: 1px;
-  display: hidden;
+  font-size: 13px;
 }
 .app-editor-wrapper .el-tabs .el-tabs__header .el-tabs__nav .el-tabs__active-bar {
   top: 0 !important;
@@ -57,11 +54,31 @@
   justify-content: center;
 }
 .app-editor-wrapper .editor-actions a {
-  margin-left: 10px;
+  margin-left: 15px;
 }
+.app-editor-wrapper .editor-actions a span,
 .app-editor-wrapper .editor-actions a i {
-  font-size: 12px;
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.app-editor-wrapper .editor-actions a img {
-  width: 18px;
+.app-editor-wrapper .editor-actions a:nth-child(1) span {
+  font-size: 15px;
+}
+.app-editor-wrapper .editor-actions a:nth-child(2) i {
+  font-size: 13px;
+}
+.app-editor-wrapper .editor-actions a:hover span,
+.app-editor-wrapper .editor-actions a:hover i {
+  color: #20a0ff;
+}
+.app-editor-wrapper.closed-window-console {
+  flex: 0 0 42px !important;
+}
+.app-editor-wrapper p {
+  cursor: pointer;
+  color: #4A4A4A;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.app-editor-wrapper p:hover {
+  color: #20a0ff;
 }

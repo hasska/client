@@ -28,7 +28,7 @@ let mainWindow, wizard, splash;
 function createWindow() {
     // Create the browser window.
     const {screen} = require('electron');
-    mainWindow = new BrowserWindow({width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height, minWidth: 900, minHeight: 480, titleBarStyle: 'hidden', show: false});
+    mainWindow = new BrowserWindow({width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height, minWidth: 1200, minHeight: 620, titleBarStyle: 'hidden', show: false});
     wizard = new BrowserWindow({width: 820, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
     splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 

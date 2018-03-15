@@ -6,8 +6,6 @@ import haskaType from "../../dist/img/haska.svg";
 import run from "../../dist/img/run.svg";
 import stop from "../../dist/img/stop.svg";
 import clean from "../../dist/img/clean.svg";
-import build from "../../dist/img/build.svg";
-import publish from "../../dist/img/publish.svg";
 
 import { Redirect } from 'react-router'
 
@@ -95,8 +93,8 @@ class Console extends Component {
     return (
     <div className={"app-editor-wrapper console-wrapper "+( this.state.showConsole == false && "closed-window-console" ) }>
       <div className="editor-actions">
-        <a onClick={ ()=>this.clearLogs()} className="editor-clean"><img src={clean} /></a>
-        <a onClick={ ()=>this.triggerView() }><i className="el-icon-arrow-down"></i></a>
+        <a onClick={ ()=>this.clearLogs()} className="editor-clean"><span className="haskon-eraser"></span></a>
+        <a onClick={ ()=>this.triggerView() }><i className={"el-icon-arrow-down "+( this.state.showConsole == false && "el-icon-arrow-up" )}></i></a>
       </div>
 
       { this.state.showConsole == true ? <Tabs activeName="1" onTabClick={ (tab) => console.log(tab.props.name) }>

@@ -125,7 +125,7 @@ class ModelProperties extends Component {
             content.push(<Input onChange={ self.props.updateValidations.bind(self,'length',data.validations.length,data.name) } value={data.validations.length || ""} placeholder="Length" />);
 
             return (
-              <Popover placement="bottom" title="Validation" width="200" trigger="click" content={content}>
+              <Popover placement="top" title="Validation" width="200" trigger="click" content={content}>
                 <Button>Configure</Button>
               </Popover>
             )
@@ -147,7 +147,7 @@ class ModelProperties extends Component {
                 }
               </Select>)
             return (
-              <Popover placement="bottom" title="Validation" width="200" trigger="click" content={content}>
+              <Popover placement="top" title="Validation" width="200" trigger="click" content={content}>
                 <Button>Manage</Button>
               </Popover>
             )
@@ -160,7 +160,7 @@ class ModelProperties extends Component {
             return (
               <span className="row-actions">
                 <Button type="text" onClick={ ()=>self.setState({dialogVisible:true,dialogData: data}) }><Icon name="setting"/></Button>
-                <Button type="text" onClick={ ()=>self.removeProp(data) }><Icon name="delete"/></Button>
+                <Button type="text" onClick={ ()=>self.removeProp(data) }><Icon name="delete2"/></Button>
               </span>
               )
           }

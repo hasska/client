@@ -2,30 +2,13 @@
 	opacity: 1 !important;
 }
 
-.project-name span{
-	float: right;
-	margin: 10px;
-}
-
-.project-item{
-	border-bottom: 1px solid #eee;
-	width: 100%;
-	padding: 5px;
-	margin-top: 0 !important;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
 .default-option{
 	margin-bottom:20px;
 }
 .databases-select{
 	margin:20px 0 0 120px;
 }
-.active-project{
-	background: blue;
-	color: #fff;
-}
+
 .admin-options{
 	margin:20px 0 20px 0;
 }
@@ -38,29 +21,9 @@
 .admin-options .el-input{
 	margin-bottom: 12px;
 }
-.model-options{
-	width: 100%;
-	display: block;
-	margin:10px 20px;
-}
-
-.model-actions{
-	float: right;
-	position: absolute;
-	right: 25px;
-	top:80px;
-}
 .closed-logs{
-	position: relative;
-	bottom: 20px;
-	left: 20px;
-	vertical-align: middle;
-	padding-top: 10px;
-	color: #666;
-	opacity: 0.6;
-	margin-top: 23px;
 	font-size: 13px;
-	font-weight: 900;
+  padding-left: 15px;
 }
 #errors-pane{
 	color: #c0392b !important;
@@ -76,9 +39,6 @@
 	line-height: 18px;
 }
 
-.closed-window-console{
-	flex: 0 0 40px !important;
-}
 .console-wrapper{
 	background: #fff !important;
 	z-index: 2;
