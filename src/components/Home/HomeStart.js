@@ -5,6 +5,7 @@ import Title from './../Title';
 
 import newIcon from "../../dist/img/newAppIcon.svg";
 import appIcon from "../../dist/img/repo.svg";
+
 const {ipcRenderer} = window.require('electron')
 
 const ipc = window.ipc || {}
@@ -40,7 +41,7 @@ class HomeStart extends Component {
           <div className="home-body">
             <div className="home-app-new-wrapper">
               <div onClick={ ()=>ipc.messaging.sendOpenCreateProject()} className="home-app-new">
-                <img src={newIcon} alt="New App" />
+                <span className="haskon-newAppIcon"></span>
                 <div className="t6">
                   New Project
                 </div>                            

@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'haskon';
+  src: url('../fonts/haskon.eot?9otukh');
+  src: url('../fonts/haskon.eot?9otukh#iefix') format('embedded-opentype'), url('../fonts/haskon.ttf?9otukh') format('truetype'), url('../fonts/haskon.woff?9otukh') format('woff'), url('../fonts/haskon.svg?9otukh#haskon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="haskon-"],
+[class*=" haskon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'haskon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.haskon-rocket:before {
+  content: "\e90b";
+}
+.haskon-apps:before {
+  content: "\e90c";
+}
+.haskon-books:before {
+  content: "\e920";
+}
+.haskon-display:before {
+  content: "\e956";
+}
+.haskon-database:before {
+  content: "\e964";
+}
+.haskon-cogs:before {
+  content: "\e995";
+}
+.haskon-pie-chart:before {
+  content: "\e99a";
+}
+.haskon-lab:before {
+  content: "\e9aa";
+}
+.haskon-controller-stop:before {
+  content: "\e901";
+}
+.haskon-controller-play:before {
+  content: "\e902";
+}
+.haskon-close:before {
+  content: "\e900";
+}
+.haskon-home:before {
+  content: "\e903";
+}
+.haskon-dashboard:before {
+  content: "\e908";
+}
+.haskon-folder:before {
+  content: "\e909";
+}
+.haskon-eraser:before {
+  content: "\e90a";
+}
+.haskon-mdBlog:before {
+  content: "\e904";
+}
+.haskon-mdCompany:before {
+  content: "\e905";
+}
+.haskon-mdDefault:before {
+  content: "\e906";
+}
+.haskon-mdShop:before {
+  content: "\e907";
+}
+.haskon-newAppIcon:before {
+  content: "\e910";
+}

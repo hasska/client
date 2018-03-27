@@ -38,7 +38,6 @@
 .app-header {
     height: 72px;
     background-color: @headerBGColor;
-    border-bottom: 1px solid @borderColor;
     -webkit-app-region: drag;
 }
 .app-body {
@@ -58,12 +57,13 @@
         flex:1; 
         .app-sub-nav {
             background-color: @subNavBGColor;
-            flex :0 0 260px;
-            border-right: 1px solid @borderColor;
+            flex :0 0 200px;
+            height: 100%;            
         }
         .app-preview {
             background-color: @previewBGColor;
             flex: 1 1;
+            overflow: hidden;
         }    
     }
     .app-editor-wrapper{

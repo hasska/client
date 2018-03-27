@@ -1,28 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
-    <title>nav-documents</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="documents">
-            <g id="Group" transform="translate(4.000000, 4.000000)">
-                <g id="Group-Copy" transform="translate(0.000000, 1.000000)">
-                    <rect id="Rectangle-3" stroke="#999999" stroke-width="1.5" x="0" y="0" width="6" height="22" rx="1"></rect>
-                    <rect id="Rectangle" fill="#999999" x="0" y="18.6153846" width="6" height="1"></rect>
-                    <rect id="Rectangle-Copy" fill="#999999" x="0" y="15.2307692" width="6" height="1"></rect>
-                </g>
-                <g id="Group-Copy-2" transform="translate(9.000000, 1.000000)">
-                    <rect id="Rectangle-3" stroke="#999999" stroke-width="1.5" x="0" y="0" width="6" height="22" rx="1"></rect>
-                    <rect id="Rectangle" fill="#999999" x="0" y="18.6153846" width="6" height="1"></rect>
-                    <rect id="Rectangle-Copy" fill="#999999" x="0" y="15.2307692" width="6" height="1"></rect>
-                </g>
-                <g id="Group-Copy-3" transform="translate(21.000000, 12.000000) rotate(-7.000000) translate(-21.000000, -12.000000) translate(18.000000, 1.000000)">
-                    <rect id="Rectangle-3" stroke="#999999" stroke-width="1.5" x="0" y="0" width="6" height="22" rx="1"></rect>
-                    <rect id="Rectangle" fill="#999999" x="0" y="18.6153846" width="6" height="1"></rect>
-                    <rect id="Rectangle-Copy" fill="#999999" x="0" y="15.2307692" width="6" height="1"></rect>
-                </g>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<title>nav-documents</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1">
+	<g id="documents">
+		<g id="Group" transform="translate(4.000000, 4.000000)">
+			<g id="Group-Copy" transform="translate(0.000000, 1.000000)">
+				<path d="M4,22.8H0c-1,0-1.8-0.8-1.8-1.8V1C-1.8,0-1-0.7,0-0.7h4C5-0.7,5.8,0,5.8,1v20C5.8,22,5,22.8,4,22.8z M0,0.8
+					c-0.1,0-0.2,0.1-0.2,0.2v20c0,0.1,0.1,0.2,0.2,0.2h4c0.1,0,0.2-0.1,0.2-0.2V1c0-0.1-0.1-0.2-0.2-0.2H0z"/>
+				<rect id="Rectangle" x="-1" y="18.6" width="6" height="1"/>
+				<rect id="Rectangle-Copy" x="-1" y="15.2" width="6" height="4.4"/>
+			</g>
+			<g id="Group-Copy-2" transform="translate(9.000000, 1.000000)">
+				<path d="M4,22.8H0c-1,0-1.8-0.8-1.8-1.8V1C-1.8,0-1-0.7,0-0.7h4C5-0.7,5.8,0,5.8,1v20C5.8,22,5,22.8,4,22.8z M0,0.8
+					c-0.1,0-0.2,0.1-0.2,0.2v20c0,0.1,0.1,0.2,0.2,0.2h4c0.1,0,0.2-0.1,0.2-0.2V1c0-0.1-0.1-0.2-0.2-0.2H0z"/>
+				<rect id="Rectangle_1_" x="-1" y="18.6" width="6" height="1"/>
+				<rect id="Rectangle-Copy_1_" x="-1" y="15.5" width="6" height="3.6"/>
+			</g>
+			<g id="Group-Copy-2_1_" transform="translate(9.000000, 1.000000)">
+				<path d="M16.5,22.1l-3.9,0.8c-0.9,0.2-1.9-0.4-2.1-1.4L6.6,1.9C6.4,1,7.1,0,8-0.1l3.9-0.8c0.9-0.2,1.9,0.4,2.1,1.4l3.9,19.6
+					C18.1,21,17.4,22,16.5,22.1z M8.3,1.3c-0.1,0-0.2,0.2-0.2,0.3L12,21.2c0,0.1,0.2,0.2,0.3,0.2l3.9-0.8c0.1,0,0.2-0.2,0.2-0.3
+					L12.5,0.8c0-0.1-0.2-0.2-0.3-0.2L8.3,1.3z"/>
+				
+					<rect id="Rectangle_2_" x="10.8" y="18.5" transform="matrix(0.981 -0.1943 0.1943 0.981 -3.4198 3.0469)" width="6" height="1"/>
+				
+					<rect id="Rectangle-Copy_2_" x="10.5" y="15.4" transform="matrix(0.981 -0.1943 0.1943 0.981 -3.0925 2.948)" width="6" height="3.6"/>
+			</g>
+		</g>
+	</g>
+</g>
 </svg>

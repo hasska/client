@@ -19,17 +19,20 @@
 				.flexcol();
 				width: 100%;
 				.home-app-new{
-					.flex();
+					.flexcol();
 					flex:1;
 					height: 140px;
-					flex-direction: center;
+					align-items: center;
 					justify-content: center;
 					background-color: @white;
 					border:1px solid @borderColor;
 					margin-bottom: 20px;
 					border-radius: 5px;
 					position: relative;
-					img{
+					span{
+						font-size: 42px;
+						color: @secondryText;
+						.transition(.2s);						
 					}
 					div{
 						color: @secondryText;
@@ -39,20 +42,23 @@
 						bottom: 7px;
 					}
 					&:hover{
+						span{
+							color: @primaryColor;													
+						}
 						.transition(.2s);
 						border:1px solid @primaryColor;
 					}
 				}
 			}
 			.home-app-recent-wrapper{
-				.flexcol();
+				overflow-x: scroll;
 				.home-app-recent{
 					.flexrow();
-					flex:1;
+					height: 55px;
 					align-items: flex-start;
 					justify-content: center;
 					position: relative;
-					margin-bottom: 20px;
+					margin-bottom: 10px;
 					.app-recent-logo{
 						.flex();
 						flex: 0 0 50px;

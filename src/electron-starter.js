@@ -159,6 +159,7 @@ function createWindow() {
         store.set('currentProject', arg)
         menuManger.setMenu(true);
         mainWindow.show();
+        mainWindow.reload();
     });
 
     ipcMain.on('import-project', (event,arg) => {

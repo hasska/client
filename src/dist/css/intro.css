@@ -30,10 +30,11 @@
   top: 10px;
   opacity: 0;
 }
-.home-intro .intro-top .intro-app-close img {
+.home-intro .intro-top .intro-app-close span {
   opacity: .5;
+  font-size: 12px;
 }
-.home-intro .intro-top .intro-app-close:hover img {
+.home-intro .intro-top .intro-app-close:hover span {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   opacity: 1;
 }

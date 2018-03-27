@@ -1,7 +1,18 @@
 .app-header .header-layout .header-right .project-actions a img{
 	opacity: 1 !important;
 }
+.intro-top{
+	background: #0984e3;
+}
+.intro-app-version div{
+	color: #ddd !important;
+	opacity: 0.8;
+	line-height: 20px;
+}
+.app-setting{
+	z-index: 2;
 
+}
 .project-name span{
 	float: right;
 	margin: 10px;
@@ -116,10 +127,7 @@
 .databases-select{
 	margin:20px 0 0 120px;
 }
-.active-project{
-	background: blue;
-	color: #fff;
-}
+
 .admin-options{
 	margin:20px 0 20px 0;
 }
@@ -151,16 +159,8 @@
 	top:80px;
 }
 .closed-logs{
-	position: relative;
-	bottom: 20px;
-	left: 20px;
-	vertical-align: middle;
-	padding-top: 10px;
-	color: #666;
-	opacity: 0.6;
-	margin-top: 23px;
 	font-size: 13px;
-	font-weight: 900;
+  padding-left: 15px;
 }
 #errors-pane{
 	color: #c0392b !important;
@@ -201,7 +201,142 @@
 .model-single .model-properties-wrapper{
     overflow-x: scroll;
 }
+small{
+	display: inline-block;
+	color: red;
+	background: #eee;
+	padding: 0px;
+}
 .app-window >div{
 	flex: 1;
    display: flex;
+}
+.commands{
+	background: #fafafa;
+	color: #666;
+	font-weight: 700;
+	font-family: 'Tahoma';
+	padding: 5px 5px;
+	width: 80%;
+	font-size: 14px;
+	border-radius: 5px;
+	border:1px solid #eee;
+	display: block;
+	margin-bottom: 20px;
+}
+.projectPath{
+	background: #fafafa;
+	color: #222;
+	font-weight: 700;
+	font-family: 'Tahoma';
+	padding: 10px 5px;
+	width: 95%;
+	font-size: 17px;
+	border-radius: 3px;
+	border:1px solid #ccc;
+	display: block;
+	margin-bottom: 30px;
+}
+.deploy-method ul{
+	width: 100%;
+	display: block;
+	float: left;
+	position: relative;
+	margin:10px 0px !important;
+}
+.apps-list{
+	width: 100%;
+	position: relative;
+	float: left;
+	overflow-y: scroll !important;
+}
+
+.apps-list ul li{
+	cursor: pointer;
+	float: left;
+	border-radius: 5px;
+	margin:15px;
+	border:1px solid #eee;
+	padding: 30px;
+	text-align: center;
+}
+.apps-list ul li .integrate{
+	background: #6ab04c;
+	border: 1px solid #6ab04c;
+	color: #fff;
+	padding: 5px 10px;
+	display: block;
+	width: 100%;
+	margin:5px;
+	border-radius: 3px;
+}
+.apps-list ul li .docs{
+	width: 100%;
+	background: #fff;
+	margin:5px;
+	padding: 5px 10px;
+	border:1px solid #ddd;
+	color: #222;
+	border-radius: 3px;
+}
+.apps-list ul li img{
+	max-height: 75px;
+}
+.hint-deploy{
+	background: #e17055;
+	color:#fff;
+	padding: 5px;
+	width: 90%;
+	font-size: 13px;
+	border-radius: 4px;
+}
+.hint-apps{
+	background: #e17055;
+	color:#fff;
+	font-size: 13px;
+	display: block;
+	padding: 5px;
+	width: 100%;
+	border-radius: 4px;
+}
+.deploy-method div{
+	width: 100%;
+	float: left;
+	font-weight: 900;
+	position: relative;
+	font-size: 14px;
+}
+.deploy-method ul li:hover{
+	border: 1px solid green;
+}
+.deploy-method ul li{
+	cursor: pointer;
+	margin-left: 0 !important;
+	border:1px solid #ddd;
+	border-radius: 10px;
+	padding: 0 10px;
+	margin-bottom: 20px;
+	float: left;
+	margin-right: 10px;
+}
+.el-progress-bar__inner{
+	transition: 0.5 all;
+}
+.ins-codes{
+	float: left;width: 45%;
+	margin:5% 2.5% 5% 2.5%;
+}
+.ins-codes p{
+	color: #666;
+	margin:10px 0;
+}
+
+.ins-dep{
+	float: left;
+	line-height: 20px;
+	width: 45%;
+	margin:0 2.5% 7.5% 2.5%;
+	position: relative;
+	font-size: 14px;
+	color: #999;
 }

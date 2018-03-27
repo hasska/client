@@ -15,7 +15,7 @@ class DatabaseManager extends Component {
     this.state = {
       databases: [],
       createMode: false,
-      currentDatabase: [],
+      currentDatabase: null,
       selectedDb: "db"
     }
 
@@ -136,7 +136,7 @@ class DatabaseManager extends Component {
     return (
       <div className="app-window">
       {
-      	this.state.databases.length > 0 && <div>
+      	( this.state.currentDatabase != null && this.state.databases.length > 0 ) && <div>
         <DatabaseList newDb={this.newDb} switchDb={this.switchDb} selectedDb={this.state.selectedDb} databases={this.state.databases} />
         <DatabaseSingle publishDb={this.publishDb} removeDb={this.removeDb} updateDatabase={this.updateDatabase} selectedDb={this.state.selectedDb} currentDatabase={this.state.currentDatabase} createMode={this.state.createMode} />
         </div>

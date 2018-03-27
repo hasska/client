@@ -10,11 +10,6 @@ import navStatistic from "../../dist/img/nav-statistic.svg";
 import { Popover,Tooltip,Message, Progress, Loading, Button, Select, Icon, Dropdown } from 'element-react';
 
 import logo from "../../dist/img/logo/haskafavicon.svg";
-import run from "../../dist/img/run.svg";
-import stop from "../../dist/img/stop.svg";
-import clean from "../../dist/img/clean.svg";
-import build from "../../dist/img/build.svg";
-import publish from "../../dist/img/publish.svg";
 
 const {ipcRenderer} = window.require('electron')
 
@@ -49,7 +44,7 @@ class ActionBar extends Component {
   timer() {
     let time = this.state.progress.time;
     var self = this;
-    let timeout = 100;
+    let timeout = 50;
 
     if(this.state.progress.type=='BUILD')
       timeout = 1000;
@@ -273,7 +268,6 @@ class ActionBar extends Component {
       <div className="header-layout">
         <div className="header-left">
           <div className="project-name">
-
               <Popover placement="bottom" title="Recent Projects" width="180" trigger="click" content={(
               <div>{
                 projects
@@ -294,18 +288,12 @@ class ActionBar extends Component {
         </div>
         <div className="header-right">
           <div className="project-actions">
-            <a className="action-main-run">
-              <Popover placement="bottom" width="40" trigger="click" content={(
-                  <div className="action-container">
-                    <a onClick={ ()=>this.run() } className="action-run">Run</a>
-                    <a onClick={ ()=>this.build() } className="action-build">Build</a>
-                    <a onClick={ ()=>this.clean() } className="action-build">Clean</a>
-                  </div>
-                )}>
-                <Tooltip content="Run" placement="bottom" effect="dark"><img src={run} /></Tooltip>
-              </Popover>
+            <a className="action-main-run" onClick={ ()=>this.run() }>
+              <span className="haskon-controller-play"></span>
             </a>
-            <Tooltip content="Stop" placement="bottom" effect="dark"><a className="action-stop" onClick={ ()=>this.stop() }><img src={stop} /></a></Tooltip>
+            <a className="action-stop" onClick={ ()=>this.stop() }>
+              <span className="haskon-controller-stop"></span>
+            </a>
           </div>
         </div>
       </div>

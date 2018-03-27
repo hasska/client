@@ -19,6 +19,7 @@ app.start = function() {
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
+      app.use(swStats.getMiddleware({swaggerSpec:baseUrl+"/explorer/swagger.json"}));
     }
   });
 };

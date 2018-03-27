@@ -6,7 +6,7 @@
   right: 0;
   bottom: 0;
   height: 44px;
-  padding-right: 15px;
+  padding-right: 19px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,7 +20,21 @@
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .app-nav .nav-actions a:hover i {
-  color: #0084FF;
+  color: #20a0ff;
+}
+.app-nav.minimze-nav {
+  flex: 0 0 50px;
+  overflow: hidden;
+}
+.app-nav.minimze-nav .nav-container li .nav-section > div:nth-child(1) {
+  display: flex;
+  flex: 0 0 32px;
+}
+.app-nav.minimze-nav .nav-container li .nav-section > div:nth-child(2) {
+  display: none;
+}
+.app-nav.minimze-nav .nav-container li .nav-section > div:nth-child(3) {
+  display: none;
 }
 .nav-container {
   display: flex;
@@ -30,16 +44,17 @@
   display: flex;
   flex-direction: row;
   height: 34px;
-  padding: 5px 0;
+  padding: 7px 0;
   justify-content: space-between;
   align-items: center;
 }
-.nav-container li span {
+.nav-container li > span {
   width: 4px;
   height: 100%;
   background-color: #FFFFFF;
   border-radius: 0 5px 5px 0;
   flex: 0 0 4px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .nav-container li .nav-section {
   align-items: center;
@@ -47,37 +62,74 @@
   flex-direction: row;
   flex: 1;
 }
-.nav-container li .nav-section div:nth-child(1) {
+.nav-container li .nav-section > div:nth-child(1) {
   display: flex;
   flex-direction: row;
   flex: 0 0 40px;
   justify-content: flex-end;
 }
-.nav-container li .nav-section div:nth-child(1) img {
+.nav-container li .nav-section > div:nth-child(1) span {
   width: 20px;
-  height: 20px;
+  text-align: center;
+  color: #4A4A4A;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  font-size: 16px;
 }
-.nav-container li .nav-section div:nth-child(2) {
+.nav-container li .nav-section > div:nth-child(1) span.haskon-home {
+  margin-top: -2px;
+  font-size: 20px;
+}
+.nav-container li .nav-section > div:nth-child(1) span.haskon-rocket {
+  font-size: 18px;
+}
+.nav-container li .nav-section > div:nth-child(1) span.haskon-dashboard {
+  margin-top: -2px;
+}
+.nav-container li .nav-section > div:nth-child(1) span.haskon-books,
+.nav-container li .nav-section > div:nth-child(1) span.haskon-apps {
+  font-size: 15px;
+}
+.nav-container li .nav-section > div:nth-child(2) {
   flex: 1;
   padding-left: 10px;
   font-size: 12px;
   font-weight: 100;
-  color: #999999;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: #4A4A4A;
+  transition: all 0.1s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.nav-container li .nav-section > div.app-setting {
+  flex: 0 0 45px;
+  box-sizing: border-box;
+  color: #4A4A4A;
+  border-left: 1px solid #EAEAEA;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.nav-container li.active span {
-  background-color: #0084FF;
+.nav-container li .nav-section > div.app-setting .el-tooltip__rel > div {
+  text-align: center;
 }
-.nav-container li.active img {
-  color: #0084FF;
+.nav-container li .nav-section > div.app-setting:hover {
+  color: #20a0ff;
 }
-.nav-container li.active div:nth-child(2) {
-  color: #0084FF;
+.nav-container li.active > span {
+  background-color: #20a0ff;
 }
-.nav-container li:hover img {
-  color: #0084FF;
+.nav-container li.active .nav-section > div:nth-child(1) span {
+  color: #20a0ff;
 }
-.nav-container li:hover div:nth-child(2) {
-  color: #0084FF;
+.nav-container li.active .nav-section > div:nth-child(2) {
+  color: #20a0ff;
+}
+.nav-container li:hover .nav-section > div:nth-child(1) span {
+  color: #20a0ff;
+}
+.nav-container li:hover .nav-section > div:nth-child(2) {
+  color: #20a0ff;
+}
+.nav-container .nav-line {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 10px;
+  background-color: #EAEAEA;
 }
