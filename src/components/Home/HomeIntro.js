@@ -30,7 +30,7 @@ class HomeIntro extends Component {
           </div>
 
           <div className="intro-app-version">
-            <div className="t6">( Beta Version )<br />Copyright @Haska.io 2018</div>
+            <div className="t6"><span>Beta Version</span><br />Copyright @Haska.io 2018</div>
           </div>
         </div>
       </div>

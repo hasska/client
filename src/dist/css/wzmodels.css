@@ -1,8 +1,7 @@
 .wizard-models-option-wrapper {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 400px;
+  width: 460px;
 }
 .wizard-models-option-wrapper .models-option-row {
   display: flex;
@@ -13,7 +12,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  border: 1px solid #EAEAEA;
+  border: 2px solid #EAEAEA;
   margin: 7px;
   border-radius: 5px;
   justify-content: space-between;
@@ -21,18 +20,42 @@
   padding: 15px 0;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.wizard-models-option-wrapper .models-option-row .models-option img {
-  width: 66%;
+.wizard-models-option-wrapper .models-option-row .models-option span {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdBlog {
+  font-size: 105px;
+  margin-top: -8px;
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdShop {
+  font-size: 102px;
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdDefault {
+  font-size: 100px;
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdCompany {
+  font-size: 101px;
 }
 .wizard-models-option-wrapper .models-option-row .models-option div {
   letter-spacing: 1px;
   text-transform: none;
   color: #4A4A4A;
+  margin-top: 20px;
+  font-size: 16px;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .wizard-models-option-wrapper .models-option-row .models-option:hover {
-  border: 1px solid #CBCBCB;
+  border: 2px solid #20a0ff;
 }
-.wizard-models-option-wrapper .models-option-row .models-option:hover div {
-  color: #0084FF;
+.wizard-models-option-wrapper .models-option-row .models-option:hover span {
+  color: #20a0ff;
+}
+.wizard-models-option-wrapper .models-option-row .models-option.active {
+  border: 2px solid #20a0ff;
+}
+.wizard-models-option-wrapper .models-option-row .models-option.active span {
+  color: #20a0ff;
+}
+.wizard-models-option-wrapper .models-option-row .models-option.active div {
+  color: #20a0ff;
 }

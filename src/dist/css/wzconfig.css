@@ -1,5 +1,5 @@
 .wizard-config-form {
-  margin-left: -180px;
+  margin-left: -120px;
 }
 .wizard-config-form .select-directory {
   width: 400px;
@@ -23,14 +23,22 @@
   letter-spacing: 1px;
   text-transform: none;
 }
+.wizard-config-form .select-directory span {
+  font-size: 18px;
+  color: #bfcbd9;
+  line-height: 32px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-config-form .select-directory:hover span {
+  color: #20a0ff;
+}
 .wizard-config-form .select-directory:hover .project-path.no-select {
-  color: #0084FF;
+  color: #20a0ff;
 }
 .wizard-config-form .el-form-item {
   margin-bottom: 15px;
 }
 .wizard-config-form .el-form-item__content {
-  margin-left: 180px !important;
   width: 400px;
 }
 .wizard-config-form .wizard-action .el-form-item__content {
@@ -40,11 +48,11 @@
   padding: 10px 50px;
   letter-spacing: 1px;
   text-transform: none;
-  border-color: #0084FF;
-  color: #0084FF;
+  border-color: #20a0ff;
+  color: #20a0ff;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .wizard-config-form .wizard-action .el-form-item__content .el-button:hover {
-  background-color: #0084FF;
+  background-color: #20a0ff;
   color: #FFFFFF;
 }

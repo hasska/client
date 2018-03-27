@@ -32,8 +32,10 @@
   padding: 15px 15px;
   margin: 0 10px;
   border-radius: 50px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.app-sub-nav .sub-nav-body ul li h5 {
+.app-sub-nav .sub-nav-body ul li h6 {
+  font-size: 12px;
   font-weight: 100;
   color: #999999;
   letter-spacing: 1px;
@@ -50,7 +52,7 @@
 .app-sub-nav .sub-nav-body ul li i:first-child {
   font-size: 13px;
 }
-.app-sub-nav .sub-nav-body ul li:hover h5 {
+.app-sub-nav .sub-nav-body ul li:hover h6 {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   color: #444444;
 }
@@ -61,8 +63,7 @@
 .app-sub-nav .sub-nav-body ul li.active {
   background-color: #20a0ff !important;
 }
-.app-sub-nav .sub-nav-body ul li.active h5,
+.app-sub-nav .sub-nav-body ul li.active h6,
 .app-sub-nav .sub-nav-body ul li.active i {
   color: #FFFFFF;
-  border-top: 1px solid transparent;
 }

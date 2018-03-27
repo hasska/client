@@ -68,7 +68,7 @@ class ConfigureStep extends Component {
 	      <Form.Item label="Destination">
 		      <div onClick={ ()=> this.showDialog() } id="selectDirectory" className="select-directory">
 		      	<div className="project-path no-select">{this.state.form['destination'] || 'Choose Folder' }</div>
-		      	<img src={folder} />
+		      	<span className="haskon-folder"></span>
 		      </div>
 	      </Form.Item>
 	      <div className="space-30"></div>
@@ -80,21 +80,21 @@ class ConfigureStep extends Component {
 	    	<div className="wizard-models-option-wrapper">
 		    	<div className="models-option-row">
 			    	<div className="models-option active">
-			    		<img src={mdDefault}></img>
+              <span className="haskon-mdDefault"></span>
 			    		<div className="t5">Default</div>
 			    	</div>
 			    	<div className="models-option">
-			    		<img src={mdBlog}></img>
+              <span className="haskon-mdBlog"></span>
 			    		<div className="t5">Built-in Blog</div>
 			    	</div>
 		    	</div>
 		    	<div className="models-option-row">
 			    	<div className="models-option">
-			    		<img src={mdShop}></img>
+              <span className="haskon-mdShop"></span>
 			    		<div className="t5">Built-in eCommerce</div>
 			    	</div>
 			    	<div className="models-option">
-			    		<img src={mdCompany}></img>
+              <span className="haskon-mdCompany"></span>
 			    		<div className="t5">Built-in Company</div>
 			    	</div>
 		    	</div>

@@ -21,7 +21,7 @@ class DatabaseList extends Component {
             this.props.databases.map( (db)=> {
               let cname = this.props.selectedDb == db.name ? 'active' : '';
               return <li onClick={ ()=>this.props.switchDb(db.name) } className={cname}>
-  			        <h5>{db.name + '('+db.connector+')'}</h5>
+  			        <h6>{db.name + '('+db.connector+')'}</h6>
   			        <i className="el-icon-arrow-right"></i>
   			      </li>
             })

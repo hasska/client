@@ -90,6 +90,7 @@ body > div#root > div > div > div:nth-child(2) {
   height: 72px;
   background-color: #FFFFFF;
   -webkit-app-region: drag;
+  border-bottom: 1px solid #EAEAEA;
 }
 .app-body {
   flex: 2;
@@ -112,7 +113,7 @@ body > div#root > div > div > div:nth-child(2) {
 }
 .app-window-wrapper .app-window .app-sub-nav {
   background-color: #FFFFFF;
-  flex: 0 0 200px;
+  flex: 0 0 260px;
   height: 100%;
 }
 .app-window-wrapper .app-window .app-preview {
@@ -285,7 +286,7 @@ body > div#root > div > div > div:nth-child(2) {
   display: flex;
   flex-direction: row;
   height: 34px;
-  padding: 7px 0;
+  padding: 10px 0;
   justify-content: space-between;
   align-items: center;
 }
@@ -408,8 +409,10 @@ body > div#root > div > div > div:nth-child(2) {
   padding: 15px 15px;
   margin: 0 10px;
   border-radius: 50px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.app-sub-nav .sub-nav-body ul li h5 {
+.app-sub-nav .sub-nav-body ul li h6 {
+  font-size: 12px;
   font-weight: 100;
   color: #999999;
   letter-spacing: 1px;
@@ -426,7 +429,7 @@ body > div#root > div > div > div:nth-child(2) {
 .app-sub-nav .sub-nav-body ul li i:first-child {
   font-size: 13px;
 }
-.app-sub-nav .sub-nav-body ul li:hover h5 {
+.app-sub-nav .sub-nav-body ul li:hover h6 {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   color: #444444;
 }
@@ -437,10 +440,9 @@ body > div#root > div > div > div:nth-child(2) {
 .app-sub-nav .sub-nav-body ul li.active {
   background-color: #20a0ff !important;
 }
-.app-sub-nav .sub-nav-body ul li.active h5,
+.app-sub-nav .sub-nav-body ul li.active h6,
 .app-sub-nav .sub-nav-body ul li.active i {
   color: #FFFFFF;
-  border-top: 1px solid transparent;
 }
 .app-header {
   display: flex;
@@ -593,6 +595,10 @@ body > div#root > div > div > div:nth-child(2) {
 }
 .app-header .progress-bar .el-progress-bar__outer {
   height: 3px !important;
+  background-color: transparent !important;
+}
+.app-header .progress-bar .el-progress-bar__inner {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .el-tabs {
   flex: 1;
@@ -719,9 +725,17 @@ button {
 .home-intro .intro-top .intro-app-version div {
   text-align: center;
   letter-spacing: 1px;
-  color: #999999;
+  color: #FFFFFF;
+}
+.home-intro .intro-top .intro-app-version div span {
+  padding: 5px 14px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  margin-bottom: 10px;
+  display: inline-block;
 }
 .home-intro .intro-top .intro-app-close {
+  color: #FFFFFF;
   position: absolute;
   left: 10px;
   top: 10px;
@@ -943,9 +957,10 @@ body {
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__line-inner {
   border: none;
   border-top: 1px solid;
+  border-width: 2px !important;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__line.is-horizontal {
-  height: 1px;
+  height: 2px;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__icon .el-icon-check {
   font-size: 8px;
@@ -962,6 +977,9 @@ body {
   color: #4A4A4A;
   background-color: #FFFFFF;
   border-color: #4A4A4A;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head {
+  border-width: 2px !important;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main {
   margin-left: -32px;
@@ -1017,7 +1035,7 @@ body {
   color: #20a0ff;
 }
 .wizard-config-form {
-  margin-left: -180px;
+  margin-left: -120px;
 }
 .wizard-config-form .select-directory {
   width: 400px;
@@ -1041,6 +1059,15 @@ body {
   letter-spacing: 1px;
   text-transform: none;
 }
+.wizard-config-form .select-directory span {
+  font-size: 18px;
+  color: #bfcbd9;
+  line-height: 32px;
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-config-form .select-directory:hover span {
+  color: #20a0ff;
+}
 .wizard-config-form .select-directory:hover .project-path.no-select {
   color: #20a0ff;
 }
@@ -1048,7 +1075,6 @@ body {
   margin-bottom: 15px;
 }
 .wizard-config-form .el-form-item__content {
-  margin-left: 180px !important;
   width: 400px;
 }
 .wizard-config-form .wizard-action .el-form-item__content {
@@ -1069,8 +1095,7 @@ body {
 .wizard-models-option-wrapper {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 200px;
+  width: 460px;
 }
 .wizard-models-option-wrapper .models-option-row {
   display: flex;
@@ -1081,7 +1106,7 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  border: 1px solid #EAEAEA;
+  border: 2px solid #EAEAEA;
   margin: 7px;
   border-radius: 5px;
   justify-content: space-between;
@@ -1089,19 +1114,43 @@ body {
   padding: 15px 0;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.wizard-models-option-wrapper .models-option-row .models-option img {
-  width: 66%;
+.wizard-models-option-wrapper .models-option-row .models-option span {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdBlog {
+  font-size: 105px;
+  margin-top: -8px;
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdShop {
+  font-size: 102px;
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdDefault {
+  font-size: 100px;
+}
+.wizard-models-option-wrapper .models-option-row .models-option span.haskon-mdCompany {
+  font-size: 101px;
 }
 .wizard-models-option-wrapper .models-option-row .models-option div {
   letter-spacing: 1px;
   text-transform: none;
   color: #4A4A4A;
+  margin-top: 20px;
+  font-size: 16px;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .wizard-models-option-wrapper .models-option-row .models-option:hover {
-  border: 1px solid #CBCBCB;
+  border: 2px solid #20a0ff;
 }
-.wizard-models-option-wrapper .models-option-row .models-option:hover div {
+.wizard-models-option-wrapper .models-option-row .models-option:hover span {
+  color: #20a0ff;
+}
+.wizard-models-option-wrapper .models-option-row .models-option.active {
+  border: 2px solid #20a0ff;
+}
+.wizard-models-option-wrapper .models-option-row .models-option.active span {
+  color: #20a0ff;
+}
+.wizard-models-option-wrapper .models-option-row .models-option.active div {
   color: #20a0ff;
 }
 .app-preview {
@@ -1259,7 +1308,7 @@ body {
   right: 0px;
   width: 67px;
   padding-right: 28px;
-  top: 80px;
+  top: 7px;
   display: flex;
   flex-direction: row;
 }
@@ -1297,10 +1346,7 @@ body {
 }
 .database-single .database-config-wrapper .database-config-form form {
   margin-left: -120px;
-  width: 520px;
-}
-.database-single .database-config-wrapper .database-config-form .el-form-item__content {
-  width: 400px;
+  width: 610px;
 }
 .setting-wrapper {
   flex: 1;

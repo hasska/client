@@ -26,7 +26,7 @@ class ModelsList extends Component {
       model = this.props.models[model];
       let cname = this.props.selectedModel.toString() == model.name.toString() ? 'active' : '';
 
-      list.push(<li onClick={ ()=>this.props.switchModel(model.name) } className={ cname }><h5>{model.name}</h5> <i className="el-icon-arrow-right"></i></li>);
+      list.push(<li onClick={ ()=>this.props.switchModel(model.name) } className={ cname }><h6>{model.name}</h6> <i className="el-icon-arrow-right"></i></li>);
     }
 
     return (

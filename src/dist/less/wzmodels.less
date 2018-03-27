@@ -3,35 +3,60 @@
 
 .wizard-models-option-wrapper{
 	.flexcol();
-	width: 400px;
-	height: 200px;
+	width: 460px;
 	.models-option-row{
 		.flexrow();
 			flex:1;
 			.models-option{
 			.flexcol();
 			flex:1;
-			border: 1px solid @borderColor;
+			border: 2px solid @borderColor;
 			margin: 7px;
 			border-radius: 5px;
 			justify-content: space-between;
 			align-items: center;
 			padding: 15px 0;
 			.transition(.2s);
-			img{
-				width: 66%;
+			span{
+				.transition(.2s);				
+				&.haskon-mdBlog{
+			    font-size: 105px;
+			    margin-top: -8px;
+				}
+				&.haskon-mdShop{
+					font-size: 102px;
+				}
+				&.haskon-mdDefault{
+					font-size: 100px;
+				}
+				&.haskon-mdCompany{
+					font-size: 101px;
+				}
 			}
 			div{
 				letter-spacing: 1px;
 				text-transform: none;
 				color: @secondryText;
+				margin-top:20px;
+				font-size: 16px;
 				.transition(.2s);
 			}
 			&:hover{
-				border: 1px solid @borderColorUp;
-				div{
+				border: 2px solid @primaryColor;
+				span{
 					color: @primaryColor;
 				}
+				div{
+				}
+			}
+			&.active{
+				border: 2px solid @primaryColor;
+				span{
+					color: @primaryColor;
+				}
+				div{
+					color: @primaryColor;
+				}				
 			}
 		}
 	}

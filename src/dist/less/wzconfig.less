@@ -2,7 +2,7 @@
 @import "mixins.less";
 
 .wizard-config-form{
-	margin-left: -180px;
+	margin-left: -120px;
 	.select-directory{
 		width: 400px;
 		border: 1px solid #bfcbd9;
@@ -25,9 +25,16 @@
 			&.is-fill{
 			}
 		}
-		img{
+		span{
+	    font-size: 18px;
+	    color: #bfcbd9;
+	    line-height: 32px;
+	    .transition(.2s);
 		}
 		&:hover{
+			span{
+					color: @primaryColor;				
+			}
 			.project-path{
 				&.no-select{
 					color: @primaryColor;
@@ -40,7 +47,6 @@
 	}
 
 	.el-form-item__content{
-		margin-left: 180px !important;
 		width: 400px;
 	}
 

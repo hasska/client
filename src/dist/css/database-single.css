@@ -12,8 +12,5 @@
 }
 .database-single .database-config-wrapper .database-config-form form {
   margin-left: -120px;
-  width: 520px;
-}
-.database-single .database-config-wrapper .database-config-form .el-form-item__content {
-  width: 400px;
+  width: 610px;
 }
