@@ -9,6 +9,7 @@ const fs = require("fs-extra");
 const Store = require('electron-store');
 const shell = require('shelljs');
 const logger = require('../utilities/logger');
+const wget = require('node-wget');
 
 module.exports = {
 	createProject: (req,res,app) => {
@@ -186,7 +187,42 @@ module.exports = {
 		let run = shell.exec('forever start -al '+project.destination+'/logs/forever.log -ao '+project.destination+'/logs/out.log -ae '+project.destination+'/logs/err.log server/server.js', function(code, stdout, stderr) {
 	  	  if(code==0){
 	  	  	logger.log(stdout);
-					callback({"status":"success",step:'START_APP',data:stdout })
+					setTimeout(function(){
+						wget('http://'+project.configs.SERVICE_HOST+':'+project.configs.SERVICE_PORT+'/explorer/swagger.json', function(){
+							setTimeout(function(){
+
+								shell.exec('spectacle -l favicon.png -f docs.html swagger.json',function(code, stdout, stderr) {
+									console.log(stdout)
+									logger.log(stdout)
+									logger.log(stderr)
+
+									callback({"status":"success",step:'START_APP',data:stdout })
+								});
+
+								shell.cd(project.destination+'/dashboard');
+
+
+								let runAdmin = shell.exec('npm start', function(code, stdout, stderr) {
+							  	  if(code==0){
+							  	  	logger.log(stdout);
+							  	  	callback({"status":"success",step:'START_APP',data:stdout })
+							  	  }
+							  	  else{
+							  	  	logger.log(stderr)
+							  	  	callback({"status":"error",step:'START_APP',data:stderr })
+							  	  }
+								});
+
+								runAdmin.stdout.on('data', function(data) {
+								  	logger.log(data);
+								});
+
+								callback({"status":"success",step:'START_APP',data:stdout })
+
+
+							},2000);
+						});
+					},3000);
 	  	  }
 	  	  else{
 	  	  	logger.log(stderr)
@@ -198,22 +234,6 @@ module.exports = {
 		  	logger.log(data);
 		});
 
-		shell.cd(project.destination+'/dashboard');
-
-		let runAdmin = shell.exec('npm start', function(code, stdout, stderr) {
-	  	  if(code==0){
-	  	  	logger.log(stdout);
-	  	  	callback({"status":"success",step:'START_APP',data:stdout })
-	  	  }
-	  	  else{
-	  	  	logger.log(stderr)
-	  	  	callback({"status":"error",step:'START_APP',data:stderr })
-	  	  }
-		});
-
-		runAdmin.stdout.on('data', function(data) {
-		  	logger.log(data);
-		});
 
 	},
 	stop: (callback) => {
@@ -369,6 +389,9 @@ module.exports = {
 		run_dashboard.stdout.on('data', function(data) {
 		  	logger.log(data);
 		});
+	},
+	runDocs: () => {
+
 	},
 	updateConfigs: (data,callback) => {
 		console.log(data)

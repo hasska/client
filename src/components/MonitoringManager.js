@@ -18,15 +18,13 @@ class MonitoringManager extends Component {
     if(this.props.progress.type!='RUN' && this.props.progress.status!='success'){
       self.showMessage('You have to RUN your project before start services :)',"error");
     }
-    else if(this.props.project.build==true){
+    else {
       this.setState({loading: true,preview:false});
       setTimeout( ()=> {
         self.setState({loading: false})
         self.showMessage('Service Started ...',"success");
       },4000);
-    } else {
-      self.showMessage('You have to build your project once before start services :)',"error");
-    }
+    } 
   }
   showMessage(message,type){
     Message({

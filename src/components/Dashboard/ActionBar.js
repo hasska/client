@@ -44,7 +44,7 @@ class ActionBar extends Component {
   timer() {
     let time = this.state.progress.time;
     var self = this;
-    let timeout = 50;
+    let timeout = 500;
 
     if(this.state.progress.type=='BUILD')
       timeout = 1000;

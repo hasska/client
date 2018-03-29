@@ -1,0 +1,9 @@
+node_modules
+coverage
+*.tgz
+*.xml
+.loopbackrc
+.idea
+
+test
+.travis.yml

@@ -117,6 +117,7 @@ class Dashboard extends Component {
                         <Route path={this.props.match.path+'/monitoring'} render={(props) => ( <MonitoringManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/docs'} render={(props) => ( <DocsManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/deploy'} render={(props) => ( <DeployManager project={this.state.project} progress={this.state.progress} /> )} />
+                        <Route path={this.props.match.path+'/models'} render={(props) => ( <ModelsManager project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/api'} render={(props) => ( <ApiManager updateWindows={this.updateWindows} windows={this.state.windows} project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/databases'} render={(props) => ( <DatabaseManager project={this.state.project} progress={this.state.progress} /> )} />
                         <Route path={this.props.match.path+'/overview'} render={(props) => ( <OverviewContainer project={this.state.project} progress={this.state.progress} /> )} />

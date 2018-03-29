@@ -12,18 +12,35 @@ class DocsManager extends Component {
       loading: false
     }
   }
+  showMessage(message,type){
+    Message({
+      message: message || "",
+      type: type || "warning"
+    });
+  }
   triggerView(){
     const self = this;
-    this.setState({loading: true,preview:false});
-    setTimeout( ()=> {
-      self.setState({loading: false})
-    },4000);
+    const webview = document.querySelector('webview')
+    if(this.props.progress.type!='RUN' && this.props.progress.status!='success'){
+      self.showMessage('You have to RUN your project before start services :)',"error");
+    }
+    else {
+      this.setState({loading: true,preview:false});
+      setTimeout( ()=> {
+        self.setState({loading: false})
+        self.showMessage('Service Started ...',"success");
+      },4000);
+    }
   }
   reload(){
     const webview = document.querySelector('webview')
     webview.reload();
   }
   render() {
+
+    let project = this.props.project;
+    let url = 'file://'+project.destination+'/dashboard/public/docs.html';
+
     return (
       <div>
       <Loading className="loading-custom" loading={this.state.loading} fullscreen={this.state.loading} text={"Loading API Explorer..."} />
@@ -38,7 +55,7 @@ class DocsManager extends Component {
             </div>
           </div> :
           <div className="frame-services">
-            <webview src="http://127.0.0.1:3006" style={{width:"100%"}}></webview>
+            <webview src={url} style={{width:"100%"}}></webview>
           </div>
         }
       </div>

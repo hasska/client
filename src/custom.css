@@ -155,8 +155,8 @@
 .model-actions{
 	float: right;
 	position: absolute;
-	right: 25px;
-	top:80px;
+	right: 15px;
+	top:5px;
 }
 .closed-logs{
 	font-size: 13px;
@@ -295,7 +295,7 @@ small{
 	color:#fff;
 	font-size: 13px;
 	display: block;
-	padding: 5px;
+	padding: 5px;``
 	width: 100%;
 	border-radius: 4px;
 }
@@ -321,6 +321,7 @@ small{
 }
 .el-progress-bar__inner{
 	transition: 0.5 all;
+	-webkit-transition: 0.5 all;
 }
 .ins-codes{
 	float: left;width: 45%;
