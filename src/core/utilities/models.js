@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2018-present, Abject.
+ * Copyright (c) Haska.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
+ *
  */
 
 const fs = require("fs-extra");
@@ -12,7 +13,6 @@ const dirToJson = require('dir-to-json');
 
 module.exports = {
 	createModel: (req,res,app) => {
-
 		const store = new Store();
 		let models = store.get('models'),model_config = {};
 
@@ -65,6 +65,15 @@ module.exports = {
 	setProperties: (req,res,app) => {
 		let model = req.body.model;
 		const _JSON_DIRECTORY = req.body.project.destination+'/common/models/'+model.title+'.json';
+		const _JSON_ADMIN_DIRECTORY = req.body.project.destination+'/dashboard/src/models/common/'+model.title+'.json';
+
+		fs.readJson(_JSON_ADMIN_DIRECTORY, (err, packageObj) => {
+		  if (err) console.error(err)
+		  let tmpData = packageObj;
+		  tmpData.properties = req.body.properties;
+		  fs.writeJson(_JSON_ADMIN_DIRECTORY, tmpData);
+		  
+		})
 
 		fs.readJson(_JSON_DIRECTORY, (err, packageObj) => {
 		  if (err) console.error(err)
@@ -190,6 +199,7 @@ module.exports = {
 		const store = new Store();
 		let project = store.get('currentProject');
 		let _dir = project.destination+'/common/models/'+arg.name+'.json';
+		let _dir_admin = project.destination+'/dashboard/src/models/common/models/'+arg.name+'.json';
 		let _dir_js = project.destination+'/common/models/'+arg.name+'.js';
 		const self = this;
 
@@ -199,6 +209,17 @@ module.exports = {
 					if(err) callback(err.toString());
 					else {
 						self.updateDb(arg.name,arg.db);
+					}
+				});
+			}
+		});
+
+		fs.ensureFile(_dir_admin, err => {
+			if(!err){
+				fs.writeJson(_dir_admin, arg.model, (err) => {
+					if(err) callback(err.toString());
+					else {
+						//self.updateDb(arg.name,arg.db);
 					}
 				});
 			}
@@ -266,6 +287,11 @@ module.exports = {
 				if(err) callback(err.toString());
 				else {
 					self.updateDb(arg.name,arg.db);
+					fs.copy(project.destination+'/common/models/'+arg.name+'.json', project.destination+'/dashboard/src/models/common/'+arg.name+'.json', function (err) {
+						if (!err){
+							//callback('success')
+						}
+					});
 					fs.copy(project.destination+'/common/models/'+arg.name+'.json', project.destination+'/dashboard/src/models/common/models/'+arg.name+'.json', function (err) {
 						if (!err){
 							callback('success')
@@ -309,6 +335,7 @@ module.exports = {
 		}
 
 		fs.removeSync(project.destination+'/common/models/'+model+'.json')
+		fs.removeSync(project.destination+'/dashboard/src/models/common/'+model+'.json')
 		fs.removeSync(project.destination+'/common/models/'+model+'.js');
 		/*fs.remove('/tmp/myfile')
 		.then(() => {
@@ -346,19 +373,19 @@ module.exports = {
 				status: 'success'
 			}));
 	},
-	setRelations: (req,res,app) => {
+	setRelations: (req,res,app) => { //TODO
 
 	},
-	addMethod: (req,res,app) => {
+	addMethod: (req,res,app) => { //TODO
 
 	},
-	deleteMethod: (req,res,app) => {
+	deleteMethod: (req,res,app) => { //TODO
 
 	},
-	updateMethod: (req,res,app) => {
+	updateMethod: (req,res,app) => { //TODO
 
 	},
-	getAllMethods: (req,res,app) => {
-
+	getAllMethods: (req,res,app) => { //TODO
+ 
 	}
 }

@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import navOverview from "../../dist/img/nav-overview.svg";
 import navModels from "../../dist/img/nav-models.svg";
@@ -9,7 +17,6 @@ import navMonitoring from "../../dist/img/nav-monitoring.svg";
 import navStatistic from "../../dist/img/nav-statistic.svg";
 import Title from '../../components/Title';
 import { Popover, Tooltip, Progress, Dialog, Loading, Tabs, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
-
 import { Redirect } from 'react-router'
 
 class ModelCreator extends Component {
@@ -60,7 +67,7 @@ class ModelCreator extends Component {
       <div className="model-info-wrapper">
         <Title contnet="MODEL CONFIGURATION" />
         <div className="model-actions">
-          <Tooltip placement="top" content={ this.props.createMode == true ? 'Create'  : 'Apply Changes' }><Button type="text" onClick={ ()=>this.props.publishModels() } size="small" className="publish-model">{ this.props.createMode == true ? <Icon name="check" />  : <Icon name="check" /> }</Button></Tooltip>
+          <Tooltip placement="top" content={ this.props.createMode == true ? 'Create'  : 'Apply Changes' }><Button type="primary" onClick={ ()=>this.props.publishModels() } size="small" className="publish-model" icon="check">Save Changes</Button></Tooltip>
           { !this.props.createMode && <Tooltip placement="top" content={"Delete"}><Button onClick={ ()=>this.props.removeModel(this.props.selectedModel) } type="text" size="small" className="remove-model"><i className="el-icon-delete2"></i></Button></Tooltip> }
         </div>
         <div className="model-info-form">

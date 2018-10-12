@@ -1,8 +1,16 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+ 
 import React, { Component } from 'react';
 import { Popover, Message, Progress, Dialog, Loading, Tabs, Form, Input,
    Checkbox, Card, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
-import apiIcon from '../dist/img/monitor.png';
+import apiIcon from '../dist/img/minitor.png';
 
 class MonitoringManager extends Component {
   constructor(props){
@@ -24,7 +32,7 @@ class MonitoringManager extends Component {
         self.setState({loading: false})
         self.showMessage('Service Started ...',"success");
       },4000);
-    } 
+    }
   }
   showMessage(message,type){
     Message({

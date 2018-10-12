@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+ 
 import React, { Component } from 'react';
 
 import { Loading, Button, Input, Switch, Select, Upload, Notification,
@@ -67,7 +75,8 @@ class ModelCreate extends Component {
 
         xhr.open ('POST', url+self.props.model+'s', true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
-
+        //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+        console.log(form_data)
         xhr.send (form_data);
         return false;
 
@@ -98,7 +107,7 @@ class ModelCreate extends Component {
 
       var required = properties[property].required || false;
 
-      if(required==true){
+      if(required==true && properties[property].type != 'boolean'){
         var tmp_rules = this.state.rules;
         tmp_rules[property] = [{
           required: true,
@@ -125,7 +134,8 @@ class ModelCreate extends Component {
         formModel[property] = false;
       }
 
-      if(typeof properties[property].uiType != "undefined"){
+      if(typeof properties[property].uiType != "undefined" &&
+                properties[property].uiType ){
 
         if(properties[property].uiType.toLowerCase()=="select"){
           formModel[property] = properties[property].options.selectItems[0].value;
@@ -207,7 +217,7 @@ class ModelCreate extends Component {
       Object.keys(properties).map(function (key,index) {
 
           var type = properties[key].type;
-          if(typeof properties[key].uiType != "undefined")
+          if(typeof properties[key].uiType != "undefined" && properties[key].uiType)
             type = properties[key].uiType.toLowerCase();
 
           if(hiddens.indexOf(key)<0 && key != 'id'){
@@ -216,22 +226,22 @@ class ModelCreate extends Component {
                 form_fields.push(<Form.Item prop={key} required={properties[key].required || false} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } type="text"></Input></Form.Item>);
                 break;
               case 'boolean':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Switch value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } onColor="#13ce66" offColor="#aaa"></Switch></Form.Item>);
+                form_fields.push(<Form.Item prop={key}  label={key+' :'}><Switch value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } onColor="#13ce66" offColor="#aaa"></Switch></Form.Item>);
                 break;
               case 'email':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } type="email"></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } type="email"></Input></Form.Item>);
                 break;
               case 'password':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) }  type="password"></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) }  type="password"></Input></Form.Item>);
                 break;
               case 'url':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } prepend="http://" type="text"></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } prepend="http://" type="text"></Input></Form.Item>);
                 break;
               case 'textarea':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input onChange={ (value) => self.onFormChange(value,key) } autosize={ {minRows: 3} } value={self.state.form[key]} type={'textarea'} ></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input onChange={ (value) => self.onFormChange(value,key) } autosize={ {minRows: 3} } value={self.state.form[key]} type={'textarea'} ></Input></Form.Item>);
                 break;
               case 'number':case 'money':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><InputNumber value={self.state.form[key]}  defaultValue={0} onChange={ (value) => self.onFormChange(value,key) } type="text"></InputNumber></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><InputNumber value={self.state.form[key]}  defaultValue={0} onChange={ (value) => self.onFormChange(value,key) } type="text"></InputNumber></Form.Item>);
                 break;
               case 'select':
                 form_fields.push(
@@ -350,7 +360,6 @@ class ModelCreate extends Component {
                 }
                 <Form.Item className="actionBar">
                   <Button onClick={ this.saveModel.bind(this) } type="primary">Save Entry</Button>
-                  <Button onClick={ ()=> this.resetChanges() } type="default">Reset</Button>
                 </Form.Item>
               </Form></div> : null
           }

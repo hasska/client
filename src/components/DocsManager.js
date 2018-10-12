@@ -1,8 +1,16 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { Popover, Message, Progress, Dialog, Loading, Tabs, Form, Input,
    Checkbox, Card, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
-import apiIcon from '../dist/img/book.png';
+import apiIcon from '../dist/img/docs.png';
 
 class DocsManager extends Component {
   constructor(props){
@@ -29,7 +37,7 @@ class DocsManager extends Component {
       setTimeout( ()=> {
         self.setState({loading: false})
         self.showMessage('Service Started ...',"success");
-      },4000);
+      },2000);
     }
   }
   reload(){
@@ -39,7 +47,7 @@ class DocsManager extends Component {
   render() {
 
     let project = this.props.project;
-    let url = 'file://'+project.destination+'/dashboard/public/docs.html';
+    let url = 'file://'+project.destination+'/public/docs.html';
 
     return (
       <div>

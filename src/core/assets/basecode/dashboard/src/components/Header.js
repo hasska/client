@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+ 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import { Loading,Menu,SubMenu,Tooltip,Notification } from 'element-react';
@@ -38,7 +46,7 @@ class Header extends Component {
 
     const self = this;
     self.setState({loading: true,fullscreen: true});
-    
+
     let url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/Users/logout';
     axios.post(url,{},{
       headers: {
@@ -66,10 +74,10 @@ class Header extends Component {
     })
 
     let auth_status = localStorage.getItem('auth') || false;
-  
+
     const _PATH = 'http://'+this.props.configs.HOST+':'+this.props.configs.PORT+'/';
-    let favIcon = this.props.configs.FAV_ICON ? <img src={_PATH+this.props.configs.FAV_ICON} /> : <HIcon /> 
-    
+    let favIcon = this.props.configs.FAV_ICON ? <img src={"favicon.png"} /> : <HIcon /> 
+
     top_menu.push(<li onClick={ ()=> this.signOut() }><Link className="btn-desktop" to="#"><Tooltip placement="bottom" content={"Sign Out"}><OutIcon size={20} /></Tooltip></Link></li>);
     top_menu.push(<li><Link className="btn-desktop" to={"/Users/update/"+this.state.userId}><Tooltip placement="bottom" content={"Admin Profile"}><GearIcon size={23} /></Tooltip></Link></li>);
     top_menu.push(<li><Link className="btn-desktop" to=""><Tooltip placement="bottom" content={"Dashboard"}><HomeIcon size={23} /></Tooltip></Link></li>);
@@ -85,9 +93,9 @@ class Header extends Component {
               {
                 top_menu
               }
-            </ul>      
-            </Menu> 
-             
+            </ul>
+            </Menu>
+
           </div>
           <div className="sub-navbar">
             <ul>

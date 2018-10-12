@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
+import React, { Component } from 'react';
 import { Form, Input, Radio, Button, Switch, Upload, Message } from 'element-react';
 import cactus from '../../dist/img/cactus.png';
 

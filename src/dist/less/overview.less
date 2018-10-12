@@ -1,0 +1,141 @@
+@import "var.less";
+@import "mixins.less";
+
+.overview-container{
+	width: 100%;
+	overflow-x: scroll;
+	.overview-top{
+		padding: 30px 30px 50px 30px;
+		color: @white;
+		background-color: @primaryColor;
+		.flexcol();
+		align-items: center;
+		justify-content: center;
+		.t4{
+			font-size: 20px;
+		}
+		.t1{
+			margin-top: 10px;
+			font-size: 36px;
+		}
+		.get-started-tips{
+			margin-top: 40px;
+			.flexrow();
+			width: 600px;
+			.get-started-card{
+				.flexcol();
+				flex:1;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				.get-started-circle{
+					.flexrow();
+					align-items: center;
+					justify-content: center;
+					background-color: @white;
+					border-radius: 200px;
+					width: 90px;
+					height: 90px;
+					span{
+						font-size: 42px;
+						color: @primaryColor;
+						.transition(.2s);
+					}
+				}
+				.get-started-text{
+					margin-top: 20px;
+					font-size: 16px;
+				}
+				&:hover{
+					.get-started-circle{
+						span{
+							color: @secondryText;
+						}
+					}
+				}
+			}
+		}
+	}
+	.overview-bottom{
+		.discover-header{
+			text-align: center;
+			font-size: 20px;
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+		.discover-card-container{
+			.flexrow();
+			.discover-card{
+				.flexcol();
+				align-items: center;
+				justify-content: center;
+				margin-right: 20px;
+				margin-bottom: 20px;
+				border-radius: 5px;
+				padding-bottom: 20px;
+				border: 1px solid #ebecec;
+				&:first-child{
+					margin-left: 20px;
+				}
+				.card-header{
+					.flexcol();
+					background-color: #f8f9fa;
+					flex:1;
+					width: 100%;
+					padding-top: 20px;
+					align-items: center;
+					justify-content: center;
+			    margin-left: 0px;
+			    border-radius: 5px 5px 0 0;
+			    margin-top: -1px;
+			    margin-right: 0px;
+			    width: calc(100% + 2px);
+					.icon{
+						span{
+					    color: #4a4a4a;
+					    font-size: 42px;
+						}
+					}
+					.title{
+						margin: 20px 0;
+						color: @secondryText;
+						font-size: 18px;
+					}					
+				}
+				.description{
+					text-align: center;
+					font-size: 13px;
+					color: @inactiveText;
+					margin-bottom: 20px;
+					margin-top: 20px;
+					padding: 0 20px;
+				}
+				.action{
+					button{
+				    padding: 10px 40px;				
+				    letter-spacing: 1px;
+				    text-transform: none;
+				    border-color: @primaryColor;
+				    color: @primaryColor;
+				    .transition(.2s);
+				    &:hover{
+				    	background-color: @primaryColor;
+				    	color: @white;
+				    }			
+				    &.back-button{
+				    	padding: 0;
+				    	border:none;
+				    	position: absolute;
+				    	left: 50px;
+				    	color: @secondryText;	    	
+					    &:hover{
+					    	background-color: @white;
+					    	color: @primaryColor;
+					    }			
+				    }
+					}
+				}
+			}
+		}
+	}
+}

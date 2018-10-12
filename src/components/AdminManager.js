@@ -1,8 +1,16 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { Popover, Message, Progress, Dialog, Loading, Tabs, Form, Input,
    Checkbox, Card, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
-import apiIcon from '../dist/img/bulletin_board.png';
+import apiIcon from '../dist/img/admin.png';
 
 class AdminManager extends Component {
   constructor(props){
@@ -27,7 +35,7 @@ class AdminManager extends Component {
         self.setState({loading: false})
         self.showMessage('Service Started ...',"success");
       },3000);
-    } 
+    }
   }
   showMessage(message,type){
     Message({
@@ -39,6 +47,7 @@ class AdminManager extends Component {
     const webview = document.querySelector('webview')
     webview.reload();
   }
+  
   render() {
     let project = this.props.project;
     let url = 'http://'+project.configs.admin.HOST+':'+project.configs.admin.PORT;
@@ -54,7 +63,6 @@ class AdminManager extends Component {
               <h2>Admin Dashboard</h2>
               <p>Need data entry? Use admin dashboard for managing and working with data's in databases of your project.</p>
               <Button onClick={()=>this.triggerView()} type="primary">Open Admin Dashboard</Button>
-              <Button type="default">Configurations</Button>
             </div>
           </div> :
           <div className="frame-services">

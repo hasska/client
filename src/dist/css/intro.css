@@ -22,9 +22,17 @@
 .home-intro .intro-top .intro-app-version div {
   text-align: center;
   letter-spacing: 1px;
-  color: #999999;
+  color: #FFFFFF;
+}
+.home-intro .intro-top .intro-app-version div span {
+  padding: 5px 14px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  margin-bottom: 10px;
+  display: inline-block;
 }
 .home-intro .intro-top .intro-app-close {
+  color: #FFFFFF;
   position: absolute;
   left: 10px;
   top: 10px;

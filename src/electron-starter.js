@@ -1,14 +1,21 @@
-const electron = require('electron');
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
+const electron = require('electron');
 const server = require('../src/core/provider/server');
 const fileManager = require('../src/core/filemanager');
 const Store = require('electron-store');
 const store = new Store();
-const menuManger = require('../src/core/utilities/menu');
-const projectManger = require('../src/core/utilities/projects');
-const logsManger = require('../src/core/utilities/logger');
+const menuManager = require('../src/core/utilities/menu');
+const projectManager = require('../src/core/utilities/projects');
+const logsManager = require('../src/core/utilities/logger');
 const modelsManager = require('../src/core/utilities/models');
-const dbManger = require('../src/core/utilities/database');
+const dbManager = require('../src/core/utilities/database');
 
 
 // Module to control application life.
@@ -28,18 +35,28 @@ let mainWindow, wizard, splash;
 function createWindow() {
     // Create the browser window.
     const {screen} = require('electron');
-    mainWindow = new BrowserWindow({width: screen.getPrimaryDisplay().size.width, height: screen.getPrimaryDisplay().size.height, minWidth: 900, minHeight: 480, titleBarStyle: 'hidden', show: false,"webPreferences":{
-      "webSecurity":false
-    }});
+    mainWindow = new BrowserWindow({
+        width: screen.getPrimaryDisplay().size.width, 
+        height: screen.getPrimaryDisplay().size.height, 
+        minWidth: 900, 
+        minHeight: 480, 
+        titleBarStyle: 'hidden', 
+        show: false,
+        webPreferences:{
+          webSecurity:false,
+        }
+    });
+
     wizard = new BrowserWindow({width: 820, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
     splash = new BrowserWindow({width: 760, height: 480, resizable: false, frame: false, show: false});
 
-    menuManger.setMenu(false);
+    menuManager.setMenu(false);
 
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:3000/#/dashboard/overview');
-    wizard.loadURL('http://localhost:3000/#/wizard');
-    splash.loadURL('http://localhost:3000');
+    mainWindow.loadURL('file://'+app.getAppPath()+'/build/index.html#/dashboard/overview');
+    //mainWindow.loadURL('http://127.0.0.1:3000/#/dashboard/overview')
+    wizard.loadURL('file://'+app.getAppPath()+'/build/index.html#/wizard');
+    splash.loadURL('file://'+app.getAppPath()+'/build/index.html');
 
     splash.once('ready-to-show', () => {
       splash.show()
@@ -55,6 +72,13 @@ function createWindow() {
         } else {
             wizard.show();
         }
+    })
+
+    ipcMain.on('create-project-ipc', (event, arg) => {
+        event.preventDefault();
+        projectManager.createProjectIPC(app, arg, (response) => {
+            event.sender.send('models-create-ipc-result', response)
+        });
     })
 
     ipcMain.on('open-dialog', (event,arg) => {
@@ -79,21 +103,21 @@ function createWindow() {
         event.sender.send('project-info-result', store.get('currentProject'));
     });
 
-  ipcMain.on('models-remove', (event,arg) => {
+    ipcMain.on('models-remove', (event,arg) => {
       event.preventDefault();
       modelsManager.modelRemove(arg, (response) => {
           event.sender.send('models-remove-result', response)
           //mainWindow.reload();
       });
-  });
+    });
 
-  ipcMain.on('updateConfigs', (event,arg) => {
+    ipcMain.on('updateConfigs', (event,arg) => {
       event.preventDefault();
-      projectManger.updateConfigs(arg, (response) => {
+      projectManager.updateConfigs(arg, (response) => {
           event.sender.send('updateConfigs-result', response)
           //mainWindow.reload();
       });
-  });
+    });
 
     ipcMain.on('models-publish', (event,arg) => {
         event.preventDefault();
@@ -111,35 +135,35 @@ function createWindow() {
 
     ipcMain.on('projects-list', (event,arg) => {
         event.preventDefault();
-        projectManger.getProjectsIPC( (response) => {
+        projectManager.getProjectsIPC( (response) => {
             event.sender.send('projects-list-result', response)
         });
     });
 
     ipcMain.on('database-remove', (event,arg) => {
         event.preventDefault();
-        dbManger.removeDatabase(arg, (response) => {
+        dbManager.removeDatabase(arg, (response) => {
             event.sender.send('database-remove-result', response)
         });
     });
 
     ipcMain.on('database-update', (event,arg) => {
         event.preventDefault();
-        dbManger.updateDatabase(arg,false, (response) => {
+        dbManager.updateDatabase(arg,false, (response) => {
             event.sender.send('database-update-result', response)
         });
     });
 
     ipcMain.on('database-create', (event,arg) => {
       event.preventDefault();
-      dbManger.updateDatabase(arg,true, (response) => {
+      dbManager.updateDatabase(arg,true, (response) => {
           event.sender.send('database-update-result', response)
       });
     });
 
     ipcMain.on('databases-list', (event,arg) => {
         event.preventDefault();
-        dbManger.getDatabasesIPC( (response) => {
+        dbManager.getDatabasesIPC( (response) => {
             event.sender.send('databases-list-result', response)
         });
     });
@@ -155,21 +179,23 @@ function createWindow() {
         event.preventDefault();
 
         wizard.hide();
-        splash.hide();
+        //splash.hide();
         store.set('currentProject', arg)
-        menuManger.setMenu(true);
-        mainWindow.show();
-        mainWindow.reload();
+        //menuManager.setMenu(true);
+        if(mainWindow){
+            mainWindow.show();
+            mainWindow.reload();
+        }
+        
     });
 
     ipcMain.on('import-project', (event,arg) => {
         event.preventDefault();
 
         wizard.hide();
-        splash.hide();
-        console.log(arg)
+        //splash.hide();
         store.set('currentProject', arg)
-        menuManger.setMenu(true);
+        menuManager.setMenu(true);
         mainWindow.reload();
     });
 
@@ -191,21 +217,30 @@ function createWindow() {
 
     ipcMain.on('update-logs', (event,arg) => {
         event.preventDefault();
-          logsManger.getLogs( (response) => {
-              event.sender.send('update-logs-result', response.data)
+          logsManager.getLogs( (response) => {
+              let r = response.data;
+              r = r.trim();
+              r = r.replace(/(?:\r\n|\r|\n)/g, '<br />');
+              event.sender.send('update-logs-result', r)
           });
     });
 
     ipcMain.on('update-errors', (event,arg) => {
         event.preventDefault();
-        logsManger.getErrLogs( (response) => {
-            event.sender.send('update-errors-result', response.data)
+        logsManager.getErrLogs( (response) => {
+            let r = response.data;
+              r = r.trim();
+              r = r.replace(/(?:\r\n|\r|\n)/g, '<br />');
+            event.sender.send('update-errors-result', r)
         });
     });
 
     ipcMain.on('start-project', (event,arg) => {
         event.preventDefault();
-        projectManger.run( (response) => {
+        logsManager.cleanErrLogFile( (response) => { });
+        logsManager.cleanLogFile( (response) => { });
+        
+        projectManager.run( (response) => {
             setTimeout( ()=> {
                 event.sender.send('start-project-result', response)
             },2000)
@@ -214,7 +249,7 @@ function createWindow() {
 
     ipcMain.on('stop-project', (event,arg) => {
         event.preventDefault();
-        projectManger.stop( (response) => {
+        projectManager.stop( (response) => {
             setTimeout( ()=> {
                 event.sender.send('stop-project-result', response)
             },1000);
@@ -223,14 +258,14 @@ function createWindow() {
 
     ipcMain.on('build-project', (event,arg) => {
         event.preventDefault();
-        projectManger.build( (response) => {
+        projectManager.build( (response) => {
             event.sender.send('build-project-result', response)
         });
     });
 
     ipcMain.on('clean-project', (event,arg) => {
         event.preventDefault();
-        projectManger.clean( (response) => {
+        projectManager.clean( (response) => {
             setTimeout( ()=> {
                 event.sender.send('clean-project-result', response)
             },2000)
@@ -241,26 +276,22 @@ function createWindow() {
     //mainWindow.webContents.openDevTools();
 
     // Emitted when the window is closed.
-    mainWindow.on('close', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null
+    mainWindow.on('close', function (event) {
+        event.preventDefault();
+        mainWindow.hide();
+
     })
 
     splash.on('close', function () {
-        //app.quit()
+        app.quit();
         //mainWindow.show();
-        spash.hide();
+        splash.hide();
         event.preventDefault();
     })
 
     wizard.on('close', function (event) {
         wizard.hide();
         event.preventDefault();
-        //wizard = null;
-        //wizard = new BrowserWindow({width: 1080, height: 620, minWidth: 760, minHeight: 480, titleBarStyle: 'hidden', show: false});
-       // wizard = null;
     })
 
     app.port = process.env.PORT || 8000;

@@ -18,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "stop": "killall node",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

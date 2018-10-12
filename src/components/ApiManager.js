@@ -1,8 +1,16 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { Popover, Message, Progress, Dialog, Loading, Tabs, Form, Input,
    Checkbox, Card, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
 
-import apiIcon from '../dist/img/product.png';
+import apiIcon from '../dist/img/api.png';
 
 class ApiManager extends Component {
   constructor(props){
@@ -53,7 +61,6 @@ class ApiManager extends Component {
               <h2>API Explorer</h2>
               <p>A place for exploring & tesging your rest-full APIs generated based on your models and custom methodes.</p>
               <Button onClick={()=>this.triggerView()} type="primary">Get Started</Button>
-              <Button type="default">Configurations</Button>
             </div>
           </div> :
           <div className="frame-services">

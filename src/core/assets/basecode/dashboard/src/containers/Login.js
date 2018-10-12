@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+ 
 import React, { Component } from 'react';
 
 import { Loading,Input,Button,Notification } from 'element-react';
@@ -21,7 +29,7 @@ class Login extends Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    
+
   }
   showMessage(title,msg,type) {
     Notification({
@@ -33,7 +41,7 @@ class Login extends Component {
   signIn(){
     const self = this;
     let url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/Users/login';
-   
+
     axios.post(url,{
       email: this.state.email,
       password: this.state.password
@@ -52,7 +60,7 @@ class Login extends Component {
     const _FAV_ICON = this.props.configs.FAV_ICON;
     return (
         <div className="login-form">
-           <h2>{ _FAV_ICON ? <img src={_PATH+_FAV_ICON} /> : <DashIcon /> } { this.props.configs.PROJECT_BRAND }</h2>
+           <h2>{ _FAV_ICON ? <img src="favicon.png" /> : <DashIcon /> } { this.props.configs.PROJECT_BRAND }</h2>
            <p>Login To Admin Dashboard</p>
            <Input onChange={ (value)=>this.setState({'email':value}) } placeholder="Email" type="email"></Input>
            <Input onChange={ (value)=>this.setState({'password':value}) } placeholder="Password" value={this.state.password} type="password"></Input>

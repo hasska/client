@@ -1,4 +1,12 @@
-  import React, { Component } from 'react';
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+import React, { Component } from 'react';
 
 import { Popover, Progress, Loading, Tabs, Select, Icon, Dropdown } from 'element-react';
 
@@ -21,7 +29,7 @@ class Console extends Component {
      logs: "",
      logsInterval: null,
      errorsInterval: null,
-     showConsole:true
+     showConsole:false
     };
     ipc.messaging = {
       updateLogs: function(data) {
@@ -41,37 +49,32 @@ class Console extends Component {
     } else {
       this.setState({showConsole: true});
     }
+    this.forceUpdate();
   }
   setIntervals(){
     const self = this;
     //request for out logs every 3 sec
-    this.state.logsInterval = setInterval( () => {
-      ipc.messaging.updateLogs();
+    //this.state.logsInterval = setInterval( () => {
+    ipc.messaging.updateLogs();
       ipcRenderer.on('update-logs-result', (event, arg) => {
-        let _arg = arg.trim();
-        _arg = _arg.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        /*for(let i in _arg){
-          if(_arg[i].trim()=='')
-            delete _arg[i];
-        }*/
-        self.setState({logs: _arg})
+   
+        self.setState({logs: arg})
         self.scrollToBottom();
-      });
-    }, 5000);
+        //clearInterval(this.state.logsInterval);
+        //self.setIntervals();
+    });
+   // }, 5000);
     //request for errors every 5 sec
-    this.state.errorsInterval = setInterval( () => {
-      ipc.messaging.updateErrors();
+    //this.state.errorsInterval = setInterval( () => {
+    ipc.messaging.updateErrors();
       ipcRenderer.on('update-errors-result', (event, arg) => {
-        let _arg = arg.trim();
-        _arg = _arg.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        /*for(let i in _arg){
-          if(_arg[i].trim()=='')
-            delete _arg[i];
-        }*/
-        self.setState({errors: _arg})
+        
+        self.setState({errors: arg})
         self.scrollToBottom()
-      });
-    }, 8000);
+        //clearInterval(this.state.errorsInterval);
+        //this.setIntervals();
+    });
+    //}, 8000);
   }
   scrollToBottom() {
     const self = this;
@@ -90,6 +93,8 @@ class Console extends Component {
     this.setIntervals();
   }
   render() {
+    const logsLabel = <span><Icon name="document" /> Logs</span>;
+    const errorsLabel = <span><Icon name="warning" /> Errors</span>;
     return (
     <div className={"app-editor-wrapper console-wrapper "+( this.state.showConsole == false && "closed-window-console" ) }>
       <div className="editor-actions">
@@ -98,14 +103,15 @@ class Console extends Component {
       </div>
 
       { this.state.showConsole == true ? <Tabs activeName="1" onTabClick={ (tab) => console.log(tab.props.name) }>
-        <Tabs.Pane className="tabsConsole" label="Logs" name="1">
+        <Tabs.Pane className="tabsConsole" label={logsLabel} name="1">
           <div id="logs-pane" dangerouslySetInnerHTML={{ __html: this.state.logs.toString() }}></div>
         </Tabs.Pane>
-        <Tabs.Pane className="tabsConsole" label="Errors" name="2">
+        <Tabs.Pane className="tabsConsole" label={errorsLabel} name="2">
           <div id="errors-pane" dangerouslySetInnerHTML={{ __html: this.state.errors.toString() }}></div>
         </Tabs.Pane>
       </Tabs>
-       : <p onClick={ ()=>this.triggerView() } className="closed-logs"><Icon name={'warning'} /> Console Logs</p>}
+       : <p onClick={ ()=>this.triggerView() } className="closed-logs"><Icon name={'warning'} /> Console Logs</p>
+     }
     </div>
     );
   }

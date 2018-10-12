@@ -26,9 +26,10 @@
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__line-inner {
   border: none;
   border-top: 1px solid;
+  border-width: 2px !important;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__line.is-horizontal {
-  height: 1px;
+  height: 2px;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head .el-step__icon .el-icon-check {
   font-size: 8px;
@@ -37,14 +38,17 @@
   border-width: 1px;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head.is-process {
-  color: #0084FF;
+  color: #20a0ff;
   background-color: #FFFFFF;
-  border-color: #0084FF;
+  border-color: #20a0ff;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head.is-success {
   color: #4A4A4A;
   background-color: #FFFFFF;
   border-color: #4A4A4A;
+}
+.wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__head {
+  border-width: 2px !important;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main {
   margin-left: -32px;
@@ -59,7 +63,7 @@
   font-weight: 100;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main .el-step__title.is-process {
-  color: #0084FF;
+  color: #20a0ff;
 }
 .wizard-wrapper .wizard-steps-wrapper .wizard-steps .el-step__main .el-step__title.is-success {
   color: #4A4A4A;
@@ -80,12 +84,12 @@
   padding: 10px 50px;
   letter-spacing: 1px;
   text-transform: none;
-  border-color: #0084FF;
-  color: #0084FF;
+  border-color: #20a0ff;
+  color: #20a0ff;
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .wizard-wrapper .wizard-action-wrapper .app-button:hover {
-  background-color: #0084FF;
+  background-color: #20a0ff;
   color: #FFFFFF;
 }
 .wizard-wrapper .wizard-action-wrapper .app-button.back-button {
@@ -97,5 +101,5 @@
 }
 .wizard-wrapper .wizard-action-wrapper .app-button.back-button:hover {
   background-color: #FFFFFF;
-  color: #0084FF;
+  color: #20a0ff;
 }

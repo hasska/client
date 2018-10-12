@@ -1,7 +1,13 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
-
 import { Tooltip, Form, Input, Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
-
 import Title from '../Title';
 
 class DatabaseSingle extends Component {
@@ -26,7 +32,7 @@ class DatabaseSingle extends Component {
 			    <div className="database-config-wrapper">
 			      <Title contnet="Database config" />
 						<div className="model-actions">
-		          <Tooltip placement="top" content={ this.props.createMode == true ? 'Create'  : 'Apply Changes' }><Button type="text" onClick={ ()=>this.props.publishDb(this.props.currentDatabase) } size="small" className="publish-model">{ this.props.createMode == true ? <Icon name="check" />  : <Icon name="check" /> }</Button></Tooltip>
+		          <Tooltip placement="top" content={ this.props.createMode == true ? 'Create'  : 'Apply Changes' }><Button type="primary" onClick={ ()=>this.props.publishDb(this.props.currentDatabase) } size="small" icon="check" className="publish-model">Save Changes</Button></Tooltip>
 		          { !this.props.createMode && <Tooltip placement="top" content={"Delete"}><Button onClick={ ()=>this.props.removeDb(this.props.selectedDb) } type="text" size="small" className="remove-model"><i className="el-icon-delete2"></i></Button></Tooltip> }
 		        </div>
 			      <div className="database-config-form">

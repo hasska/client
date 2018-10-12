@@ -1,6 +1,14 @@
-import React, { Component } from 'react';
-const {ipcRenderer} = window.require('electron')
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
+import React, { Component } from 'react';
+
+const {ipcRenderer} = window.require('electron')
 const ipc = window.ipc || {}
 
 class HomeRecent extends Component {

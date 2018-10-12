@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { Popover, Message, Progress, Dialog, Loading, Tabs, Form, Input,
    Checkbox, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
@@ -28,6 +36,7 @@ class ModelsManager extends Component {
       models: [],
       modelsConfigs: [],
       databases: [],
+      loading: true,
       selectedDB: null,
       currentModel: null
   	}
@@ -43,6 +52,7 @@ class ModelsManager extends Component {
     this.publishModels = this.publishModels.bind(this);
     this.removeModel = this.removeModel.bind(this);
     this.newModel = this.newModel.bind(this);
+    this.updateCurrentModel = this.updateCurrentModel.bind(this);
 
   	ipc.messaging = {
       getModels: function(data) {
@@ -72,7 +82,7 @@ class ModelsManager extends Component {
     let _currentModel = [],_model = "newModel";
     let _models = this.state.models;
 
-    _model = _model+parseInt(this.state.models.length+1);
+    _model = _model+Math.random().toString(36).substring(10);
 
     let tmp = {
         "name": _model,
@@ -94,11 +104,17 @@ class ModelsManager extends Component {
 
     this.setState({ createMode: true ,models: _models, currentModel: _currentModel, selectedModel: _model,selectedDB: "db" })
   }
+  updateCurrentModel(model){
+    this.setState({currentModel: model});
+  }
   removeModel(model){
-    ipc.messaging.removeModel(model);
+    if(model!='User'){
+      ipc.messaging.removeModel(model);
+    } else {
+      this.showMessage('Oops Sry :( You cant remove Users model','error');
+    }
   }
   publishModels(){
-    console.log(this.state.createMode)
     if(this.state.createMode==true){
       ipc.messaging.createModels({db: this.state.selectedDB ,name:this.state.selectedModel,model:this.state.currentModel});
     } else {
@@ -107,6 +123,8 @@ class ModelsManager extends Component {
     }
   }
   switchModel(model){
+    const self = this;
+    this.setState({loading: true})
     let _currentModel = null;
     for(let i in this.state.models){
       if(this.state.models[i].name==model){
@@ -115,9 +133,12 @@ class ModelsManager extends Component {
     }
     let modelConfigs = this.state.modelsConfigs[model] || {};
     this.setState({"selectedModel": model,"currentModel":_currentModel,"selectedDB": modelConfigs.dataSource || "db" });
+    setTimeout( ()=> {
+      self.setState({loading: false})
+    },1000);
   }
   componentDidMount(){
-  	this.fetchModels();
+      this.fetchModels();
   }
   changeDb(db){
     this.setState({selectedDB: db});
@@ -133,7 +154,7 @@ class ModelsManager extends Component {
   }
   updateModelProps(key,value,prop,name){
     let _currentModel = this.state.currentModel;
-    if(key=='label'){
+    if(key=='label') {
       let tmp = _currentModel['properties'][value];
       delete _currentModel['properties'][value];
 
@@ -190,12 +211,19 @@ class ModelsManager extends Component {
     ipc.messaging.getDatabases();
 
     ipcRenderer.on('models-list-result',(event, arg) => {
-      for(let model in arg){
-        if(arg[model].name.indexOf('.json')>=0){
-          let name = arg[model].name.split('.json')[0];
-          ipc.messaging.getModel(name);
+      console.log(arg)
+      console.log(self.state.models.length)
+      if(self.state.models.length>0){
+
+      } else {
+        for(let model in arg){
+          if(arg[model].name.indexOf('.json')>=0){
+            let name = arg[model].name.split('.json')[0];
+            ipc.messaging.getModel(name);
+          }
         }
       }
+
     });
 
     ipcRenderer.on('models-remove-result',(event,arg) => {
@@ -240,8 +268,10 @@ class ModelsManager extends Component {
       if(arg.name==self.state.selectedModel){
         _currentModel = arg;
       }
-
       self.setState({'models': _models,"currentModel": _currentModel});
+      setTimeout( ()=> {
+          self.setState({loading: false});
+      },1000)
     });
     ipcRenderer.on('models-configs-result',(event, arg) => {
       self.setState({'modelsConfigs': arg,'selectedDB':arg[self.state.selectedModel].dataSource});
@@ -254,10 +284,6 @@ class ModelsManager extends Component {
       self.setState({'databases': _dbs});
     });
   }
-  componentWillMount(){
-  	//request for models list
-
-  }
   onChange(key, value) {
     this.state.info[key] = value;
     this.forceUpdate();
@@ -266,17 +292,17 @@ class ModelsManager extends Component {
     e.preventDefault();
   }
   render() {
-    let loading = this.state.currentModel != null && this.state.currentModel.length>0;
+    let loading = this.state.loading;//this.state.models.length>0 && this.state.currentModel != null && this.state.currentModel.length>0;
     return (
       <div className="app-top">
         <Loading loading={loading} fullscreen={loading} text={"Loading Lab..."} />
     		<ModelsList newModel={this.newModel} switchModel={this.switchModel} selectedModel={this.state.selectedModel} models={this.state.models} />
-	        <div className="app-preview">
+        <div className="app-preview">
 		      <div className="model-single">
 		        <ModelCreator publishModels={this.publishModels} createMode={this.state.createMode} removeModel={this.removeModel} publishModels={this.publishModels} changeDb={this.changeDb} updateModel={this.updateModel} currentModel={this.state.currentModel} selectedDB={this.state.selectedDB} databases={this.state.databases} selectedModel={this.state.selectedModel} models={this.state.models} />
-	       		<ModelProperties updateTypeOptions={this.updateTypeOptions} updateRelations={this.updateRelations} updateValidations={this.updateValidations} updateModelProps={this.updateModelProps} updateModel={this.updateModel} currentModel={this.state.currentModel} selectedModel={this.state.selectedModel} models={this.state.models} />
+	       		{ this.state.currentModel != null ? <ModelProperties updateCurrentModel={this.updateCurrentModel}  currentModel={this.state.currentModel} selectedModel={this.state.selectedModel} models={this.state.models} /> : null }
 	   		  </div>
-	       	</div>
+       	</div>
       </div>
     );
   }

@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
+import React, { Component } from 'react';
 import HomeRecent from './HomeRecent';
 import Title from './../Title';
-
 import newIcon from "../../dist/img/newAppIcon.svg";
 import appIcon from "../../dist/img/repo.svg";
 
 const {ipcRenderer} = window.require('electron')
-
 const ipc = window.ipc || {}
 
 class HomeStart extends Component {

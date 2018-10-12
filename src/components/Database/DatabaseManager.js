@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import DatabaseList from './DatabaseList';
 import DatabaseSingle from './DatabaseSingle';
@@ -60,7 +68,7 @@ class DatabaseManager extends Component {
   newDb(){
     let dbs = this.state.databases;
     let newDb = {
-      "name": "Database"+parseInt(this.state.databases.length+1),
+      "name": "Database"+Math.random().toString(36).substring(10),
       "connector": "memory",
       "host": "",
       "port": "",

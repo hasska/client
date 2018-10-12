@@ -40,7 +40,9 @@
 				padding: 15px 15px;
 				margin: 0 10px;
 				border-radius: 50px;
-				h5{
+				.transition(.2s);
+				h6{
+					font-size: 12px;
 					font-weight: 100;					
 					color: @inactiveText;
 					letter-spacing: 1px;
@@ -58,7 +60,7 @@
 					}
 				}
 				&:hover{
-					h5{
+					h6{
 						.transition(.2s);				
 						color: @activeText;
 					}
@@ -69,9 +71,8 @@
 				}
 				&.active{
 					background-color: @primaryColor !important;
-					h5, i{
+					h6, i{
 						color: @white;
-					    border-top: 1px solid transparent;
 					}
 				}
 			}

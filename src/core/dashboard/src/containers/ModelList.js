@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
@@ -106,7 +114,7 @@ class ModelList extends Component {
 
     for(var property in properties){
 
-      let defaultColumn = properties[property].defaultColumn || false;
+      let defaultColumn = properties[property]['options'].defaultColumn || false;
       let label = properties[property].label || property;
 
       let currentColumn = this.state.selectedColumns.indexOf(property)>0;

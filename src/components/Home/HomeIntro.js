@@ -1,12 +1,15 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
-
 import IntroTips from './IntroTips';
-
-
 import logo from "../../dist/img/logo/haska-white.svg";
 import closeIcon from "../../dist/img/closeIcon.svg";
-
-
 
 const remote = window.require('electron').remote;
 
@@ -30,7 +33,7 @@ class HomeIntro extends Component {
           </div>
 
           <div className="intro-app-version">
-            <div className="t6">( Beta Version )<br />Copyright @Haska.io 2018</div>
+            <div className="t6"><span>Beta Version</span><br />Copyright @Haska.io 2018</div>
           </div>
         </div>
       </div>

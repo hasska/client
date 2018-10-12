@@ -1,7 +1,13 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './index.css';
-import './custom.css';
 
 import { Select, i18n } from 'element-react';
 import locale from 'element-react/src/locale/lang/en'

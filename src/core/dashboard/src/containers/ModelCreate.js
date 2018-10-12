@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+ 
 import React, { Component } from 'react';
 
 import { Loading, Button, Input, Switch, Select, Upload, Notification,
@@ -45,10 +53,10 @@ class ModelCreate extends Component {
     const self = this;
     this.refs.form.validate((valid) => {
       if (valid) {
-        
+
         var xhr  = new XMLHttpRequest();
         const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
-        xhr.onload = function(){ 
+        xhr.onload = function(){
           if(xhr.status==200){
             var response = JSON.parse(xhr.response);
             self.showMessage('Success :)','Successfully Entry Added !','success');
@@ -57,7 +65,7 @@ class ModelCreate extends Component {
             self.setState({loading:false,fullscreen:false});
             self.showMessage('Error :(',JSON.parse(xhr.response).error.message.toString(),'error')
           }
-          
+
         }
 
         var form_data = new FormData();
@@ -67,7 +75,8 @@ class ModelCreate extends Component {
 
         xhr.open ('POST', url+self.props.model+'s', true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
-        
+        //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+        console.log(form_data)
         xhr.send (form_data);
         return false;
 
@@ -98,7 +107,7 @@ class ModelCreate extends Component {
 
       var required = properties[property].required || false;
 
-      if(required==true){
+      if(required==true && properties[property].type != 'boolean'){
         var tmp_rules = this.state.rules;
         tmp_rules[property] = [{
           required: true,
@@ -107,7 +116,7 @@ class ModelCreate extends Component {
         }];
         self.setState({ rules: tmp_rules });
       }
-      
+
       formModel[property] = "";
 
       if(properties[property].type=="string"){
@@ -125,10 +134,11 @@ class ModelCreate extends Component {
         formModel[property] = false;
       }
 
-      if(typeof properties[property].uiType != "undefined"){
+      if(typeof properties[property].uiType != "undefined" &&
+                properties[property].uiType ){
 
         if(properties[property].uiType.toLowerCase()=="select"){
-          formModel[property] = properties[property].options[0].value;
+          formModel[property] = properties[property].options.selectItems[0].value;
         }
 
         if(properties[property].uiType.toLowerCase()=="date"){
@@ -140,7 +150,7 @@ class ModelCreate extends Component {
         }
 
         if(properties[property].uiType.toLowerCase()=="editor" ||
-          properties[property].uiType.toLowerCase()=="html" || 
+          properties[property].uiType.toLowerCase()=="html" ||
           properties[property].uiType.toLowerCase()=="code"){
           formModel[property] = properties[property].options.default || "";
         }
@@ -159,8 +169,8 @@ class ModelCreate extends Component {
             self.setState({'loading':false,fullscreen:false});
           }).catch( (ex) => {
             self.setState({'loading':false,fullscreen:false});
-          }); 
-        } 
+          });
+        }
       }
     }
     this.setState({ form: formModel });
@@ -196,7 +206,7 @@ class ModelCreate extends Component {
     this.setState({ form: tmp })
   }
   render() {
-    
+
     let form_fields = [];
     let properties = this.state.properties;
     let hiddens = this.props.model_config.hidden || [];
@@ -205,9 +215,9 @@ class ModelCreate extends Component {
 
     if(!this.state.loading){
       Object.keys(properties).map(function (key,index) {
-          
+
           var type = properties[key].type;
-          if(typeof properties[key].uiType != "undefined")
+          if(typeof properties[key].uiType != "undefined" && properties[key].uiType)
             type = properties[key].uiType.toLowerCase();
 
           if(hiddens.indexOf(key)<0 && key != 'id'){
@@ -216,29 +226,29 @@ class ModelCreate extends Component {
                 form_fields.push(<Form.Item prop={key} required={properties[key].required || false} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } type="text"></Input></Form.Item>);
                 break;
               case 'boolean':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Switch value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } onColor="#13ce66" offColor="#aaa"></Switch></Form.Item>);
+                form_fields.push(<Form.Item prop={key}  label={key+' :'}><Switch value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } onColor="#13ce66" offColor="#aaa"></Switch></Form.Item>);
                 break;
               case 'email':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } type="email"></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } type="email"></Input></Form.Item>);
                 break;
               case 'password':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) }  type="password"></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) }  type="password"></Input></Form.Item>);
                 break;
               case 'url':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } prepend="http://" type="text"></Input></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input value={self.state.form[key]} onChange={ (value) => self.onFormChange(value,key) } prepend="http://" type="text"></Input></Form.Item>);
                 break;
-              case 'textarea': 
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><Input onChange={ (value) => self.onFormChange(value,key) } autosize={ {minRows: 3} } value={self.state.form[key]} type={'textarea'} ></Input></Form.Item>);
+              case 'textarea':
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><Input onChange={ (value) => self.onFormChange(value,key) } autosize={ {minRows: 3} } value={self.state.form[key]} type={'textarea'} ></Input></Form.Item>);
                 break;
               case 'number':case 'money':
-                form_fields.push(<Form.Item prop={key} label={key+' :'}><InputNumber value={self.state.form[key]}  defaultValue={0} onChange={ (value) => self.onFormChange(value,key) } type="text"></InputNumber></Form.Item>);
+                form_fields.push(<Form.Item prop={key} required={properties[key].required || false}  label={key+' :'}><InputNumber value={self.state.form[key]}  defaultValue={0} onChange={ (value) => self.onFormChange(value,key) } type="text"></InputNumber></Form.Item>);
                 break;
               case 'select':
-                form_fields.push( 
+                form_fields.push(
                   <Form.Item prop={key} label={key}>
                     <Select onChange={ (value) => self.onFormChange(value,key) } multiple={properties[key].multiple || false} value={self.state.form[key]}>
                     {
-                      properties[key].options.map(el => {
+                      properties[key].options.selectItems.map(el => {
                         return <Select.Option key={el.value} label={el.label} value={el.value} />
                       })
                     }
@@ -260,8 +270,8 @@ class ModelCreate extends Component {
               case 'slider':
                 var options = properties[key].options || {};
                 form_fields.push(<Form.Item prop={key} label={key+' :'}>
-                  <Slider onChange={ (value) => self.onFormChange(value,key) } value={self.state.form[key]} name={key} min={options.min || 0} range={options.range || false} 
-                  step={options.step || 1} max={options.max || 100} showTooltip={options.showTooltip || true} 
+                  <Slider onChange={ (value) => self.onFormChange(value,key) } value={self.state.form[key]} name={key} min={options.min || 0} range={options.range || false}
+                  step={options.step || 1} max={options.max || 100} showTooltip={options.showTooltip || true}
                   disabled={options.disabled || false } showStops={options.showStops || false} />
                 </Form.Item>);
               break;
@@ -350,7 +360,6 @@ class ModelCreate extends Component {
                 }
                 <Form.Item className="actionBar">
                   <Button onClick={ this.saveModel.bind(this) } type="primary">Save Entry</Button>
-                  <Button onClick={ ()=> this.resetChanges() } type="default">Reset</Button>
                 </Form.Item>
               </Form></div> : null
           }

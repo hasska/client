@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import navOverview from "../../dist/img/nav-overview.svg";
 import navModels from "../../dist/img/nav-models.svg";
@@ -21,7 +29,9 @@ class ActionBar extends Component {
     this.state = {
      progress: this.props.progress,
      timer: null,
-     projects: []
+     projects: [],
+     runDisable: false,
+     stopDisable: true,
     }
     ipc.messaging = {
       runProject: function(data) {
@@ -43,11 +53,12 @@ class ActionBar extends Component {
   }
   timer() {
     let time = this.state.progress.time;
-    var self = this;
-    let timeout = 500;
+    const self = this;
+    let timeout = 250;
 
     if(this.state.progress.type=='BUILD')
       timeout = 1000;
+
 
     this.state.timer = window.setInterval(function(){
         time++;
@@ -56,6 +67,7 @@ class ActionBar extends Component {
         self.setState({'progress': _progress});
 
         if (time >= 100 || self.state.progress.inprogress == false ) {
+            self.props.updateConsole(true);
             _progress['time'] = 100;
             self.setState({ 'progress': _progress})
             window.clearInterval(self.state.timer);
@@ -81,13 +93,13 @@ class ActionBar extends Component {
     const self = this;
     setTimeout( () => {
       let _progress = self.state.progress;
-      _progress['time'] = 100;
+      _progress['time'] =  0 ;
       _progress['status'] = self.state.progress.status;
       _progress['text'] = msg;
       _progress['inprogress'] = false;
       _progress['type'] = type;
       self.setState({progress: _progress});
-      this.props.updateProgress(_progress);
+      self.props.updateProgress(_progress);
     },2000);
   }
   run(){
@@ -98,7 +110,9 @@ class ActionBar extends Component {
     _progress['text'] = 'Preparing for run...';
     _progress['inprogress'] = true;
     _progress['type'] = 'RUN';
-    this.setState({progress: _progress});
+    this.props.updateConsole(false);
+
+    this.setState({progress: _progress,runDisable: true});
     this.props.updateProgress(_progress);
     this.timer();
   }
@@ -110,6 +124,7 @@ class ActionBar extends Component {
     _progress['text'] = 'Install & Building Modules ...';
     _progress['inprogress'] = true;
     _progress['type'] = 'BUILD';
+
     this.setState({progress: _progress});
     this.props.updateProgress(_progress);
 
@@ -123,7 +138,9 @@ class ActionBar extends Component {
     _progress['text'] = 'Stopping Services ...';
     _progress['inprogress'] = true;
     _progress['type'] = 'STOP';
-    this.setState({progress: _progress});
+    this.props.updateConsole(false);
+
+    this.setState({progress: _progress, stopDisable: true});
     this.props.updateProgress(_progress);
 
     this.timer();
@@ -136,6 +153,7 @@ class ActionBar extends Component {
     _progress['text'] = 'Cleaning Resources ...';
     _progress['inprogress'] = true;
     _progress['type'] = 'CLEAN';
+
     this.setState({progress: _progress});
     this.props.updateProgress(_progress);
 
@@ -154,18 +172,23 @@ class ActionBar extends Component {
         _progress['inprogress'] = false;
 
       if(arg.status=='success'){
-        _progress['status'] = 'success';
-        _progress['text'] = 'Running Successfully';
-        self.setState({progress: _progress});
-        self.props.updateProgress(_progress);
+        setTimeout( ()=> {
+          _progress['status'] = 'success';
+          _progress['text'] = 'Running Successfully';
+          self.setState({progress: _progress, runDisable: true, stopDisable: false });
+          self.props.updateProgress(_progress);
+         // self.showMessage('Your services running now :)','success')
+          self.clearProgress('Up & Running','RUN');
+          self.props.updateConsole(true);
 
-        self.clearProgress('Up & Running','RUN');
+        },10000)
       } else {
         _progress['status'] = 'exception';
         _progress['text'] = 'Running Failed !';
-        self.setState({progress: _progress});
+        self.setState({progress: _progress, runDisable: false, stopDisable: true});
         self.props.updateProgress(_progress);
-
+        self.showMessage('Problem in running. Please check your Haska.log file for reasons :)','error')
+        self.props.updateConsole(true);
         self.clearProgress('Run Failed !','RUN');
       }
 
@@ -181,15 +204,20 @@ class ActionBar extends Component {
       if(arg.status=='success'){
         _progress['status'] = 'success';
         _progress['text'] = 'Stopped Successfully';
-        self.setState({progress: _progress});
+        self.setState({progress: _progress, runDisable: false, stopDisable: true});
         self.props.updateProgress(_progress);
+          self.showMessage('Your services stopped now :)','success')
+        self.props.updateConsole(true);
 
         self.clearProgress('Stopped Services','KICKOFF');
       } else {
         _progress['status'] = 'exception';
         _progress['text'] = 'Stop Failed !';
-        self.setState({progress: _progress});
+        self.setState({progress: _progress, runDisable: true, stopDisable: false});
         self.props.updateProgress(_progress);
+        self.props.updateConsole(true);
+
+       // self.showMessage('Problem in stopping. Please check your Haska.log file for reasons :)','error')
 
         self.clearProgress('Stop Failed !','STOP');
       }
@@ -279,6 +307,13 @@ class ActionBar extends Component {
         <div className="header-center">
           <div className="project-status-wrapper">
             <div className="project-name">
+              
+              <div class="hostdiv">
+                  <div class={ this.state.progress.type == 'KICKOFF' && 'statusIconWarn' }></div>
+                  <div class={ this.state.progress.type == 'RUN' && 'statusIconGood' }></div>
+                  <div class={ this.state.progress.type == 'STOP' && 'statusIconBad' }></div>
+              </div>
+
               { this.state.progress.type }
             </div>
             <div className="project-status">
@@ -288,10 +323,11 @@ class ActionBar extends Component {
         </div>
         <div className="header-right">
           <div className="project-actions">
-            <a className="action-main-run" onClick={ ()=>this.run() }>
+
+            <a className={ this.state.runDisable ? "action-main-run disabled" : "action-main-run"} onClick={ ()=>!this.state.runDisable && this.run() }>
               <span className="haskon-controller-play"></span>
             </a>
-            <a className="action-stop" onClick={ ()=>this.stop() }>
+            <a className={ this.state.stopDisable ? "action-main-stop disabled" : "action-main-stop"} onClick={ ()=>!this.state.stopDisable && this.stop() }>
               <span className="haskon-controller-stop"></span>
             </a>
           </div>

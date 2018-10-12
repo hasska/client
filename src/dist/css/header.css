@@ -149,4 +149,8 @@
 }
 .app-header .progress-bar .el-progress-bar__outer {
   height: 3px !important;
+  background-color: transparent !important;
+}
+.app-header .progress-bar .el-progress-bar__inner {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { Popover, Message, Progress, Dialog, Loading, Tabs, Form, Input,
    Checkbox, Card, Radio, Button, Select, Icon, Tag, Table, Dropdown } from 'element-react';
@@ -7,7 +15,7 @@ import fb from '../../dist/img/apps/facebook.png';
 import tw from '../../dist/img/apps/twitter.png';
 import insta from '../../dist/img/apps/instagram.png';
 import linkedin from '../../dist/img/apps/linkedin.png';
-import github from '../../dist/img/apps/linkedin.png';
+import github from '../../dist/img/apps/github.png';
 import mailchimp from '../../dist/img/apps/mailchimp.png';
 import mandrill from '../../dist/img/apps/mandrill.png';
 import mailerlite from '../../dist/img/apps/mailerlite.png';

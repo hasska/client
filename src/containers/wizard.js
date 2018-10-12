@@ -1,16 +1,22 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import { Steps } from 'element-react';
 import { Loading, Button, Message } from 'element-react';
 import ConfigureStep from '../components/ConfigureStep';
 import ModelsStep from '../components/ModelsStep';
-import { createProject } from '../actions/projects';
-const {ipcRenderer} = window.require('electron')
 
+const {ipcRenderer} = window.require('electron');
+const ipc = window.ipc || {};
 
-const ipc = window.ipc || {}
 require('element-theme-default');
 
 class Wizard extends Component {
@@ -33,26 +39,29 @@ class Wizard extends Component {
     ipc.messaging = {
       sendCreateProject: function(data) {
           ipcRenderer.send('main-project', data)
+      },
+      CreateProject: function(data) {
+          ipcRenderer.send('create-project-ipc', data)
       }
     }
   }
-
   next() {
     let active = this.state.active + 1;
     this.setState({ active: active });
-  }  
-  componentWillMount() {
-    
-    
   }
   componentDidMount(){
-    
-  }
-  componentWillReceiveProps(nextProps) {
-    
+    const self = this;
+    ipcRenderer.on('models-create-ipc-result', (event, arg) => {
+      self.setState({ loading: false, fullscreen: false });
+      if(arg.status=='success'){
+        self.showMessage('Project Created Successfully :)','success');
+        ipc.messaging.sendCreateProject(arg.data);
+      } else {
+        self.showMessage(arg.msg,'error');
+      }
+    });
   }
   validation(callback){
-    
     let validate = true, msg = '';
     if(this.state.form.name == ''){
       validate = false;
@@ -63,9 +72,7 @@ class Wizard extends Component {
       validate = false;
       msg = 'Project destination folder required';
     }
-
     callback(validate,msg);
-
   }
   showMessage(msg,type){
      Message({
@@ -86,29 +93,16 @@ class Wizard extends Component {
     }
     else{
       this.setState({ loading: true, fullscreen: true });
-      createProject(this.state.form,(response) => {
-        console.log(response)
-        this.setState({ loading: false, fullscreen: false });
-
-        if(response.status=='success'){
-          self.showMessage('Project Created Successfully :)','success');
-          console.log(response.data)
-          ipc.messaging.sendCreateProject(response.data);
-        } else {
-          self.showMessage(response.msg,'error');
-        }
-
-      });
+      ipc.messaging.CreateProject(this.state.form)
     }
   }
   firstStep(){
     this.setState({active: 0, buttonText: 'Next'})
   }
   render() {
-
     return (
         <div className="wizard-wrapper">
-          <Loading loading={this.state.loading} fullscreen={this.state.fullscreen} text={'Creating Project ...'} />
+          <Loading loading={this.state.loading} fullscreen={this.state.fullscreen} text={'Creating Project'} />
           <div className="wizard-steps-wrapper">
             <Steps className="wizard-steps" space={100} active={this.state.active} finishStatus="success">
               <Steps.Step title="Config"></Steps.Step>

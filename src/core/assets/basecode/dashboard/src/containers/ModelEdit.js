@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 import React, { Component } from 'react';
 
 import { Loading, Button, Input, Switch, Select, Upload, Notification,
@@ -127,7 +134,7 @@ class ModelEdit extends Component {
 
       var required = properties[property].required || false;
 
-      if(required==true){
+      if(required==true && properties[property].type != 'boolean' ){
         var tmp_rules = this.state.rules;
         tmp_rules[property] = [{
           required: true,
@@ -374,7 +381,6 @@ class ModelEdit extends Component {
                 }
                 <Form.Item className="actionBar">
                   <Button onClick={ this.saveModel.bind(this) } type="primary">Update Entry</Button>
-                  <Button onClick={ ()=> this.resetChanges() } type="default">Reset</Button>
                 </Form.Item>
               </Form></div> : null
           }

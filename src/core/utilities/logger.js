@@ -1,8 +1,9 @@
 /**
- * Copyright (c) 2018-present, Abject.
+ * Copyright (c) Haska.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
+ *
  */
 
 const fs = require("fs-extra");
@@ -41,6 +42,19 @@ module.exports = {
 		const store = new Store();
 		let project = store.get('currentProject');
 		let log_destination = project.destination+'/haska.log';
+
+		fs.ensureFile(log_destination).then(() => {
+		  // With Promises:
+			fs.removeSync(log_destination);
+		})
+		.catch(err => {
+		  return {"status":"error","msg": "Log file dosnt exist in destination"}
+		})
+	},
+	cleanErrLogFile: () => {
+		const store = new Store();
+		let project = store.get('currentProject');
+		let log_destination = project.destination+'/logs/err.log';
 
 		fs.ensureFile(log_destination).then(() => {
 		  // With Promises:

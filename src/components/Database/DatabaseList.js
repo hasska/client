@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
 import React, { Component } from 'react';
 
 class DatabaseList extends Component {
@@ -21,7 +29,7 @@ class DatabaseList extends Component {
             this.props.databases.map( (db)=> {
               let cname = this.props.selectedDb == db.name ? 'active' : '';
               return <li onClick={ ()=>this.props.switchDb(db.name) } className={cname}>
-  			        <h5>{db.name + '('+db.connector+')'}</h5>
+  			        <h6>{db.name + '('+db.connector+')'}</h6>
   			        <i className="el-icon-arrow-right"></i>
   			      </li>
             })

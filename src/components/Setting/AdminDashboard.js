@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
 
+import React, { Component } from 'react';
 import { Form, Input, Radio, Button, Switch, Upload, Message } from 'element-react';
 
 
@@ -29,7 +36,7 @@ class AdminDashboard extends Component {
     return (
       <div className="setting-form">
         <Form className="en-US form-custom-style" model={this.state.settingsAdminDashboard} labelWidth="120" onSubmit={this.onSubmit.bind(this)}>
-          <Form.Item label="AdminDashboard">
+          <Form.Item label="Disable dashboard">
 			      <Switch
 			        value={this.props.configs.admin.DISABLE_ADMIN}
 			        onChange={this.props.updateConfigs.bind(this, 'DISABLE_ADMIN')}

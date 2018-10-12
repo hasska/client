@@ -1,4 +1,12 @@
-import React, { Component } from 'react';
+/**
+ * Copyright (c) Haska.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+ import React, { Component } from 'react';
 
 class LoggerPane extends Component {
   constructor(props){
@@ -8,7 +16,7 @@ class LoggerPane extends Component {
   	}
   }
   componentDidMount(){
-  	this.setState({history: [{value: 'sag'}]})
+  	this.setState({history: [{value: ''}]})
   }
   render() {
     return (
