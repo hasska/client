@@ -1,5 +1,5 @@
 # Haska
-Haska is code-less back-end services platform which means you can create your own services like restful API's or admin dashboard for managing your data's in database by defining your models and properties with lots of configurations and options in our GUI environment.
+Haska is a code-less back-end services platform which means you can create your own services like restful API's or admin dashboard for managing your data's in database by defining your models and properties with lots of configurations and options in our GUI environment.
 > You can easily create your own back-end services such as Rest-ful API, Admin Dashboard, Documentations and so on based on your models definition and configurations without any code.
       
 By Haska you can start your next project without any delay at start because it's fast and easy to create your own API endpoints or the other services at start of your application. Haska current services are :
