@@ -8,7 +8,7 @@ By Haska you can start your next project without any delay at start because it's
  - **Admin dashboard**: Haska generate admin dashboard for managing your datas in database. As admin you have an access to dashboard for managing your data and users.
  - **Monitoring**: We provide powerfull monitoring system for each project that you built with our platform. You can monitoring your services like errors, progresses, CPU usage and several awesome informations.
  - **Documentation**: Haska automatically generate documentation based on your API's and services.
- - **Deployment**: After finish your design, build and test your services you have to deploy your back-end project to the server.
+
  
  
 
