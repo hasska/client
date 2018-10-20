@@ -51,7 +51,7 @@ class Login extends Component {
       localStorage.setItem('auth',true);
       window.location.assign('/')
     }).catch( (error)=>{
-      self.showMessage('Error',error.response.data.error.message,'error');
+      self.showMessage('Error','Problem in login, check your entries!','error');
     })
   }
 

@@ -73,7 +73,18 @@ class ModelCreate extends Component {
             form_data.append(key, self.refs.form.props.model[key]);
         }
 
-        xhr.open ('POST', url+self.props.model+'s', true);
+        let purl = url+self.props.model;
+        
+        if(purl.slice(-1)=='y'){
+          purl = purl.slice(0, -1);
+          purl += 'ies';
+        } else {
+          if(purl.slice(-1) != 's'){
+            purl += 's';
+          }
+        }
+
+        xhr.open ('POST', purl, true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
         //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
         console.log(form_data)

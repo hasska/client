@@ -59,8 +59,13 @@ class Header extends Component {
       localStorage.setItem('auth',false);
       window.location.assign('/signin');
     }).catch( (error)=>{
+      /*self.setState({loading: false,fullscreen: false}) ;
+      self.showMessage('Error','Problem in logout occured! Please do login again.','error');*/
+      self.showMessage('Success','Signed out successfully !','success');
       self.setState({loading: false,fullscreen: false});
-      self.showMessage('Error',error.response.data.error.message,'error');
+      localStorage.removeItem('authorized_user');
+      localStorage.setItem('auth',false);
+      window.location.assign('/signin'); 
     })
   }
   redirect(to,el){

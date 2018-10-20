@@ -154,7 +154,7 @@ class ModelProperties extends Component {
                 }
               </Select>)
             return (
-              <Popover placement="top" title="Validation" width="200" trigger="click" content={content}>
+              <Popover placement="top" title="Relations" width="200" trigger="click" content={content}>
                 <Button>Manage</Button>
               </Popover>
             )

@@ -36,7 +36,7 @@ class ModelList extends Component {
       allColumns: [],
       currentPage: 1,
       dialogVisible: false,
-      totalItems: 10
+      totalItems: 10,
     };
   }
   componentWillMount() {
@@ -52,6 +52,20 @@ class ModelList extends Component {
   componentWillReceiveProps(nextProps) {
     
   }
+  getPurl(){
+    let purl = this.props.model;
+        
+    if(purl.slice(-1)=='y'){
+      purl = purl.slice(0, -1);
+      purl += 'ies';
+    } else {
+      if(purl.slice(-1) != 's'){
+        purl += 's';
+      }
+    }
+
+    return purl;
+  }
   getModelData(page) {
 
     let currentPage = this.state.currentPage;
@@ -59,7 +73,7 @@ class ModelList extends Component {
       currentPage = page;
     }
    
-    const url = 'http://'+this.props.configs.SERVICE_HOST+":"+this.props.configs.SERVICE_PORT+"/api/"+this.props.model+'s?filter[limit]='+this.state.totalItems+'&filter[skip]='+ ( parseInt(currentPage-1)*parseInt(this.state.totalItems) );
+    const url = 'http://'+this.props.configs.SERVICE_HOST+":"+this.props.configs.SERVICE_PORT+"/api/"+this.getPurl()+'?filter[limit]='+this.state.totalItems+'&filter[skip]='+ ( parseInt(currentPage-1)*parseInt(this.state.totalItems) );
     const self = this;
 
     let properties = this.props.model_config.properties;
@@ -114,9 +128,12 @@ class ModelList extends Component {
 
     for(var property in properties){
 
-      let defaultColumn = properties[property]['options'].defaultColumn || false;
-      let label = properties[property].label || property;
+      let defaultColumn = true;
 
+      if(typeof properties[property]['options'] != 'undefined')
+        defaultColumn = properties[property]['options'].defaultColumn || false;
+
+      let label = properties[property].label || property;
       let currentColumn = this.state.selectedColumns.indexOf(property)>0;
 
       if( defaultColumn ){
@@ -146,6 +163,7 @@ class ModelList extends Component {
       label: "Actions",
       width: 140,
       render: function(row, column, index) {
+        console.log(row)
         return (
           <div className="actions-btn">
           <Link className="btn-desktop" to={"/"+self.props.model+'s/update/'+row.idx}><Tooltip placement="bottom" content={"Edit Entry"}><EditIcon size={20} /></Tooltip></Link>
@@ -217,7 +235,7 @@ class ModelList extends Component {
   }
   getModelCount(model,callback){
     const url = 'http://'+this.props.configs.SERVICE_HOST+":"+this.props.configs.SERVICE_PORT+'/api/';
-    axios.get(url+model+'s/count',{
+    axios.get(url+this.getPurl()+'/count',{
       headers: {
         'Authorization': this.props.token
       }
@@ -236,7 +254,7 @@ class ModelList extends Component {
     const self = this;
     if(selected != null){
       const url = 'http://'+this.props.configs.SERVICE_HOST+":"+this.props.configs.SERVICE_PORT+'/api/';
-      axios.delete(url+this.props.model+'s/'+selected,{
+      axios.delete(url+this.getPurl()+'/'+selected,{
         headers: {
           Authorization: self.props.token
         }
@@ -338,7 +356,7 @@ class ModelList extends Component {
           <Loading loading={this.state.loading} fullscreen={this.state.fullscreen} />
           <Layout.Row gutter="24">
             <Layout.Col span="16">
-              <h2><DirIcon size={25} /> { this.state.modelCount } { this.props.model+'s' }</h2>
+              <h2><DirIcon size={25} /> { this.state.modelCount } { this.getPurl() }</h2>
             </Layout.Col>
             <Layout.Col span="8">
               <Link to={ this.props.model+'s/create' }><Button type="primary">+ Create Entry</Button></Link>

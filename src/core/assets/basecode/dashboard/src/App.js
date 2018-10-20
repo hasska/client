@@ -7,7 +7,7 @@
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router,Redirect, Route, Link } from "react-router-dom";
-import { fetchModels } from './fetchModels';
+import { fetchModels } from './router';
 import { configs } from './configs';
 
 import Header from './components/Header'

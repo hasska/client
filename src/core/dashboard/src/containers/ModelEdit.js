@@ -45,11 +45,25 @@ class ModelEdit extends Component {
      this.scanModels();
      this.fetchModelData();
   }
+  getPurl(model){
+    let purl = model;
+        
+    if(purl.slice(-1)=='y'){
+      purl = purl.slice(0, -1);
+      purl += 'ies';
+    } else {
+      if(purl.slice(-1) != 's'){
+        purl += 's';
+      }
+    }
+
+    return purl;
+  }
   fetchModelData(){
     const self = this;
     const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
 
-    axios.get(url+this.props.model+'s/'+window.location.pathname.split('update/')[1],{
+    axios.get(url+this.getPurl(this.props.model)+'/'+window.location.pathname.split('update/')[1],{
       headers: {
         Authorization: JSON.parse(localStorage.getItem('authorized_user')).id
       }
@@ -102,7 +116,9 @@ class ModelEdit extends Component {
         for ( var key in self.refs.form.props.model ) {
             form_data.append(key, self.refs.form.props.model[key]);
         }
-        xhr.open ('PATCH', url+self.props.model+'s/'+window.location.pathname.split('update/')[1], true);
+
+        
+        xhr.open ('PATCH', url+self.getPurl(self.props.model)+'/'+window.location.pathname.split('update/')[1], true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
 
         xhr.send (form_data);
@@ -340,7 +356,7 @@ class ModelEdit extends Component {
                     onSuccess={file => self.handleSuccess(file,key)}
                     onRemove={(file, fileList,key) => self.handleRemove(file, fileList,key)}
                     handleError={ (err)=>self.handleError(err) }
-                    fileList={self.state.form[key]}
+                    fileList={self.state.form[key] || [] }
                     tip={<div className="el-upload__tip">{options.tip || ""}</div>}
                     accept={options.accept}
                   >

@@ -1,0 +1,172 @@
+/*
+ * networks.js: Instance methods for working with networks
+ * for Openstack networking
+ *
+  * (C) 2014 Hewlett-Packard Development Company, L.P.
+ *
+ */
+
+var urlJoin = require('url-join');
+
+var networksResourcePath = '/networks';
+
+// Declaring variables for helper functions defined later
+var _convertNetworkToWireFormat;
+
+/**
+ * client.getNetworks
+ *
+ * @description get the list of networks for an account
+ *
+ * @param {object|Function}   options
+ * @param {Function}          callback
+ */
+exports.getNetworks  = function (options, callback) {
+  var self = this;
+
+  if (typeof options === 'function') {
+    callback = options;
+    options = {};
+  }
+
+  var getNetworkOpts = {
+    path: networksResourcePath
+  };
+
+  this._request(getNetworkOpts, function (err, body) {
+    if (err) {
+      return callback(err);
+    }
+    else if (!body || !body.networks || !(body.networks instanceof Array)) {
+      return new Error('Malformed API Response');
+    }
+
+    return callback(err, body.networks.map(function (network) {
+      return new self.models.Network(self, network);
+    }));
+  });
+};
+
+/**
+ * client.getNetwork
+ *
+ * @description get the details for a specific network
+ *
+ * @param {String|object}     network     the network or networkId
+ * @param callback
+ */
+exports.getNetwork = function (network, callback) {
+  var self = this,
+    networkId = network instanceof this.models.Network ? network.id : network;
+  self.emit('log::trace', 'Getting details for network', networkId);
+  this._request({
+    path: urlJoin(networksResourcePath, networkId),
+    method: 'GET'
+  }, function (err, body) {
+    if (err) {
+      return callback(err);
+    }
+
+    if (!body ||!body.network) {
+      return new Error('Malformed API Response');
+    }
+
+    callback(err, new self.models.Network(self, body.network));
+  });
+};
+
+/**
+ * client.createNetwork
+ *
+ * @description create a new network
+ *
+ * @param {object}    options
+ * @param {String}    options.name      the name of the new network
+ * @param callback
+ */
+exports.createNetwork = function (options, callback) {
+  var self = this,
+    network = typeof options === 'object' ? options : { 'name' : options};
+
+  network = _convertNetworkToWireFormat(network);
+
+  var createNetworkOpts = {
+    method: 'POST',
+    path: networksResourcePath,
+    body: { 'network' : network}
+  };
+
+  self.emit('log::trace', 'Creating network', network);
+  this._request(createNetworkOpts, function (err,body) {
+    return err
+      ? callback(err)
+      : callback(err, new self.models.Network(self, body.network));
+  });
+};
+
+/**
+ * client.updateNetwork
+ *
+ * @description update an existing network
+ *
+ * @param {object}    options
+ * @param callback
+ */
+exports.updateNetwork = function (network, callback) {
+  var self = this,
+  networkId = network.id,
+  networkToUpdate = _convertNetworkToWireFormat(network);
+
+  var updateNetworkOpts = {
+    method: 'PUT',
+    path: urlJoin(networksResourcePath, networkId),
+    contentType: 'application/json',
+    body: { 'network' : networkToUpdate}
+  };
+
+  self.emit('log::trace', 'Updating network', networkId);
+  this._request(updateNetworkOpts, function (err,body) {
+    return err
+      ? callback(err)
+      : callback(err, new self.models.Network(self, body.network));
+  });
+};
+
+/**
+ * client.destroyNetwork
+ *
+ * @description Delete a specific network
+ *
+ * @param {String|object}     network     the network or network ID
+ * @param callback
+ */
+exports.destroyNetwork = function (network, callback) {
+  var self = this,
+    networkId = network instanceof this.models.Network ? network.id : network;
+  self.emit('log::trace', 'Deleting network', networkId);
+  this._request({
+    path: urlJoin(networksResourcePath,networkId),
+    method: 'DELETE'
+  }, function (err) {
+    if (err) {
+      return callback(err);
+    }
+    callback(err, networkId);
+  });
+};
+
+/**
+ * _convertNetworkToWireFormat
+ *
+ * @description convert Network instance into its wire representation.
+ *
+ * @param {object}     details    the Network instance.
+ */
+_convertNetworkToWireFormat = function (details){
+  var wireFormat = {};
+  wireFormat.admin_state_up = details.admin_state_up || details.adminStateUp;
+  wireFormat.name = details.name;
+  wireFormat.shared = details.shared;
+  wireFormat.tenant_id = details.tenantId || details.tenant_id;
+  return wireFormat;
+};
