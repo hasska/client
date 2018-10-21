@@ -111,6 +111,15 @@ function createWindow() {
       });
     });
 
+    ipcMain.on('delete-project', (event,arg) => {
+      event.preventDefault();
+      projectManager.removeProject(arg, (response) => {
+          mainWindow.hide();
+          splash.reload();
+          event.sender.send('delete-project-reply', response)
+      });
+    });
+
     ipcMain.on('updateConfigs', (event,arg) => {
       event.preventDefault();
       projectManager.updateConfigs(arg, (response) => {
@@ -121,6 +130,7 @@ function createWindow() {
 
     ipcMain.on('models-publish', (event,arg) => {
         event.preventDefault();
+        console.log(arg)
         modelsManager.modelPublish(arg, (response) => {
             event.sender.send('models-publish-result', response)
         });

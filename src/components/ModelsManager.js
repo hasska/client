@@ -105,7 +105,9 @@ class ModelsManager extends Component {
     this.setState({ createMode: true ,models: _models, currentModel: _currentModel, selectedModel: _model,selectedDB: "db" })
   }
   updateCurrentModel(model){
+    console.log(model)
     this.setState({currentModel: model});
+    this.forceUpdate();
   }
   removeModel(model){
     if(model!='User'){
@@ -118,6 +120,7 @@ class ModelsManager extends Component {
     if(this.state.createMode==true){
       ipc.messaging.createModels({db: this.state.selectedDB ,name:this.state.selectedModel,model:this.state.currentModel});
     } else {
+      console.log(this.state.currentModel)
       ipc.messaging.publishModels({db: this.state.selectedDB ,name:this.state.selectedModel,model:this.state.currentModel});
       //will off createMode
     }

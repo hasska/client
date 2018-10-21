@@ -228,6 +228,8 @@ class ModelProperties extends Component {
     _currentModel['properties'] = _result;
     this.setState({currentModel: _currentModel})
     this.props.updateCurrentModel(_currentModel);
+    console.log('#############################')
+    console.log(_currentModel)
     this.updateTableData();
 
   }
@@ -244,9 +246,6 @@ class ModelProperties extends Component {
       console.log(_selectItems)
       _currentModel['properties'][prop]['options'][key] = _selectItems;
     } else {
-      console.log(prop)
-      console.log(key)
-      console.log(value)
       _currentModel['properties'][prop]['options'][key] = value;
     }
 
@@ -265,9 +264,11 @@ class ModelProperties extends Component {
   }
   updateRelations(value,key,prop,name){
     let _currentModel = this.state.currentModel;
-    _currentModel['relations'] = _currentModel.relations || [];
-    _currentModel['relations'][name] = _currentModel['relations'][name] || [];
+    //_currentModel['relations'] = _currentModel.relations;//[model] || [];
+    _currentModel['relations'][name] = _currentModel['relations'][name] || {};
     _currentModel['relations'][name][key] = value;
+    _currentModel['properties'][name]['relations'] = _currentModel['relations'][name]
+
     this.setState({currentModel: _currentModel});
     this.updateTableData();
     this.props.updateCurrentModel(_currentModel);

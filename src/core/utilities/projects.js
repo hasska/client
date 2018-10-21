@@ -294,25 +294,20 @@ module.exports = {
 			status: 'success'
 		}));
 	},
-	removeProject: (req,res,app) => {
-		const store = new Store();
-		let project = store.get('projects.'+req.body.project.id);
+	removeProject: (arg,callback) => {
 
-		fs.remove(JSON.parse(project).destination, err => {
+		const store = new Store();
+		let project = store.get('currentProject');
+
+		fs.remove(project.destination, err => {
 
 		    if (err) {
-		    	res.send(app.respondToClient({
-					msg: err,
-					status: 'error'
-				}));
+		    	callback('error');
 				return;
 		    }
 
-    	    store.delete('projects.'+req.body.project.id);
-	  		res.send(app.respondToClient({
-				msg: 'Project deleted successfully',
-				status: 'success'
-			}));
+    	    store.delete('projects.'+project.id);
+	  		callback('success');
 		})
 	},
 	setConfiguration: (req,res,app) => {

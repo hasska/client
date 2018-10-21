@@ -46,6 +46,20 @@ class ModelCreate extends Component {
      this.scanModels();
   }
 
+  getPurl(model){
+    let purl = model;
+        
+    if(purl.slice(-1)=='y'){
+      purl = purl.slice(0, -1);
+      purl += 'ies';
+    } else {
+      if(purl.slice(-1) != 's'){
+        purl += 's';
+      }
+    }
+    return purl;
+  }
+
   saveModel(e){
     //this.setState({ loading: true,fullscreen:true  })
 
@@ -69,25 +83,18 @@ class ModelCreate extends Component {
         }
 
         var form_data = new FormData();
+
         for ( var key in self.refs.form.props.model ) {
-            form_data.append(key, self.refs.form.props.model[key]);
+            if(this.state.properties[key].uiType == 'relationship'){
+              form_data.append(key, self.refs.form.props.model[key].key);
+            } else {
+              form_data.append(key, self.refs.form.props.model[key]);
+            }
         }
 
-        let purl = url+self.props.model;
-        
-        if(purl.slice(-1)=='y'){
-          purl = purl.slice(0, -1);
-          purl += 'ies';
-        } else {
-          if(purl.slice(-1) != 's'){
-            purl += 's';
-          }
-        }
-
-        xhr.open ('POST', purl, true);
+        xhr.open ('POST', url+self.getPurl(self.props.model), true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
         //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
-        console.log(form_data)
         xhr.send (form_data);
         return false;
 
@@ -98,9 +105,17 @@ class ModelCreate extends Component {
 
   }
   onFormChange(value,key) {
+
     let _obj = { [key]: value };
     let _form = Object.assign({}, this.state.form, _obj);
-
+   
+    this.setState({
+      form: _form
+    });
+  }
+  onFormDateChange(value,key) {
+    let _obj = { [key]: value };
+    let _form = Object.assign({}, this.state.form, _obj);
     this.setState({
       form: _form
     });
@@ -111,6 +126,7 @@ class ModelCreate extends Component {
     let flag = true;
 
     const self = this;
+    console.log(properties)
 
     for(var property in properties){
 
@@ -118,11 +134,11 @@ class ModelCreate extends Component {
 
       var required = properties[property].required || false;
 
-      if(required==true && properties[property].type != 'boolean'){
+      if(required==true && properties[property].type != 'boolean' && properties[property].type != 'date'){
         var tmp_rules = this.state.rules;
         tmp_rules[property] = [{
           required: true,
-          message: 'Please Fill '+property+' Input',
+          message: 'Please fill '+property+' input',
           trigger: 'change'
         }];
         self.setState({ rules: tmp_rules });
@@ -149,7 +165,8 @@ class ModelCreate extends Component {
                 properties[property].uiType ){
 
         if(properties[property].uiType.toLowerCase()=="select"){
-          formModel[property] = properties[property].options.selectItems[0].value;
+          if(typeof properties[property].options.selectItems != 'undefined')
+            formModel[property] = properties[property].options.selectItems[0].value;
         }
 
         if(properties[property].uiType.toLowerCase()=="date"){
@@ -171,30 +188,53 @@ class ModelCreate extends Component {
         }
 
         if(properties[property].uiType.toLowerCase() == 'relationship'){
+          
           flag = false;
+          
           const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
-          axios.get(url+properties[property].options.ref+'?filter={"where":'+JSON.stringify(properties[property].options.filter)+'}').
-          then( (body) => {
-            properties[property]['data'] = body;
-            self.setState({'properties':properties});
+          const filter = typeof properties[property].options.filter != 'undefined' ? '?filter={"where":'+JSON.stringify(properties[property].options.filter)+'}' : '';
+          const req_property = property;
+          axios.get(url+this.getPurl(properties[property].relations.model)+filter)
+          .then( (body) => {
+
+            var tmp_props = properties;
+
+            let tmp_data = [];
+
+            body.data && body.data.map((item,i)=>{
+              tmp_data.push({key: item.id || i, value: item[tmp_props[req_property].relations.foreignKey]})
+            })
+
+            tmp_props[req_property]['relations']['data'] = tmp_data;
+            tmp_props[req_property]['data'] = tmp_data;
+
+            self.setState({ properties: tmp_props });
+
+            //self.setState({'properties': properties});
             self.setState({'loading':false,fullscreen:false});
+            self.forceUpdate();
+            
           }).catch( (ex) => {
             self.setState({'loading':false,fullscreen:false});
           });
         }
       }
     }
-    this.setState({ form: formModel });
+
+
+
     if(flag) {
-      self.setState({'properties':properties});
-      self.setState({'loading':false,fullscreen:false});
+        self.setState({ form: formModel });
+        self.setState({'properties':properties});
+        self.setState({'loading':false,fullscreen:false});
     }
   }
 
   handleSuccess(file,key) {
     let tmp = this.state.form;
-    tmp[key] = file.result.files.file;
-    this.setState({ form: tmp })
+    console.log(file);
+    //tmp[key] = file.result.files.file;
+    //this.setState({ form: tmp })
   }
   showMessage(title,msg,type) {
     Notification({
@@ -259,6 +299,7 @@ class ModelCreate extends Component {
                   <Form.Item prop={key} label={key}>
                     <Select onChange={ (value) => self.onFormChange(value,key) } multiple={properties[key].multiple || false} value={self.state.form[key]}>
                     {
+                      properties[key].options.selectItems &&
                       properties[key].options.selectItems.map(el => {
                         return <Select.Option key={el.value} label={el.label} value={el.value} />
                       })
@@ -271,9 +312,9 @@ class ModelCreate extends Component {
                 form_fields.push(<Form.Item prop={key} label={key+' :'}><DatePicker
                     value={ self.state.form[key] }
                     placeholder="Pick a day"
+                    selectionMode={ options.selectionMode || 'day' }
                     format={ options.format || null }
-                    selectionMode={ options.selectionMode || null }
-                    onChange={ (date) => self.onFormChange(date,key) }
+                    onChange={ (value) => self.onFormChange(value,key) }
                   />
                 </Form.Item>);
                 break;
@@ -326,7 +367,7 @@ class ModelCreate extends Component {
                 <Form.Item prop={key} label={key+' :'}>
                   <Upload
                     className="upload-demo"
-                    action={api_url+'uploads/files/upload'}
+                    action={api_url+'containers/1/upload'}
                     onSuccess={file => self.handleSuccess(file,key)}
                     onRemove={(file, fileList,key) => self.handleRemove(file, fileList,key)}
                     handleError={ (err)=>self.handleError(err) }
@@ -341,14 +382,19 @@ class ModelCreate extends Component {
 
               case 'relationship':
                 var options = properties[key].options || {};
-                var data = properties[key].data.data || {};
-                self.state.form[key] = data[0][options.key];
+                var data = {};
+
+                if( properties[key]['relations'].data ){
+                   data = properties[key]['relations'].data;
+                   self.state.form[key] = data[0].value;
+                }
+
 
                 form_fields.push(<Form.Item label={key}>
                   <Select prop={key} onChange={ (value) => self.onFormChange(value,key) } value={self.state.form[key]} multiple={options.multiple || false}>
                   {
-                    data.map(el => {
-                      return <Select.Option key={el[options.key]} label={options.key+': '+el[options.key]} value={el[options.key]} />
+                    data && data.length > 0 && data.map(el => {
+                      return <Select.Option key={el.key} label={el.value} value={el.value} />
                     })
                   }
                   </Select>

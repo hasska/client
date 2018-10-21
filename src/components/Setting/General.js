@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { Form, Input, Button, Switch, Upload, Message } from 'element-react';
+import { Form, MessageBox, Input, Button, Switch, Upload, Message } from 'element-react';
 
 const {ipcRenderer} = window.require('electron')
 const ipc = window.ipc || {}
@@ -18,13 +18,16 @@ class General extends Component {
 		super(props);
 		this.state = {
 			settingsGeneral:{
-        description: '',
+        		description: '',
 			}
 		}
 
 		ipc.messaging = {
 	    sendOpenDialog: function() {
 	        ipcRenderer.send('open-dialog-fav', 'an-argument')
+	    },
+	    deleteProject: function() {
+	        ipcRenderer.send('delete-project', 'an-argument')
 	    }
 	  }
 	}
@@ -35,6 +38,9 @@ class General extends Component {
 		ipcRenderer.on('open-dialog-fav-reply', (event,arg) => {
 			self.props.updateConfigs('FAV_ICON',arg[0]);
 		});
+		ipcRenderer.on('delete-project-reply', (event,arg) => {
+			console.log(arg)
+		});
 	}
 
   onChange(key, value) {
@@ -44,6 +50,26 @@ class General extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+  }
+
+  deleteProject(){
+  	console.log(this.props.configs)
+  	MessageBox.confirm('This will permanently delete the your whole project. Continue?', 'Warning', {
+	    confirmButtonText: 'OK',
+	    cancelButtonText: 'Cancel',
+	    type: 'warning'
+	  }).then(() => {
+	  	Message({
+	      type: 'success',
+	      message: 'Delete completed!'
+	    });
+	  	ipc.messaging.deleteProject()
+	  }).catch(() => {
+	    Message({
+	      type: 'info',
+	      message: 'Delete canceled'
+	    });
+	  });
   }
 
   render() {
@@ -62,16 +88,19 @@ class General extends Component {
             <Input value={this.props.configs.admin.PROJECT_BRAND || ""} onChange={this.props.updateConfigs.bind(this, 'PROJECT_BRAND')}></Input>
           </Form.Item>
           <Form.Item label="Authentication">
-			      <Switch
-			        value={this.props.configs.authentication}
-							onChange={this.props.updateConfigs.bind(this, 'authentication')}
-			        onText=""
-			        offText="">
-			        >
-			      </Switch>
+		      <Switch
+		        value={this.props.configs.authentication}
+						onChange={this.props.updateConfigs.bind(this, 'authentication')}
+		        onText=""
+		        offText="">
+		        >
+		      </Switch>
           </Form.Item>
           <Form.Item label="Description">
             <Input type="textarea" autosize={{ minRows: 2, maxRows: 4}} value={this.state.settingsGeneral.descriptaion} onChange={this.onChange.bind(this, 'descriptaion')}></Input>
+          </Form.Item>
+          <Form.Item label="Delete">
+          	<Button onClick={()=>this.deleteProject()} type="danger" icon="trash">DELETE PROJECT</Button>
           </Form.Item>
         </Form>
 

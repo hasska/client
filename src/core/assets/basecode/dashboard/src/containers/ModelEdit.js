@@ -74,14 +74,16 @@ class ModelEdit extends Component {
 
         for(var prop in response.data){
           //if(prop != "id"){
+            console.log(response.data[prop])
             if(response.data[prop] != "")
               tmp_form[prop] = response.data[prop];
             else {
                 tmp_form[prop] = "";
             }
-          //}
-          self.setState({loading:false,fullscreen:false,form: tmp_form})
         }
+
+        self.setState({loading:false,fullscreen:false,form: tmp_form})
+
       } else {
         self.showMessage('Error','Entry not available !','error');
         self.setState({loading:false,fullscreen:false,redirect:true,redirect_url:'/'+this.props.model});
@@ -150,7 +152,7 @@ class ModelEdit extends Component {
 
       var required = properties[property].required || false;
 
-      if(required==true && properties[property].type != 'boolean' ){
+      if(required==true && properties[property].type != 'boolean' && properties[property].type != 'date' ){
         var tmp_rules = this.state.rules;
         tmp_rules[property] = [{
           required: true,
@@ -198,15 +200,34 @@ class ModelEdit extends Component {
         }
 
         if(properties[property].uiType.toLowerCase() == 'relationship'){
+          
           const url = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/api/';
-          axios.get(url+properties[property].options.ref+'?filter={"where":'+JSON.stringify(properties[property].options.filter)+'}').
-          then( (body) => {
-            properties[property]['data'] = body;
+          const filter = typeof properties[property].options.filter != 'undefined' ? '?filter={"where":'+JSON.stringify(properties[property].options.filter)+'}' : '';
+          const req_property = property;
+          axios.get(url+this.getPurl(properties[property].relations.model)+filter)
+          .then( (body) => {
 
-            self.setState({'properties':properties});
-           // self.setState({'loading':false,fullscreen:false});
+            var tmp_props = properties;
+
+            let tmp_data = [];
+
+            body.data && body.data.map((item,i)=>{
+              tmp_data.push({key: item.id || i, value: item[tmp_props[req_property].relations.foreignKey]})
+            })
+
+            tmp_props[req_property]['relations']['data'] = tmp_data;
+            tmp_props[req_property]['data'] = tmp_data;
+           
+            self.setState({ properties: tmp_props });
+            //formModel[property] = null;
+
+
+            //self.setState({'properties': properties});
+            self.setState({'loading':false,fullscreen:false});
+            self.forceUpdate();
+            
           }).catch( (ex) => {
-           // self.setState({'loading':false,fullscreen:false});
+            self.setState({'loading':false,fullscreen:false});
           });
         }
         if(properties[property].uiType.toLowerCase() == 'file'){
@@ -294,11 +315,15 @@ class ModelEdit extends Component {
                   break;
               case 'date':
                 var options = properties[key].options || {};
+                var final_date = self.state.form[key];
+                if(typeof final_date == 'string')
+                  final_date = new Date(self.state.form[key]);
+
                 form_fields.push(<Form.Item prop={key} label={key+' :'}><DatePicker
-                    value={ self.state.form[key] }
+                    value={ final_date }
                     placeholder="Pick a day"
                     format={ options.format || null }
-                    selectionMode={ options.selectionMode || null }
+                    selectionMode={ options.selectionMode || 'day' }
                     onChange={ (date) => self.onFormChange(date,key) }
                   />
                 </Form.Item>);
@@ -367,14 +392,27 @@ class ModelEdit extends Component {
 
               case 'relationship':
                 var options = properties[key].options || {};
-                var data = properties[key].data.data || {};
-                self.state.form[key] = data[0][options.key];
+                var data = {};
+                    console.log(self.state.form)
+                
+
+                if( properties[key]['relations'].data ){
+                   data = properties[key]['relations'].data;
+                   console.log(data)
+                   for(var item in data){
+                    if(data[item].key==self.state.form[key])
+                      self.state.form[key] = data[item].value;
+                   }
+                   
+                   console.log(self.state.form[key])
+                }
+
 
                 form_fields.push(<Form.Item label={key}>
                   <Select prop={key} onChange={ (value) => self.onFormChange(value,key) } value={self.state.form[key]} multiple={options.multiple || false}>
                   {
-                    data.map(el => {
-                      return <Select.Option key={el[options.key]} label={options.key+': '+el[options.key]} value={el[options.key]} />
+                    data && data.length > 0 && data.map(el => {
+                      return <Select.Option key={el.key} label={el.value} value={el.value} />
                     })
                   }
                   </Select>

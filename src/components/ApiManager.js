@@ -60,9 +60,9 @@ class ApiManager extends Component {
             <div className="preview-services-content">
               <h2>API Explorer</h2>
               <p>A place for exploring & tesging your rest-full APIs generated based on your models and custom methodes.</p>
-              <Button onClick={()=>this.triggerView()} type="primary">Get Started</Button>
+              <Button type="danger" icon="trash" onClick={()=>this.triggerView()} type="primary">Get Started</Button>
             </div>
-          </div> :
+          </div> : null
         }
       </div>
       </div>

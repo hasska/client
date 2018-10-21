@@ -269,7 +269,8 @@ module.exports = {
 		const store = new Store();
 		let project = store.get('currentProject');
 		const self = this;
-
+		console.log(arg.model)
+		
 		if(arg.name == 'User')
 			fs.writeJson(project.destination+'/common/User.json', arg.model, (err) => {
 				if(err) callback(err.toString());
