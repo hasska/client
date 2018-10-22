@@ -43,6 +43,12 @@ class ConfigureStep extends Component {
 	  this.setState({form: _form});
 	}
 
+	onModelChange(value) {
+	  let _form = this.state.form;
+	  _form['modelDefault'] = value;
+	  this.setState({form: _form});
+	}
+
 	onSubmit(e) {
 	  e.preventDefault();
 	}
@@ -84,27 +90,26 @@ class ConfigureStep extends Component {
 	    <div className="modelsStep">
 	    	<div className="wizard-models-option-wrapper">
 		    	<div className="models-option-row">
-			    	<div className="models-option active">
-              <span className="haskon-mdDefault"></span>
-			    		<div className="t5">Default</div>
-			    	</div>
-			    	<div className="models-option disabled">
-              <span className="haskon-mdBlog"></span>
-			    		<div className="t5">Built-in Blog</div>
-			    	</div>
-		    	</div>
-		    	<div className="models-option-row">
-			    	<div className="models-option disabled">
-              <span className="haskon-mdShop"></span>
+			    	<div onClick={()=>this.onModelChange('default')} className={"models-option "+(this.state.form.modelDefault=='default'?'active':'') }>
+		              <span className="haskon-mdDefault"></span>
+					  <div className="t5">Default</div>
+					</div>
+					<div onClick={()=>this.onModelChange('blog')} className={"models-option "+(this.state.form.modelDefault=='blog'?'active':'') }>
+		              <span className="haskon-mdBlog"></span>
+					  <div className="t5">Built-in Blog</div>
+					</div>
+				</div>
+				<div className="models-option-row">
+					<div className="models-option disabled">
+			              <span className="haskon-mdShop"></span>
 			    		<div className="t5">Built-in eCommerce</div>
 			    	</div>
-			    	<div className="models-option disabled">
-              <span className="haskon-mdCompany"></span>
-			    		<div className="t5">Built-in Company</div>
+					<div onClick={()=>this.onModelChange('company')} className={"models-option "+(this.state.form.modelDefault=='company'?'active':'') }>
+		              <span className="haskon-mdCompany"></span>
+			    	  <div className="t5">Built-in Company</div>
 			    	</div>
 		    	</div>
 	    	</div>
-
 	    </div>
 	  }
 	  </div>

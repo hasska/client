@@ -2,7 +2,7 @@
 
 module.exports = function(User) {
 
-    User.upload = function(req, res, Uploads_id, cb) {
+    /*User.upload = function(req, res, Uploads_id, cb) {
         var StorageContainer = Uploads.app.models.StorageContainer;
         StorageContainer.getContainers(function (err, containers) {
             if (containers.some(function(e) { return e.name == Uploads_id; })) {
@@ -25,6 +25,6 @@ module.exports = function(User) {
          ],
          returns: {arg: 'status', type: 'string'}
         }
-    );
+    );*/
 
 };

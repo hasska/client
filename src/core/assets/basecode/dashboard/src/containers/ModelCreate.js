@@ -86,7 +86,7 @@ class ModelCreate extends Component {
 
         for ( var key in self.refs.form.props.model ) {
             if(this.state.properties[key].uiType == 'relationship'){
-              form_data.append(key, self.refs.form.props.model[key].key);
+              form_data.append(key, self.refs.form.props.model[key]);
             } else {
               form_data.append(key, self.refs.form.props.model[key]);
             }

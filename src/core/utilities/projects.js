@@ -34,6 +34,7 @@ module.exports = {
 			}
 		}
 
+
 		// With a callback:
 		fs.ensureDir(destination, err => {
 		  // dir has now been created, including the directory it is to be placed in
@@ -224,7 +225,34 @@ module.exports = {
 
 						fs.writeFileSync(destination+'/dashboard/src/configs.js', jsConfigData);
 
-						//2COPY MODEL-CONFIG & MODELS FOLDER
+						//COPY BUILT-IN MODELS MODEL-CONFIG & MODELS FOLDER
+
+						const source_models = app.getAppPath()+'/src/core/assets/defaults/'+data.modelDefault;
+						const destination_models = data.destination+'/'+data.name+'/common';
+						const destination_admin_models = data.destination+'/'+data.name+'/dashboard/src/models/common';
+						const destination_models_config = data.destination+'/'+data.name+'/server';
+						const destination_admin_models_config = data.destination+'/'+data.name+'/dashboard/src/models'
+
+						fs.copy(source_models, destination_models, function (err) {
+							if(err)
+								logger.log(err.toString());
+						});
+						
+						fs.copy(source_models, destination_admin_models, function (err) {
+							if(err)
+								logger.log(err.toString());
+						});
+
+						fs.createReadStream(source_models+'/model-config.json').pipe(fs.createWriteStream(destination_models_config+'/model-config.json'));
+						fs.createReadStream(source_models+'/model-config.json').pipe(fs.createWriteStream(destination_admin_models_config+'/model-config.json'));
+
+
+						fs.copy(source_models+'/model-config.json', destination_admin_models_config, function (err) {
+							if(err)
+								logger.log(err.toString());
+						});
+
+
 						//TODO: WE have to change project title in package.json
 						fs.readJson(destination+'/package.json', (err, packageObj) => {
 							let tmp = packageObj;

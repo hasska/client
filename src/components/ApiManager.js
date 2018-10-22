@@ -62,7 +62,14 @@ class ApiManager extends Component {
               <p>A place for exploring & tesging your rest-full APIs generated based on your models and custom methodes.</p>
               <Button type="danger" icon="trash" onClick={()=>this.triggerView()} type="primary">Get Started</Button>
             </div>
-          </div> : null
+          </div> : 
+          <div className="frame-services">
+            <div className="webview-controller">
+              <Button onClick={ ()=>this.setState({preview: true}) } icon={"d-arrow-left"} className="back">Back</Button>
+              <Button onClick={ ()=>this.reload() } className="refresh">Refresh APIs</Button>
+            </div>
+            <webview src={url} style={{width:"100%"}}></webview>
+          </div>
         }
       </div>
       </div>

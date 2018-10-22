@@ -196,12 +196,12 @@ class ActionBar extends Component {
 
 
     ipcRenderer.on('stop-project-result', (event, arg) => {
-      console.log(arg)
+      //console.log(arg)
         let _progress = self.state.progress;
         _progress['time'] = 100;
         _progress['inprogress'] = false;
 
-      if(arg.status=='success'){
+      //if(arg.status=='success'){
         _progress['status'] = 'success';
         _progress['text'] = 'Stopped Successfully';
         self.setState({progress: _progress, runDisable: false, stopDisable: true});
@@ -210,7 +210,7 @@ class ActionBar extends Component {
         self.props.updateConsole(true);
 
         self.clearProgress('Stopped Services','KICKOFF');
-      } else {
+      /*} else {
         _progress['status'] = 'exception';
         _progress['text'] = 'Stop Failed !';
         self.setState({progress: _progress, runDisable: true, stopDisable: false});
@@ -220,7 +220,7 @@ class ActionBar extends Component {
        // self.showMessage('Problem in stopping. Please check your Haska.log file for reasons :)','error')
 
         self.clearProgress('Stop Failed !','STOP');
-      }
+      }*/
 
     })
 
