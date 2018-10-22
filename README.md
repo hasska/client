@@ -80,7 +80,7 @@ We prepared tutorials for how you should work with Haska and [getting started](h
 We are working on contribution manual and instructions for being more structural at the beginning of contributions and will be release soon right here. 
 If you want to contribute on this source code you are welcome and thanks for taking the time to contribute to our community. Major things TODO at this stage listed as below:
 
- - [*] Make built-in default models infrastructure and show cases
+ - [FIXED] Make built-in default models infrastructure and show cases
  - [ ] Deployment methods like docker and the other CI/CD
  - [ ] Custom method definition for each model
  - [ ] Build Linux and Windows release version
