@@ -71,7 +71,7 @@ class ModelEdit extends Component {
 
       if (response.status == 200) {
         let tmp_form = self.state.form;
-
+        console.log(response.data)
         for(var prop in response.data){
           //if(prop != "id"){
             console.log(response.data[prop])
@@ -115,15 +115,28 @@ class ModelEdit extends Component {
         }
 
         var form_data = new FormData();
+
         for ( var key in self.refs.form.props.model ) {
-            form_data.append(key, self.refs.form.props.model[key]);
+            if(this.state.properties[key].uiType == 'relationship'){
+              form_data.append(key, self.refs.form.props.model[key]);
+            } else if(this.state.properties[key].uiType == 'file'){
+              form_data.append(key, JSON.stringify(self.refs.form.props.model[key]) );
+            } else {
+              form_data.append(key, self.refs.form.props.model[key]);
+            }
         }
 
-        
+        var object = {};
+        form_data.forEach(function(value, key){
+            object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
         xhr.open ('PATCH', url+self.getPurl(self.props.model)+'/'+window.location.pathname.split('update/')[1], true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
+        xhr.setRequestHeader('Content-Type','application/json');
 
-        xhr.send (form_data);
+        xhr.send (json);
         return false;
 
       } else {
@@ -241,7 +254,16 @@ class ModelEdit extends Component {
   handleSuccess(file,key) {
     let tmp = this.state.form;
     tmp[key] = file.result.files.file;
+
+    for( var p in tmp[key] ){
+      var _path = tmp[key][p].path;
+      _path = _path.replace('client/','');
+      tmp[key][p]['url'] = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/'+_path;
+      tmp[key][p]['name'] = tmp[key][p].originalname;
+    }
+
     this.setState({ form: tmp })
+
   }
   showMessage(title,msg,type) {
     Notification({
@@ -377,6 +399,7 @@ class ModelEdit extends Component {
                 <Form.Item prop={key} label={key+' :'}>
                   <Upload
                     className="upload-demo"
+                    listType="picture"
                     action={api_url+'uploads/files/upload'}
                     onSuccess={file => self.handleSuccess(file,key)}
                     onRemove={(file, fileList,key) => self.handleRemove(file, fileList,key)}

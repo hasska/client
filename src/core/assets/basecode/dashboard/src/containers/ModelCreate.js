@@ -79,7 +79,6 @@ class ModelCreate extends Component {
             self.setState({loading:false,fullscreen:false});
             self.showMessage('Error :(',JSON.parse(xhr.response).error.message.toString(),'error')
           }
-
         }
 
         var form_data = new FormData();
@@ -87,15 +86,29 @@ class ModelCreate extends Component {
         for ( var key in self.refs.form.props.model ) {
             if(this.state.properties[key].uiType == 'relationship'){
               form_data.append(key, self.refs.form.props.model[key]);
+            } else if(this.state.properties[key].uiType == 'file'){
+              for( var p in self.refs.form.props.model[key] ){
+                let _path = self.refs.form.props.model[key][p].path;
+                _path = _path.replace('client/','');
+                self.refs.form.props.model[key][p]['url'] = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/'+_path;
+                self.refs.form.props.model[key][p]['name'] = self.refs.form.props.model[key][p].originalname;
+              }
+              form_data.append(key, JSON.stringify(self.refs.form.props.model[key]) );
             } else {
               form_data.append(key, self.refs.form.props.model[key]);
             }
         }
 
+        var object = {};
+        form_data.forEach(function(value, key){
+            object[key] = value;
+        });
+        var json = JSON.stringify(object);
+
         xhr.open ('POST', url+self.getPurl(self.props.model), true);
         xhr.setRequestHeader('Authorization',JSON.parse(localStorage.getItem('authorized_user')).id);
-        //xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
-        xhr.send (form_data);
+        xhr.setRequestHeader('Content-Type','application/json');
+        xhr.send (json);
         return false;
 
       } else {
@@ -230,11 +243,18 @@ class ModelCreate extends Component {
     }
   }
 
-  handleSuccess(file,key) {
+  handleSuccess(response,file,key) {
     let tmp = this.state.form;
-    console.log(file);
-    //tmp[key] = file.result.files.file;
-    //this.setState({ form: tmp })
+    tmp[key].push(response);
+
+    for( var p in tmp[key] ){
+      var _path = tmp[key][p].path;
+      _path = _path.replace('client/','');
+      tmp[key][p]['url'] = 'http://'+this.props.configs.SERVICE_HOST+':'+this.props.configs.SERVICE_PORT+'/'+_path;
+      tmp[key][p]['name'] = tmp[key][p].originalname;
+    }
+
+    this.setState({ form: tmp })
   }
   showMessage(title,msg,type) {
     Notification({
@@ -367,8 +387,9 @@ class ModelCreate extends Component {
                 <Form.Item prop={key} label={key+' :'}>
                   <Upload
                     className="upload-demo"
-                    action={api_url+'containers/1/upload'}
-                    onSuccess={file => self.handleSuccess(file,key)}
+                    name={'file'}
+                    action={'http://'+self.props.configs.SERVICE_HOST+':'+self.props.configs.SERVICE_PORT+'/upload'}
+                    onSuccess={(response,file) => self.handleSuccess(response,file,key)}
                     onRemove={(file, fileList,key) => self.handleRemove(file, fileList,key)}
                     handleError={ (err)=>self.handleError(err) }
                     fileList={self.state.form[key]}
